@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "sessions/google_login"
+  get "sessions/destroy"
   get "pages/terms"
   get "checkin_logs/index"
   get "checkin_logs/create"
