@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "checkin_logs/index"
+  get "checkin_logs/create"
   get "facilities/index"
   get "facilities/show"
   get "facilities/map"
