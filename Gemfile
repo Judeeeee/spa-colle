@@ -46,5 +46,8 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-end
 
+  # change-from-erb-to-slim https://github.com/slim-template/slim/wiki/Template-Converters-ERB-to-SLIM
+  gem "html2slim", github: "slim-template/html2slim" # https://zenn.dev/yksn/articles/aff65f3afb73d0
+  gem "slim-rails"
+end
