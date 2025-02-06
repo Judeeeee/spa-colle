@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  get "sessions/google_login"
-  get "sessions/destroy"
-  get "pages/terms"
-  get "checkin_logs/index"
-  get "checkin_logs/create"
-  get "facilities/index"
-  get "facilities/show"
-  get "facilities/map"
+  root "facilities#index"
+  get "/facilities/map", to: "facilities#map"
+  resources :facilities, only: [:index, :show] do
+    resources :checkin_logs, only: [:index, :create]
+  end
+  get "/terms", to: "pages#terms"
+  post "/users/auth/google_oauth2", to: "sessions#google_login"
+  post "/logout", to: "sessions#destroy"
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
