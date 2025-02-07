@@ -58,3 +58,17 @@ wards = [
 wards.each do |ward|
   Ward.find_or_create_by(ward)
 end
+
+# ローカルでの動作確認用に追加。後で全施設データを追記する。
+if Rails.env.development?
+  ward_id = Ward.find_by(name_kana: "としまく")&.id
+  facilities = [
+    { ward_id: ward_id, name: "タイムズ スパ・レスタ", latitude: 35.7291021729063, longitude: 139.71728243905798 },
+    { ward_id: ward_id, name: "東京染井温泉 SAKURA", latitude: 35.73819540617037, longitude: 139.7393533446155 },
+    { ward_id: ward_id, name: "五色湯", latitude: 35.725042790625494, longitude: 139.6959867355208 }
+  ]
+
+  facilities.each do |facility|
+    Facility.find_or_create_by(facility)
+  end
+end
