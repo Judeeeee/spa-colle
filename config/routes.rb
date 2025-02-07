@@ -5,8 +5,9 @@ Rails.application.routes.draw do
     resources :checkin_logs, only: [:index, :create]
   end
   get "/terms", to: "pages#terms"
-  post "/users/auth/google_oauth2", to: "sessions#google_login"
-  post "/logout", to: "sessions#destroy"
+  get "auth/:provider/callback", to: "sessions#create"
+  get "auth/failure", to: redirect("/")
+  get "log_out", to: "sessions#destroy", as: "log_out"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
