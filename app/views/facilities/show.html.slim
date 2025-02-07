@@ -1,2 +1,19 @@
-h1 Facilities#show
-p Find me in app/views/facilities/show.html.slim
+doctype html
+html
+  head
+    = csrf_meta_tags
+    = csp_meta_tag
+    = javascript_include_tag "application", "data-turbolinks-track": "reload"
+  body
+    header
+      h1 XXXの湯
+    main
+      p n回訪問
+      div.map
+        p ここに施設のマップを表示する
+      p チェックインするボタンをここに配置する
+      = link_to "チェックインログページへ", facility_checkin_logs_path(1), class: "checkin_log_link"
+      br
+      = link_to "施設一覧ページへ", facilities_path, class: "facilities_link"
+    footer
+      p © 2025 Judeee

@@ -1,2 +1,15 @@
-h1 Facilities#map
-p Find me in app/views/facilities/map.html.slim
+doctype html
+html
+  head
+    = csrf_meta_tags
+    = csp_meta_tag
+    = javascript_include_tag "application", "data-turbolinks-track": "reload"
+  body
+    header
+      h1 付近の施設を検索
+    main
+      div.map
+        p ここにマップを表示する
+      = link_to "トップページへ戻る", root_path, class: "back_top_link"
+    footer
+      p © 2025 Judeee

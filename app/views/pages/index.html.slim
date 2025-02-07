@@ -1,2 +1,17 @@
-h1 Pages#index
-p Find me in app/views/pages/index.html.slim
+doctype html
+html
+  head
+    = csrf_meta_tags
+    = csp_meta_tag
+    = javascript_include_tag "application", "data-turbolinks-track": "reload"
+  body
+    header
+      h1 spa colle
+    main
+      div.stamp-card
+        p ここにスタンプカードを表示する
+      = link_to "付近の施設を検索", facilities_map_path, class: "facilities_map_link"
+      br
+      = link_to "施設一覧", facilities_path, class: "facilities_link"
+    footer
+      p © 2025 Judeee
