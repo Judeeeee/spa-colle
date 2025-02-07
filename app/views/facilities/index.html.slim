@@ -1,2 +1,22 @@
-h1 Facilities#index
-p Find me in app/views/facilities/index.html.slim
+doctype html
+html
+  head
+    = csrf_meta_tags
+    = csp_meta_tag
+    = javascript_include_tag "application", "data-turbolinks-track": "reload"
+  body
+    header
+      h1 施設一覧
+    main
+      div.facilities
+        - facilities = { "xxx区" => ["XXXの湯", "xxx温泉"], "yyy区" => ["YYYの湯"], "zzz区" => ["ZZZの湯"] }
+        ul
+          - facilities.each do |ward, facility|
+            li
+              = ward
+              ul
+                - facility.each do |f|
+                  li = f
+      = link_to "トップページへ戻る", root_path, class: "back_top_link"
+    footer
+      p © 2025 Judeee
