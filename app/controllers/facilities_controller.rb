@@ -6,5 +6,6 @@ class FacilitiesController < ApplicationController
   end
 
   def map
+    @facilities = Facility.all
   end
 end
