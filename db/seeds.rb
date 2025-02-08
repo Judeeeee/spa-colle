@@ -61,11 +61,18 @@ end
 
 # ローカルでの動作確認用に追加。後で全施設データを追記する。
 if Rails.env.development?
-  ward_id = Ward.find_by(name_kana: "としまく")&.id
+  toshima_ward_id = Ward.find_by(name_kana: "としまく")&.id
+  nerima_ward_id = Ward.find_by(name_kana: "ねりまく")&.id
+  bunkyo_ward_id = Ward.find_by(name_kana: "ぶんきょうく")&.id
+  adachi_ward_id = Ward.find_by(name_kana: "あだちく")&.id
+
   facilities = [
-    { ward_id: ward_id, name: "タイムズ スパ・レスタ", latitude: 35.7291021729063, longitude: 139.71728243905798 },
-    { ward_id: ward_id, name: "東京染井温泉 SAKURA", latitude: 35.73819540617037, longitude: 139.7393533446155 },
-    { ward_id: ward_id, name: "五色湯", latitude: 35.725042790625494, longitude: 139.6959867355208 }
+    { ward_id: toshima_ward_id, name: "タイムズ スパ・レスタ", latitude: 35.7291021729063, longitude: 139.71728243905798 },
+    { ward_id: toshima_ward_id, name: "東京染井温泉 SAKURA", latitude: 35.73819540617037, longitude: 139.7393533446155 },
+    { ward_id: toshima_ward_id, name: "五色湯", latitude: 35.725042790625494, longitude: 139.6959867355208 },
+    { ward_id: nerima_ward_id, name: "バーデーと天然温泉豊島園 庭の湯", latitude: 35.74397030756095, longitude: 139.64813836169282 },
+    { ward_id: bunkyo_ward_id, name: "東京ドーム天然温泉 Spa LaQua", latitude: 35.70755267260959, longitude: 139.75290419672916 },
+    { ward_id: adachi_ward_id, name: "大谷田温泉 明神の湯", latitude: 35.77837056384798, longitude: 139.84751769858448 }
   ]
 
   facilities.each do |facility|
