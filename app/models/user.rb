@@ -21,8 +21,7 @@ class User < ApplicationRecord
   end
 
   def check_in(facility)
-    # TODO: 位置情報の判断ロジックは後で対応
-    CheckinLog.new(user_id: self.id, facility_id: facility.id)
+    CheckinLog.create!(user_id: self.id, facility_id: facility.id)
   end
 
   def checkin_dates_for(facility)

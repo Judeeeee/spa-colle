@@ -10,7 +10,10 @@ html
     main
       p n回訪問
       div#map(style="height: 300px; width: 70%; margin: 0 auto;")
-      = button_to 'チェックインする', facility_checkin_logs_path(@facility), method: :post
+      = form_with url: facility_checkin_logs_path(@facility), method: :post, id: "check-in-form" do |f|
+        = f.hidden_field :latitude, id: "latitude"
+        = f.hidden_field :longitude, id: "longitude"
+        = f.submit "チェックインする", id: "check-in-btn"
       = link_to "チェックインログページへ", facility_checkin_logs_path(@facility), class: "checkin_log_link"
       br
       = link_to "施設一覧ページへ", facilities_path, class: "facilities_link"
@@ -52,4 +55,17 @@ html
       |     infowindow.open(map, marker);
       |   });
       | };
+      |
+      | document.getElementById("check-in-btn").addEventListener("click", function(event) {
+      |   event.preventDefault();
+      |   if (navigator.geolocation) {
+      |     navigator.geolocation.getCurrentPosition(function(position) {
+      |       document.getElementById("latitude").value = position.coords.latitude;
+      |       document.getElementById("longitude").value = position.coords.longitude;
+      |       document.getElementById("check-in-form").submit();
+      |     });
+      |   } else {
+      |     alert("現在地を取得できません。");
+      |   }
+      | });
     script src="https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google_map_api_key}&callback=initMap" async defer
