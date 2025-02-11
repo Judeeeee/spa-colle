@@ -10,9 +10,9 @@ html
     main
       div.checkin_logs
         ul
-          li 2025/4/16
-          li 2025/4/17
-          li 2025/4/18
-      = link_to "詳細ページへ戻る", facility_path(1), class: "back_facility_link"
+          - @checkin_logs.each do |checkin_log|
+            li
+              = checkin_log
+      = link_to "詳細ページへ戻る", facility_path(@facility), class: "back_facility_link"
     footer
       p © 2025 Judeee

@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :checkin_logs
+  has_many :facilities, through: :checkin_logs
+
   class << self
     def find_or_create_from_auth_hash(auth_hash)
       user_params = user_params_from_auth_hash(auth_hash)
@@ -20,5 +23,9 @@ class User < ApplicationRecord
   def check_in(facility)
     # TODO: 位置情報の判断ロジックは後で対応
     CheckinLog.new(user_id: self.id, facility_id: facility.id)
+  end
+
+  def checkin_dates_for(facility)
+    checkin_logs.where(facility_id: facility.id).order(created_at: :asc).pluck(:created_at)
   end
 end

@@ -1,6 +1,7 @@
 class CheckinLogsController < ApplicationController
-  before_action :set_facility, only: %w[create]
+  before_action :set_facility
   def index
+    @checkin_logs = current_user.checkin_dates_for(@facility)
   end
 
   def create
