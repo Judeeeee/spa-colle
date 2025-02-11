@@ -10,8 +10,8 @@ html
     main
       p n回訪問
       div#map(style="height: 300px; width: 70%; margin: 0 auto;")
-      p チェックインするボタンをここに配置する
-      = link_to "チェックインログページへ", facility_checkin_logs_path(1), class: "checkin_log_link"
+      = button_to 'チェックインする', facility_checkin_logs_path(@facility), method: :post
+      = link_to "チェックインログページへ", facility_checkin_logs_path(@facility), class: "checkin_log_link"
       br
       = link_to "施設一覧ページへ", facilities_path, class: "facilities_link"
     footer
