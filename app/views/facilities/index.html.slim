@@ -15,7 +15,12 @@ html
               = ward
               ul
                 - facilities.each do |facility|
-                  li = link_to facility.name, facility_path(facility)
+                  li
+                    - if current_user.checkin_logs.exists?(facility_id: facility.id)
+                      | 済:
+                    - else
+                      | 未:
+                    = link_to facility.name, facility_path(facility)
       = link_to "トップページへ戻る", root_path, class: "back_top_link"
     footer
       p © 2025 Judeee
