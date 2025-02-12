@@ -8,7 +8,7 @@ html
     header
       h1 = @facility.name
     main
-      p n回訪問
+      = "#{@checkin_count}回訪問"
       div#map(style="height: 300px; width: 70%; margin: 0 auto;")
       = form_with url: facility_checkin_logs_path(@facility), method: :post, id: "check-in-form" do |f|
         = f.hidden_field :latitude, id: "latitude"

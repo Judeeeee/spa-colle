@@ -7,6 +7,7 @@ class FacilitiesController < ApplicationController
   end
 
   def show
+    @checkin_count = @facility.checkin_logs.size
   end
 
   def map

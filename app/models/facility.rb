@@ -1,5 +1,6 @@
 class Facility < ApplicationRecord
   belongs_to :ward
+  has_many :checkin_logs, dependent: :destroy
 
   def within_distance?(current_lat, current_lng)
     # 距離計算（Haversine公式）
