@@ -3,14 +3,17 @@ html
   head
     = csrf_meta_tags
     = csp_meta_tag
+    = stylesheet_link_tag "stamp_card", media: "all"
     = javascript_include_tag "application", "data-turbolinks-track": "reload"
   body
     header
       h1 spa colle
     main
       - if current_user
+        | スタンプカードをイメージするだけのために作成
         div.stamp-card
-          p ここにスタンプカードを表示する
+          = render 'stamp_card'
+        br
         = link_to "付近の施設を検索", facilities_map_path, class: "facilities_map_link"
         br
         = link_to "施設一覧", facilities_path, class: "facilities_link"
