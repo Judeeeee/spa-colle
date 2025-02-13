@@ -1,0 +1,10 @@
+table class="stamp-card-table"
+  tbody
+    - (1..3).each do |row|
+      tr
+        - (1..3).each do |col|
+          - number = (row - 1) * 3 + col
+          td
+            = number
+            - if number.odd?
+              = image_tag 'hot_spring.svg', width: 50, height: 50
