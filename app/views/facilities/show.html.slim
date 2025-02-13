@@ -3,6 +3,7 @@ html
   head
     = csrf_meta_tags
     = csp_meta_tag
+    = stylesheet_link_tag "modal", media: "all"
     = javascript_include_tag "application", "data-turbolinks-track": "reload"
   body
     header
@@ -10,13 +11,14 @@ html
     main
       = "#{@checkin_count}回訪問"
       div#map(style="height: 300px; width: 70%; margin: 0 auto;")
-      = form_with url: facility_checkin_logs_path(@facility), method: :post, id: "check-in-form" do |f|
+      = form_with url: facility_checkin_logs_path(@facility), method: :post, id: "check-in-form",  data: { turbo_frame: "checkin-modal-frame" } do |f|
         = f.hidden_field :latitude, id: "latitude"
         = f.hidden_field :longitude, id: "longitude"
         = f.submit "チェックインする", id: "check-in-btn"
       = link_to "チェックインログページへ", facility_checkin_logs_path(@facility), class: "checkin_log_link"
       br
       = link_to "施設一覧ページへ", facilities_path, class: "facilities_link"
+      turbo-frame id="checkin-modal-frame"
     footer
       p © 2025 Judeee
 
