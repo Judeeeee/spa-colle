@@ -3,6 +3,7 @@ html
   head
     = csrf_meta_tags
     = csp_meta_tag
+    = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application", "data-turbolinks-track": "reload"
   body
     header
@@ -12,15 +13,16 @@ html
         ul
           - @grouped_facilities.each do |ward, facilities|
             li
-              = ward
-              ul
-                - facilities.each do |facility|
-                  li
-                    - if current_user.checkin_logs.exists?(facility_id: facility.id)
-                      | 済:
-                    - else
-                      | 未:
-                    = link_to facility.name, facility_path(facility)
+              details
+                summary = ward
+                ul
+                  - facilities.each do |facility|
+                    li
+                      - if current_user.checkin_logs.exists?(facility_id: facility.id)
+                        | 済:
+                      - else
+                        | 未:
+                      = link_to facility.name, facility_path(facility)
       = link_to "トップページへ戻る", root_path, class: "back_top_link"
     footer
       p © 2025 Judeee
