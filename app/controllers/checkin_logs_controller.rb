@@ -7,8 +7,12 @@ class CheckinLogsController < ApplicationController
 
   def create
     if @facility.within_distance?(@current_lat, @current_lng)
-      current_user.check_in(@facility)
-      redirect_to facility_checkin_logs_path(@facility)
+
+      respond_to do |format|
+        format.turbo_stream { render_checkin_modal } if first_visit?
+        current_user.check_in(@facility)
+        format.html { redirect_to facility_checkin_logs_path(@facility) }
+      end
     else
       # "チェックイン失敗時処理"
     end
@@ -23,5 +27,17 @@ class CheckinLogsController < ApplicationController
   def set_current_location
     @current_lat = params[:latitude].to_i
     @current_lng = params[:longitude].to_i
+  end
+
+  def first_visit?
+    !current_user.checkin_logs.exists?(facility_id: @facility.id)
+  end
+
+  def render_checkin_modal
+    render turbo_stream: turbo_stream.update(
+      "checkin-modal-frame",
+      partial: "facilities/checkin_modal",
+      locals: { facility: @facility }
+    )
   end
 end
