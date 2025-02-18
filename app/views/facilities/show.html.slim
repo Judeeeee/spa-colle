@@ -4,13 +4,13 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag "modal", media: "all"
-    = javascript_include_tag "application", "data-turbolinks-track": "reload"
+    = javascript_include_tag "show", "data-turbolinks-track": "reload", preload: true, as: "script"
   body
     header
       h1 = @facility.name
     main
       = "#{@checkin_count}回訪問"
-      div#map(style="height: 300px; width: 70%; margin: 0 auto;")
+      div#map(data-latitude="#{ @facility.latitude }" data-longitude="#{ @facility.longitude }" data-image-url="#{asset_path('hot_spring.svg')}" style="height: 300px; width: 70%; margin: 0 auto;")
       = form_with url: facility_checkin_logs_path(@facility), method: :post, id: "check-in-form",  data: { turbo_frame: "checkin-modal-frame" } do |f|
         = f.hidden_field :latitude, id: "latitude"
         = f.hidden_field :longitude, id: "longitude"
@@ -22,52 +22,4 @@ html
     footer
       p © 2025 Judeee
 
-    script
-      | let map;
-      | const latitude = #{ @facility.latitude };
-      | const longitude = #{ @facility.longitude };
-      | const googleMapUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
-      |
-      | function initMap() {
-      |   map = new google.maps.Map(document.getElementById("map"), {
-      |     center: { lat: latitude, lng: longitude },
-      |     zoom: 18,
-      |   });
-      |
-      |   const contentString = `
-      |     <div>
-      |       <a href="${googleMapUrl}" target="_blank">Googleマップへ移動</a>
-      |     </div>
-      |   `;
-      |
-      |   const infowindow = new google.maps.InfoWindow({
-      |     content: contentString
-      |   });
-      |
-      |   const marker =　new google.maps.Marker({
-      |     position: { lat: latitude, lng: longitude },
-      |     map: map,
-      |     icon: {
-      |       url: "#{asset_path('hot_spring.svg')}",
-      |       scaledSize: new google.maps.Size(38, 31),
-      |     }
-      |   });
-      |
-      |   marker.addListener("click", function() {
-      |     infowindow.open(map, marker);
-      |   });
-      | };
-      |
-      | document.getElementById("check-in-btn").addEventListener("click", function(event) {
-      |   event.preventDefault();
-      |   if (navigator.geolocation) {
-      |     navigator.geolocation.getCurrentPosition(function(position) {
-      |       document.getElementById("latitude").value = position.coords.latitude;
-      |       document.getElementById("longitude").value = position.coords.longitude;
-      |       document.getElementById("check-in-form").submit();
-      |     });
-      |   } else {
-      |     alert("現在地を取得できません。");
-      |   }
-      | });
-    script src="https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google_map_api_key}&callback=initMap" async defer
+script(src="https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google_map_api_key}&callback=initMap" defer)
