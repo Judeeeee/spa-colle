@@ -2,7 +2,7 @@ class CheckinLogsController < ApplicationController
   before_action :set_facility
   before_action :set_current_location
   def index
-    @checkin_logs = current_user.checkin_dates_for(@facility)
+    @checkin_logs = current_user.checkin_dates_for(@facility).map { |date| date.strftime("%Y/%m/%d") }
   end
 
   def create
