@@ -1,0 +1,6 @@
+.modal-overlay data-controller="modal"
+  .modal
+    h2 本日は既にチェックインしています♨️
+    p １日一回のみチェックインできます。
+    = button_tag "閉じる", class: "close-modal",
+      data: { action: "click->modal#close" }
