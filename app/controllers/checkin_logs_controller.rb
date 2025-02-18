@@ -9,9 +9,13 @@ class CheckinLogsController < ApplicationController
     if @facility.within_distance?(@current_lat, @current_lng)
 
       respond_to do |format|
-        format.turbo_stream { render_checkin_modal } if first_visit?
-        current_user.check_in(@facility)
-        format.html { redirect_to facility_checkin_logs_path(@facility) }
+        if already_checked_in_today?
+          format.turbo_stream { render_chechin_limit_modal }
+        else
+          format.turbo_stream { render_checkin_modal } if first_visit?
+          current_user.check_in(@facility)
+          format.html { redirect_to facility_checkin_logs_path(@facility) }
+        end
       end
     else
       # "チェックイン失敗時処理"
@@ -33,11 +37,22 @@ class CheckinLogsController < ApplicationController
     !current_user.checkin_logs.exists?(facility_id: @facility.id)
   end
 
+  def already_checked_in_today?
+    current_user.checkin_logs.exists?(facility_id: @facility.id, created_at: Time.zone.now.all_day)
+  end
+
   def render_checkin_modal
     render turbo_stream: turbo_stream.update(
       "checkin-modal-frame",
       partial: "facilities/checkin_modal",
       locals: { facility: @facility }
+    )
+  end
+
+  def render_chechin_limit_modal
+    render turbo_stream: turbo_stream.update(
+      "checkin-limit-modal-frame",
+      partial: "facilities/checkin_limit_modal",
     )
   end
 end
