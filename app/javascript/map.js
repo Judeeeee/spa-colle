@@ -35,12 +35,6 @@ function initMap(center) {
     },
   });
 
-  const contentString = "<div>" + "ここに施設詳細リンクを表示させる" + "</div>";
-
-  const infowindow = new google.maps.InfoWindow({
-    content: contentString,
-  });
-
   facilities.forEach(function (facility) {
     const marker = new google.maps.Marker({
       position: { lat: facility.latitude, lng: facility.longitude },
@@ -50,6 +44,19 @@ function initMap(center) {
         url: document.getElementById("map").dataset.imageUrl,
         scaledSize: new google.maps.Size(38, 31),
       },
+    });
+    const contentString = `
+      <div>
+        <h2>
+          ${facility.name}
+        </h2>
+        <a href='/facilities/${facility.id}' target='_blank'>
+          施設詳細ページへ
+        </a>
+      </div>
+    `;
+    const infowindow = new google.maps.InfoWindow({
+      content: contentString,
     });
 
     marker.addListener("click", () => {
