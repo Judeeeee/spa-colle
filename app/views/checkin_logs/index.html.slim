@@ -6,6 +6,7 @@ html
     = javascript_include_tag "application", "data-turbolinks-track": "reload"
   body
     header
+      = render partial: 'layouts/header', formats: :html
       h1 チェックインログ
     main
       div.checkin_logs

@@ -7,6 +7,8 @@ html
     = javascript_include_tag "application", "data-turbolinks-track": "reload"
   body
     header
+      - if current_user
+        = render partial: 'layouts/header', formats: :html
       h1 spa colle
     main
       - if current_user
