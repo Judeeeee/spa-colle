@@ -1,19 +1,7 @@
-doctype html
-html
-  head
-    = csrf_meta_tags
-    = csp_meta_tag
-    = javascript_include_tag "application", "data-turbolinks-track": "reload"
-  body class="min-h-screen flex flex-col"
-    header
-      = render partial: 'layouts/header', formats: :html
-      h1 チェックインログ
-    main class="flex-grow"
-      div.checkin_logs
-        ul
-          - @checkin_logs.each do |checkin_log|
-            li
-              = checkin_log
-      = link_to "詳細ページへ戻る", facility_path(@facility), class: "back_facility_link"
-    footer
-      = render partial: 'layouts/footer', formats: :html
+h1 チェックインログ
+div.checkin_logs
+  ul
+    - @checkin_logs.each do |checkin_log|
+      li
+        = checkin_log
+= link_to "詳細ページへ戻る", facility_path(@facility), class: "back_facility_link"

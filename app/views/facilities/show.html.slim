@@ -1,27 +1,16 @@
-doctype html
-html
-  head
-    = csrf_meta_tags
-    = csp_meta_tag
-    = stylesheet_link_tag "modal", media: "all"
-    = javascript_include_tag "show", "data-turbolinks-track": "reload", preload: true, as: "script"
-  body class="min-h-screen flex flex-col"
-    header
-      = render partial: 'layouts/header', formats: :html
-      h1 = @facility.name
-    main class="flex-grow"
-      = "#{@checkin_count}回訪問"
-      div#map(data-latitude="#{ @facility.latitude }" data-longitude="#{ @facility.longitude }" data-image-url="#{asset_path('hot_spring.svg')}" style="height: 300px; width: 70%; margin: 0 auto;")
-      = form_with url: facility_checkin_logs_path(@facility), method: :post, id: "check-in-form",  data: { turbo_frame: "checkin-modal-frame" } do |f|
-        = f.hidden_field :latitude, id: "latitude"
-        = f.hidden_field :longitude, id: "longitude"
-        = f.submit "チェックインする", id: "check-in-btn"
-      = link_to "チェックインログページへ", facility_checkin_logs_path(@facility), class: "checkin_log_link"
-      br
-      = link_to "施設一覧ページへ", facilities_path, class: "facilities_link"
-      turbo-frame id="checkin-modal-frame"
-      turbo-frame id="checkin-limit-modal-frame"
-    footer
-      = render partial: 'layouts/footer', formats: :html
+= stylesheet_link_tag "modal", media: "all"
+= javascript_include_tag "show", "data-turbolinks-track": "reload", preload: true, as: "script"
+h1 = @facility.name
+= "#{@checkin_count}回訪問"
+div#map(data-latitude="#{ @facility.latitude }" data-longitude="#{ @facility.longitude }" data-image-url="#{asset_path('hot_spring.svg')}" style="height: 300px; width: 70%; margin: 0 auto;")
+= form_with url: facility_checkin_logs_path(@facility), method: :post, id: "check-in-form",  data: { turbo_frame: "checkin-modal-frame" } do |f|
+  = f.hidden_field :latitude, id: "latitude"
+  = f.hidden_field :longitude, id: "longitude"
+  = f.submit "チェックインする", id: "check-in-btn"
+= link_to "チェックインログページへ", facility_checkin_logs_path(@facility), class: "checkin_log_link"
+br
+= link_to "施設一覧ページへ", facilities_path, class: "facilities_link"
+turbo-frame id="checkin-modal-frame"
+turbo-frame id="checkin-limit-modal-frame"
 
 script(src="https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google_map_api_key}&callback=initMap" defer)
