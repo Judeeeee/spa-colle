@@ -24,4 +24,4 @@ html
       - else
         = button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false }
     footer
-      p © 2025 Judeee
+      = render partial: 'layouts/footer', formats: :html

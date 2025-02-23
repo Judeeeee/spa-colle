@@ -12,6 +12,6 @@ html
       div#map data-facilities=@facilities.to_json data-image-url="#{asset_path('hot_spring.svg')}" style="height: 300px; width: 70%;"
       = link_to "トップページへ戻る", root_path, class: "back_top_link"
     footer
-      p © 2025 Judeee
+      = render partial: 'layouts/footer', formats: :html
 
 script(src="https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google_map_api_key}&callback=initMapWithCurrentLocation" defer)

@@ -26,4 +26,4 @@ html
                       = link_to facility.name, facility_path(facility)
       = link_to "トップページへ戻る", root_path, class: "back_top_link"
     footer
-      p © 2025 Judeee
+      = render partial: 'layouts/footer', formats: :html

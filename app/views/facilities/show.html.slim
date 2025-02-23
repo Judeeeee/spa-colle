@@ -22,6 +22,6 @@ html
       turbo-frame id="checkin-modal-frame"
       turbo-frame id="checkin-limit-modal-frame"
     footer
-      p © 2025 Judeee
+      = render partial: 'layouts/footer', formats: :html
 
 script(src="https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google_map_api_key}&callback=initMap" defer)
