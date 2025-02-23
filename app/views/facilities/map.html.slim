@@ -6,6 +6,7 @@ html
     = javascript_include_tag "map", "data-turbolinks-track": "reload", preload: true, as: "script"
   body
     header
+      = render partial: 'layouts/header', formats: :html
       h1 付近の施設を検索
     main
       div#map data-facilities=@facilities.to_json data-image-url="#{asset_path('hot_spring.svg')}" style="height: 300px; width: 70%;"

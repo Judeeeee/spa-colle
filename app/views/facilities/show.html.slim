@@ -7,6 +7,7 @@ html
     = javascript_include_tag "show", "data-turbolinks-track": "reload", preload: true, as: "script"
   body
     header
+      = render partial: 'layouts/header', formats: :html
       h1 = @facility.name
     main
       = "#{@checkin_count}回訪問"
