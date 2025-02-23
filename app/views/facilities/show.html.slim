@@ -5,11 +5,11 @@ html
     = csp_meta_tag
     = stylesheet_link_tag "modal", media: "all"
     = javascript_include_tag "show", "data-turbolinks-track": "reload", preload: true, as: "script"
-  body
+  body class="min-h-screen flex flex-col"
     header
       = render partial: 'layouts/header', formats: :html
       h1 = @facility.name
-    main
+    main class="flex-grow"
       = "#{@checkin_count}回訪問"
       div#map(data-latitude="#{ @facility.latitude }" data-longitude="#{ @facility.longitude }" data-image-url="#{asset_path('hot_spring.svg')}" style="height: 300px; width: 70%; margin: 0 auto;")
       = form_with url: facility_checkin_logs_path(@facility), method: :post, id: "check-in-form",  data: { turbo_frame: "checkin-modal-frame" } do |f|
@@ -22,6 +22,6 @@ html
       turbo-frame id="checkin-modal-frame"
       turbo-frame id="checkin-limit-modal-frame"
     footer
-      p © 2025 Judeee
+      = render partial: 'layouts/footer', formats: :html
 
 script(src="https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google_map_api_key}&callback=initMap" defer)

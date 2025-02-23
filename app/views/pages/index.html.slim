@@ -5,12 +5,12 @@ html
     = csp_meta_tag
     = stylesheet_link_tag "stamp_card", media: "all"
     = javascript_include_tag "application", "data-turbolinks-track": "reload"
-  body
+  body class="min-h-screen flex flex-col"
     header
       - if current_user
         = render partial: 'layouts/header', formats: :html
       h1 spa colle
-    main
+    main class="flex-grow"
       - if current_user
         | スタンプカードをイメージするだけのために作成
         div.stamp-card
@@ -24,4 +24,4 @@ html
       - else
         = button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false }
     footer
-      p © 2025 Judeee
+      = render partial: 'layouts/footer', formats: :html
