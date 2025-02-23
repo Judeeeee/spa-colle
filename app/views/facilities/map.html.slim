@@ -1,17 +1,7 @@
-doctype html
-html
-  head
-    = csrf_meta_tags
-    = csp_meta_tag
-    = javascript_include_tag "map", "data-turbolinks-track": "reload", preload: true, as: "script"
-  body class="min-h-screen flex flex-col"
-    header
-      = render partial: 'layouts/header', formats: :html
-      h1 付近の施設を検索
-    main class="flex-grow"
-      div#map data-facilities=@facilities.to_json data-image-url="#{asset_path('hot_spring.svg')}" style="height: 300px; width: 70%;"
-      = link_to "トップページへ戻る", root_path, class: "back_top_link"
-    footer
-      = render partial: 'layouts/footer', formats: :html
+= javascript_include_tag "map", "data-turbolinks-track": "reload", preload: true, as: "script"
+
+h1 付近の施設を検索
+div#map data-facilities=@facilities.to_json data-image-url="#{asset_path('hot_spring.svg')}" style="height: 300px; width: 70%;"
+= link_to "トップページへ戻る", root_path, class: "back_top_link"
 
 script(src="https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google_map_api_key}&callback=initMapWithCurrentLocation" defer)

@@ -1,29 +1,16 @@
-doctype html
-html
-  head
-    = csrf_meta_tags
-    = csp_meta_tag
-    = stylesheet_link_tag "application", media: "all"
-    = javascript_include_tag "application", "data-turbolinks-track": "reload"
-  body class="min-h-screen flex flex-col"
-    header
-      = render partial: 'layouts/header', formats: :html
-      h1 施設一覧
-    main class="flex-grow"
-      div.facilities
-        ul
-          - @grouped_facilities.each do |ward, facilities|
-            li
-              details
-                summary = ward
-                ul
-                  - facilities.each do |facility|
-                    li
-                      - if current_user.checkin_logs.exists?(facility_id: facility.id)
-                        | 済:
-                      - else
-                        | 未:
-                      = link_to facility.name, facility_path(facility)
-      = link_to "トップページへ戻る", root_path, class: "back_top_link"
-    footer
-      = render partial: 'layouts/footer', formats: :html
+h1 施設一覧
+div.facilities
+  ul
+    - @grouped_facilities.each do |ward, facilities|
+      li
+        details
+          summary = ward
+          ul
+            - facilities.each do |facility|
+              li
+                - if current_user.checkin_logs.exists?(facility_id: facility.id)
+                  | 済:
+                - else
+                  | 未:
+                = link_to facility.name, facility_path(facility)
+= link_to "トップページへ戻る", root_path, class: "back_top_link"

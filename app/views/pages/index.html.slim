@@ -1,27 +1,14 @@
-doctype html
-html
-  head
-    = csrf_meta_tags
-    = csp_meta_tag
-    = stylesheet_link_tag "stamp_card", media: "all"
-    = javascript_include_tag "application", "data-turbolinks-track": "reload"
-  body class="min-h-screen flex flex-col"
-    header
-      - if current_user
-        = render partial: 'layouts/header', formats: :html
-      h1 spa colle
-    main class="flex-grow"
-      - if current_user
-        | スタンプカードをイメージするだけのために作成
-        div.stamp-card
-          = render 'stamp_card'
-        br
-        = link_to "付近の施設を検索", facilities_map_path, class: "facilities_map_link"
-        br
-        = link_to "施設一覧", facilities_path, class: "facilities_link"
-        br
-        = link_to "ログアウト", log_out_path
-      - else
-        = button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false }
-    footer
-      = render partial: 'layouts/footer', formats: :html
+h1 spa colle
+
+- if current_user
+  | スタンプカードをイメージするだけのために作成
+  div.stamp-card
+    = render 'stamp_card'
+  br
+  = link_to "付近の施設を検索", facilities_map_path, class: "facilities_map_link"
+  br
+  = link_to "施設一覧", facilities_path, class: "facilities_link"
+  br
+  = link_to "ログアウト", log_out_path
+- else
+  = button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false }
