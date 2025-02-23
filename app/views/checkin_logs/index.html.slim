@@ -4,11 +4,11 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = javascript_include_tag "application", "data-turbolinks-track": "reload"
-  body
+  body class="min-h-screen flex flex-col"
     header
       = render partial: 'layouts/header', formats: :html
       h1 チェックインログ
-    main
+    main class="flex-grow"
       div.checkin_logs
         ul
           - @checkin_logs.each do |checkin_log|

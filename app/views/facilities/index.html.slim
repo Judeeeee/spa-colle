@@ -5,11 +5,11 @@ html
     = csp_meta_tag
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application", "data-turbolinks-track": "reload"
-  body
+  body class="min-h-screen flex flex-col"
     header
       = render partial: 'layouts/header', formats: :html
       h1 施設一覧
-    main
+    main class="flex-grow"
       div.facilities
         ul
           - @grouped_facilities.each do |ward, facilities|
