@@ -3,7 +3,7 @@ h1 spa colle
 - if current_user
   | スタンプカードをイメージするだけのために作成
   div.stamp-card
-    = render 'stamp_card'
+    = render 'stamp_card', wards: @wards
   br
   = link_to "付近の施設を検索", facilities_map_path, class: "facilities_map_link"
   br
