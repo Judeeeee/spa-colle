@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root "pages#index"
   get "/facilities/map", to: "facilities#map"
-  resources :facilities, only: [:index, :show] do
-    resources :checkin_logs, only: [:index, :create]
+  resources :facilities, only: [ :index, :show ] do
+    resources :checkin_logs, only: [ :index, :create ]
   end
   get "/terms", to: "pages#terms"
   get "auth/:provider/callback", to: "sessions#create"
