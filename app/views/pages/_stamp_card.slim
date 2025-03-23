@@ -8,7 +8,7 @@ table class="stamp-card-table w-full h-full table-fixed border-collapse border b
           span = ward.name
           - if ward.visited_by_user?(current_user)
             span class="absolute inset-0 flex items-center justify-center text-red-500 text-2xl font-bold pointer-events-none"
-              = image_tag "hot_spring.svg", alt: "stamp", class: "w-8 h-8"
+              = image_tag "hot_spring.svg", alt: "stamp", class: "w-16 h-16 opacity-50"
 
     - wards.drop(3).each_slice(5) do |ward|
       tr
@@ -17,4 +17,4 @@ table class="stamp-card-table w-full h-full table-fixed border-collapse border b
             span = w.name
             - if w.visited_by_user?(current_user)
               span class="absolute inset-0 flex items-center justify-center text-red-500 text-2xl font-bold pointer-events-none"
-                = image_tag "hot_spring.svg", alt: "stamp", class: "w-8 h-8"
+                = image_tag "hot_spring.svg", alt: "stamp", class: "w-16 h-16 opacity-50"
