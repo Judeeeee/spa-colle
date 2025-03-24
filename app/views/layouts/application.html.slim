@@ -25,5 +25,6 @@ html
       = render partial: 'layouts/header', formats: :html
     main class="flex flex-col justify-center items-center"
       = yield
-    footer
-      = render partial: 'layouts/footer', formats: :html
+    - if current_user
+      footer
+        = render partial: 'layouts/footer', formats: :html
