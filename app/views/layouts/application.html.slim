@@ -23,7 +23,7 @@ html
     header
     - if current_user
       = render partial: 'layouts/header', formats: :html
-    main class="flex flex-col justify-center items-center"
+    main class="flex flex-col justify-center items-center h-screen"
       = yield
     - if current_user
       footer
