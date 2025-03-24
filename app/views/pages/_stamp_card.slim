@@ -1,19 +1,22 @@
-table class="stamp-card-table"
+table class="stamp-card-table w-full h-full table-fixed border-collapse border border-gray-300"
   tbody
     tr
-      td ♨️
-      td ♨️
+      td class="p-4 border border-gray-300 text-2xl text-center align-middle w-[30px] h-[30px]" ♨️
+      td class="p-4 border border-gray-300 text-2xl text-center align-middle w-[30px] h-[30px]" ♨️
       - wards.first(3).each do |ward|
-        td
-          = ward.name
-          br
+        td class="relative border border-gray-300 text-sm text-center w-[30px] h-[30px] align-middle"
+          span class="text-l font-bold whitespace-nowrap"
+            = ward.name
           - if ward.visited_by_user?(current_user)
-            | ⭕️
+            span class="absolute inset-0 flex items-center justify-center text-red-500 text-2xl font-bold pointer-events-none"
+              = image_tag "hot_spring.svg", alt: "stamp", class: "w-16 h-16 opacity-50"
+
     - wards.drop(3).each_slice(5) do |ward|
       tr
         - ward.each do |w|
-          td
-            = w.name
-            br
+          td class="relative border border-gray-300 text-sm text-center w-[30px] h-[30px] align-middle"
+            span class="text-l font-bold whitespace-nowrap"
+              = w.name
             - if w.visited_by_user?(current_user)
-              | ⭕️
+              span class="absolute inset-0 flex items-center justify-center text-red-500 text-2xl font-bold pointer-events-none"
+                = image_tag "hot_spring.svg", alt: "stamp", class: "w-16 h-16 opacity-50"

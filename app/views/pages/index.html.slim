@@ -1,14 +1,12 @@
-h1 spa colle
+h1 class="text-3xl md:text-4xl font-bold mb-4" spa colle
 
 - if current_user
-  | スタンプカードをイメージするだけのために作成
-  div.stamp-card
+  div class="stamp-card w-[80%] md:w-[40%] aspect-square relative mx-auto max-h-[calc(100vh-248px)]"
     = render 'stamp_card', wards: @wards
-  br
-  = link_to "付近の施設を検索", facilities_map_path, class: "facilities_map_link"
-  br
-  = link_to "施設一覧", facilities_path, class: "facilities_link"
-  br
-  = link_to "ログアウト", log_out_path
+  div class="links w-[80%] flex flex-col md:flex-row gap-4 mt-12 mb-8"
+    div class="map link w-full md:w-1/2"
+      = link_to "付近の施設を検索", facilities_map_path, class: "facilities_map_link text-xl font-bold border border-[#EDBBBD] text-[#EDBBBD] bg-transparent hover:bg-[#EDBBBD] hover:text-white py-5 px-4 rounded-xl transition-colors duration-200 block text-center"
+    div class="facilities link w-full md:w-1/2"
+      = link_to "施設一覧", facilities_path, class: "text-xl font-bold border border-[#EF454A] text-[#EF454A] bg-transparent hover:bg-[#EF454A] hover:text-white py-5 px-4 rounded-xl transition-colors duration-200 block text-center"
 - else
   = button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false }
