@@ -1,16 +1,15 @@
-h1 施設一覧
-div.facilities
-  ul
-    - @grouped_facilities.each do |ward, facilities|
-      li
-        details
-          summary = ward
-          ul
-            - facilities.each do |facility|
-              li
+h1 class="text-3xl md:text-4xl font-bold mt-6 mb-6" 施設一覧
+div class="grid grid-cols-1 md:grid-cols-3 gap-2 w-[90%]"
+  - @grouped_facilities.each do |ward, facilities|
+    div class="border-b border-gray-300 p-4"
+      details class="group"
+        summary class="text-lg font-semibold"
+          = ward
+        ul class="pl-4 space-y-2 group-open:block hidden"
+          - facilities.each do |facility|
+            li class="flex items-center space-x-2"
+              span class="whitespace-nowrap"
                 - if current_user.checkin_logs.exists?(facility_id: facility.id)
-                  | 済:
-                - else
-                  | 未:
-                = link_to facility.name, facility_path(facility)
-= link_to "トップページへ戻る", root_path, class: "back_top_link"
+                  = image_tag "sumi-stamp.svg", alt: "visited stamp", class: "h-5 w-5 inline-block"
+              = link_to facility.name, facility_path(facility), class: "text-blue-600 visited:text-purple-600 underline"
+= link_to "トップページへ戻る", root_path, class: "back_top_link text-lg text-blue-600 visited:text-purple-600 underline mt-auto mb-6"
