@@ -1,7 +1,8 @@
-h1 チェックインログ
-div.checkin_logs
-  ul
+h1 class="text-3xl md:text-4xl font-bold mt-6 mb-6" チェックインログ
+div class="checkin_logs w-[60%]"
+  ul class="space-y-2"
     - @checkin_logs.each do |checkin_log|
-      li
-        = checkin_log
-= link_to "詳細ページへ戻る", facility_path(@facility), class: "back_facility_link"
+      li class="p-4 bg-white border border-[#EDBBBD] border-4 rounded-lg flex items-center"
+        p class="text-lg md:text-xl text-center flex-1 font-bold"
+          = checkin_log
+= link_to "詳細ページへ戻る", facility_path(@facility), class: "back_facility_link text-lg text-blue-600 visited:text-purple-600 underline mt-auto mb-6"
