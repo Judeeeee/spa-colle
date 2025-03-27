@@ -4,5 +4,5 @@ header style="background-color: #EDBBBD;" class="bg-gray-800 text-white p-4"
       = link_to root_path do
         = image_tag "spa_colle_logo.png", alt: "Logo", class: "h-10"
     .ml-auto.flex.items-center
-      p class="mr-4" = "#{current_user.name}でログインしています"
+      = image_tag current_user.image, alt: "Google account profile image", class: 'h-10 w-10 rounded-full'
       = link_to "ログアウト", log_out_path
