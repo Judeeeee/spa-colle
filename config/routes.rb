@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :facilities, only: [ :index, :show ] do
     resources :checkin_logs, only: [ :index, :create ]
   end
+  resources :users, only: [ :show, :destroy ]
   get "/terms", to: "pages#terms"
   get "auth/:provider/callback", to: "sessions#create"
   get "auth/failure", to: redirect("/")
