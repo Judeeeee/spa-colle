@@ -6,3 +6,6 @@ header style="background-color: #EDBBBD;" class="bg-gray-800 text-white p-4"
     .ml-auto.flex.items-center
       = image_tag current_user.image, alt: "Google account profile image", class: 'h-10 w-10 rounded-full'
       = link_to "ログアウト", log_out_path
+      = link_to "アカウント削除", user_path(current_user), data: { turbo_frame: "modal" }, class: "ml-4 text-white"
+
+turbo-frame id="modal"
