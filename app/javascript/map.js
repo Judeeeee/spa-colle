@@ -22,7 +22,7 @@ function initMap(center) {
 
   const map = new google.maps.Map(document.getElementById("map"), {
     center: center,
-    zoom: 16,
+    zoom: 12,
   });
 
   const currentLocation = new google.maps.Marker({
