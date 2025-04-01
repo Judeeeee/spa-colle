@@ -50,7 +50,7 @@ function initMap(center) {
         <h1>
           ${facility.name}
         </h1>
-        <a href='/facilities/${facility.id}' target='_blank'>
+        <a href='/facilities/${facility.id}'>
           施設詳細ページへ
         </a>
       </div>
