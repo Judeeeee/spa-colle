@@ -46,10 +46,10 @@ function initMap(center) {
       },
     });
     const contentString = `
-      <div>
-        <h2>
+      <div class="infowindow">
+        <h1>
           ${facility.name}
-        </h2>
+        </h1>
         <a href='/facilities/${facility.id}' target='_blank'>
           施設詳細ページへ
         </a>
