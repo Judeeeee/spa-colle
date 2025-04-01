@@ -11,7 +11,7 @@ function initMap() {
   });
 
   const contentString = `
-     <div>
+     <div class="infowindow">
        <a href="${googleMapUrl}" target="_blank">Googleマップへ移動</a>
      </div>
    `;

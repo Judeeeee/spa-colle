@@ -1,0 +1,13 @@
+.infowindow h1 {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.infowindow a {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.infowindow a:visited {
+  color: #7c3aed;
+}
