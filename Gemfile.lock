@@ -338,6 +338,8 @@ GEM
       rubocop-minitest
       rubocop-performance
       rubocop-rails
+    rubocop-rspec (3.4.0)
+      rubocop (~> 1.61)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
     slim (5.2.1)
@@ -445,6 +447,7 @@ DEPENDENCIES
   rails (~> 8.0.1)
   rspec-rails (~> 7.0.0)
   rubocop-rails-omakase
+  rubocop-rspec
   slim-rails
   solid_cable
   solid_cache
