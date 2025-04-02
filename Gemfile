@@ -49,6 +49,9 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # https://github.com/rspec/rspec-rails?tab=readme-ov-file#installation
+  gem "rspec-rails", "~> 7.0.0"
 end
 
 group :development do
@@ -58,4 +61,13 @@ group :development do
   # change-from-erb-to-slim https://github.com/slim-template/slim/wiki/Template-Converters-ERB-to-SLIM
   gem "html2slim", github: "slim-template/html2slim" # https://zenn.dev/yksn/articles/aff65f3afb73d0
   gem "slim-rails"
+end
+
+group :test do
+  # https://github.com/teamcapybara/capybara?tab=readme-ov-file#setupq
+  gem "capybara"
+  # https://github.com/rubocop/rubocop-rspec?tab=readme-ov-file#installation
+  gem "rubocop-rspec", require: false
+  # https://github.com/rubocop/rubocop-capybara?tab=readme-ov-file#installation
+  gem "rubocop-capybara", require: false
 end
