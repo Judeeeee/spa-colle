@@ -9,3 +9,5 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
 # https://github.com/rubocop/rubocop-rspec?tab=readme-ov-file#rubocop-configuration-file
 plugins: rubocop-rspec
+# https://github.com/rubocop/rubocop-capybara?tab=readme-ov-file#rubocop-configuration-file
+plugins: rubocop-capybara

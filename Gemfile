@@ -68,4 +68,6 @@ group :test do
   gem "capybara"
   # https://github.com/rubocop/rubocop-rspec?tab=readme-ov-file#installation
   gem "rubocop-rspec", require: false
+  # https://github.com/rubocop/rubocop-capybara?tab=readme-ov-file#installation
+  gem "rubocop-capybara", require: false
 end
