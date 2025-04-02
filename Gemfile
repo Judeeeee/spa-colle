@@ -62,3 +62,8 @@ group :development do
   gem "html2slim", github: "slim-template/html2slim" # https://zenn.dev/yksn/articles/aff65f3afb73d0
   gem "slim-rails"
 end
+
+group :test do
+  # https://github.com/teamcapybara/capybara?tab=readme-ov-file#setupq
+  gem "capybara"
+end
