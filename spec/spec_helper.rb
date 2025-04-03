@@ -91,7 +91,4 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
-
-  require 'capybara/rails' # https://github.com/teamcapybara/capybara?tab=readme-ov-file#setup
-  require 'capybara/rspec' # https://github.com/teamcapybara/capybara?tab=readme-ov-file#using-capybara-with-rspec
 end
