@@ -52,6 +52,8 @@ group :development, :test do
 
   # https://github.com/rspec/rspec-rails?tab=readme-ov-file#installation
   gem "rspec-rails", "~> 7.0.0"
+
+  gem "slim-rails"
 end
 
 group :development do
@@ -60,7 +62,6 @@ group :development do
 
   # change-from-erb-to-slim https://github.com/slim-template/slim/wiki/Template-Converters-ERB-to-SLIM
   gem "html2slim", github: "slim-template/html2slim" # https://zenn.dev/yksn/articles/aff65f3afb73d0
-  gem "slim-rails"
 end
 
 group :test do
@@ -70,4 +71,6 @@ group :test do
   gem "rubocop-rspec", require: false
   # https://github.com/rubocop/rubocop-capybara?tab=readme-ov-file#installation
   gem "rubocop-capybara", require: false
+  # https://github.com/SeleniumHQ/selenium/tree/trunk/rb
+  gem "selenium-webdriver"
 end

@@ -1,3 +1,7 @@
+const GeolocationErrorCodes = {
+  PERMISSION_DENIED: 1,
+};
+
 function initMapWithCurrentLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
@@ -9,9 +13,20 @@ function initMapWithCurrentLocation() {
         initMap(currentLocation);
       },
       function (error) {
-        console.error("エラー", error);
+        switch (error.code) {
+          case GeolocationErrorCodes.PERMISSION_DENIED:
+            alert(
+              "位置情報の使用が許可されなかっため、現在地を取得できませんでした。"
+            );
+            break;
+          default:
+            alert("現在地を取得できませんでした");
+            break;
+        }
       }
     );
+  } else {
+    alert("このブラウザは位置情報に対応していません。");
   }
 }
 
