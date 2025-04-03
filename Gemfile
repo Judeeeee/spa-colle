@@ -71,4 +71,6 @@ group :test do
   gem "rubocop-rspec", require: false
   # https://github.com/rubocop/rubocop-capybara?tab=readme-ov-file#installation
   gem "rubocop-capybara", require: false
+  # https://github.com/SeleniumHQ/selenium/tree/trunk/rb
+  gem "selenium-webdriver"
 end
