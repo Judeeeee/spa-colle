@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
-  before do
+  before(:each) do
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(
       provider: 'google_oauth2',
@@ -10,7 +10,7 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
       credentials: { token: 'mock_token', refresh_token: 'mock_refresh_token' }
     )
 
-    driven_by :selenium_chrome
+    driven_by :selenium_chrome_without_cache # 位置情報確認ダイアログを表示させるために、テスト毎にキャッシュを無効化
     visit root_path
     click_button 'Googleでログイン'
   end
@@ -28,4 +28,19 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
 
     accept_alert '位置情報の使用が許可されなかっため、現在地を取得できませんでした。'
   end
+
+  # TODO: 非同期処理の関係でアラートが表示されない
+  # it 'displays an alert on the facility page when location permission is denied on' do
+  #   visit "/facilities/1"
+  #   expect(page).to have_selector('h1', text: 'RAKU SPA 1010 神田')
+
+  #   page.evaluate_script(<<-JS)
+  #     navigator.geolocation.getCurrentPosition = function(success, error) {
+  #       error({ code: 1 });
+  #     };
+  #     initPage();
+  #   JS
+
+  #   accept_alert '位置情報の使用が許可されなかっため、現在地を取得できませんでした。'
+  # end
 end

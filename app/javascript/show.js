@@ -1,3 +1,7 @@
+const GeolocationErrorCodes = {
+  PERMISSION_DENIED: 1,
+};
+
 function initMap() {
   const mapElement = document.getElementById("map");
   const latitude = parseFloat(mapElement.dataset.latitude);
@@ -34,20 +38,42 @@ function initMap() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  initMap();
-  const checkInBtn = document.getElementById("check-in-btn");
-
-  checkInBtn.addEventListener("click", function (event) {
-    event.preventDefault();
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
+function getCurrentLocationAndSetForm() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
         document.getElementById("latitude").value = position.coords.latitude;
         document.getElementById("longitude").value = position.coords.longitude;
-        document.getElementById("check-in-form").submit();
-      });
-    } else {
-      alert("現在地を取得できません。");
-    }
-  });
-});
+      },
+      function (error) {
+        switch (error.code) {
+          case GeolocationErrorCodes.PERMISSION_DENIED:
+            alert(
+              "位置情報の使用が許可されなかっため、現在地を取得できませんでした。"
+            );
+            break;
+          default:
+            alert("現在地を取得できませんでした");
+            break;
+        }
+      }
+    );
+  } else {
+    alert("このブラウザは位置情報に対応していません。");
+  }
+}
+
+function initPage() {
+  getCurrentLocationAndSetForm();
+  initMap();
+
+  const checkInBtn = document.getElementById("check-in-btn");
+  if (checkInBtn) {
+    checkInBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+      document.getElementById("check-in-form").submit();
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", initPage);
