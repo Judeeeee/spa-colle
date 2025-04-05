@@ -29,8 +29,8 @@ class CheckinLogsController < ApplicationController
   end
 
   def set_current_location
-    @current_lat = params[:latitude].to_i
-    @current_lng = params[:longitude].to_i
+    @current_lat = params[:latitude].to_f
+    @current_lng = params[:longitude].to_f
   end
 
   def first_visit?

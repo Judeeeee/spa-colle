@@ -5,7 +5,7 @@ class Facility < ApplicationRecord
   def within_distance?(current_lat, current_lng)
     # 距離計算（Haversine公式）
     distance = distance_by_pythagoras(self, current_lat, current_lng)
-    threshold = 100000 # truthyにしたいので仮設定
+    threshold =  0.2 # 様子を見るために200m(0.2km)圏内にする
 
     true if distance <= threshold
   end
