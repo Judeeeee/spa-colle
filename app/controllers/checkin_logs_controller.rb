@@ -18,7 +18,9 @@ class CheckinLogsController < ApplicationController
         end
       end
     else
-      # "チェックイン失敗時処理"
+      respond_to do |format|
+        format.turbo_stream { render_checkin_out_of_range_modal }
+      end
     end
   end
 
@@ -53,6 +55,13 @@ class CheckinLogsController < ApplicationController
     render turbo_stream: turbo_stream.update(
       "checkin-limit-modal-frame",
       partial: "facilities/checkin_limit_modal",
+    )
+  end
+
+  def render_checkin_out_of_range_modal
+    render turbo_stream: turbo_stream.update(
+      "checkin-out-of-range-modal-frame",
+      partial: "facilities/checkin_out_of_range_modal",
     )
   end
 end
