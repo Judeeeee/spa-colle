@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "CheckinLogs", type: :system do
-  before do
+  before(:each) do
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(
       provider: 'google_oauth2',
@@ -34,6 +34,17 @@ RSpec.describe "CheckinLogs", type: :system do
 
       expect(page).to have_selector('h1', text: 'チェックインログ')
       expect(page).to have_content(Time.zone.today.strftime("%Y/%m/%d"))
+    end
+
+    it "fails to check in" do
+      visit "/facilities/2" # { ward_id: 2, name: "SPA&SAUNA コリドーの湯", latitude: 35.6706907, longitude: 139.7599611 }
+      expect(page).to have_selector('h1', text: 'SPA&SAUNA コリドーの湯')
+
+      fill_in_location_and_submit(lat: 35.6751907, lng: 139.7542611) # 約500m北西
+
+      within "#checkin-out-of-range-modal-frame" do
+        expect(page).to have_content("チェックインに失敗しました😢")
+      end
     end
   end
 end
