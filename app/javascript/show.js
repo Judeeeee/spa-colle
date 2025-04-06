@@ -66,14 +66,6 @@ function getCurrentLocationAndSetForm() {
 function initPage() {
   getCurrentLocationAndSetForm();
   initMap();
-
-  const checkInBtn = document.getElementById("check-in-btn");
-  if (checkInBtn) {
-    checkInBtn.addEventListener("click", function (event) {
-      event.preventDefault();
-      document.getElementById("check-in-form").submit();
-    });
-  }
 }
 
 document.addEventListener("DOMContentLoaded", initPage);
