@@ -30,7 +30,10 @@ RSpec.describe "CheckinLogs", type: :system do
 
       fill_in_location_and_submit(lat: 35.698800, lng: 139.768500) # 約100m北東
 
-      # TODO: 初回チェックインモーダルの表示確認。現状、モーダルが表示されずにページ遷移してしまう。
+      within "#checkin-modal-frame" do
+        expect(page).to have_content("初回チェックイン🎉")
+        click_button "閉じる"
+      end
 
       expect(page).to have_selector('h1', text: 'チェックインログ')
       expect(page).to have_content(Time.zone.today.strftime("%Y/%m/%d"))
