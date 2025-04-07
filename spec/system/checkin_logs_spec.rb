@@ -50,4 +50,18 @@ RSpec.describe "CheckinLogs", type: :system do
       end
     end
   end
+
+  context "when there are no check-in logs" do
+    it "displays a message indicating that there are no check in logs yet" do
+      visit "/facilities/3"
+      expect(page).to have_selector('h1', text: 'テルマー湯 西麻布')
+      expect(page).to have_content("0回訪問")
+
+      click_link "チェックインログページへ"
+
+      expect(page).to have_selector('h1', text: 'チェックインログ')
+      expect(page).to have_content("チェックインログはまだありません♨️")
+      expect(page).to have_content("施設を訪問してチェックインしよう！")
+    end
+  end
 end
