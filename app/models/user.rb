@@ -26,6 +26,6 @@ class User < ApplicationRecord
   end
 
   def checkin_dates_for(facility)
-    checkin_logs.where(facility_id: facility.id).order(created_at: :asc).pluck(:created_at)
+    checkin_logs.where(facility_id: facility.id).order(created_at: :asc)
   end
 end
