@@ -64,4 +64,23 @@ RSpec.describe "CheckinLogs", type: :system do
       expect(page).to have_content("施設を訪問してチェックインしよう！")
     end
   end
+
+  context "when there are 11 more check-in logs" do
+    it "displays pagination" do
+      user = User.find_by(email: 'test@example.com')
+      11.times do |i|
+        created_at = Time.zone.today - i.days
+        CheckinLog.create!(user_id: user.id, facility_id: 4, created_at:)
+      end
+
+      visit "/facilities/4"
+      expect(page).to have_selector('h1', text: 'テルマー湯 新宿店')
+      expect(page).to have_content("11回訪問")
+
+      click_link "チェックインログページへ"
+
+      expect(page).to have_selector('h1', text: 'チェックインログ')
+      expect(page).to have_selector('nav.pagy.nav')
+    end
+  end
 end

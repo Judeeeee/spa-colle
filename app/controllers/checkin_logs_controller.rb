@@ -1,8 +1,10 @@
 class CheckinLogsController < ApplicationController
+  include Pagy::Backend
+
   before_action :set_facility
   before_action :set_current_location
   def index
-    @checkin_logs = current_user.checkin_dates_for(@facility).map { |date| date.strftime("%Y/%m/%d") }
+    @pagy, @checkin_logs = pagy(current_user.checkin_dates_for(@facility))
   end
 
   def create
