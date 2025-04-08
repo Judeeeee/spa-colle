@@ -9,5 +9,6 @@ div class="checkin_logs w-[60%] flex flex-col"
           p class="text-lg md:text-xl text-center flex-1 font-bold"
             = checkin_log.created_at.strftime("%Y/%m/%d")
     div class="mt-6 mb-6 self-center"
-      = pagy_nav(@pagy).html_safe
+      - if @pagy.pages > 1
+        = pagy_nav(@pagy).html_safe
 = link_to "詳細ページへ戻る", facility_path(@facility), class: "back_facility_link text-lg text-blue-600 visited:text-purple-600 underline mt-auto mb-6"
