@@ -1,3 +1,6 @@
+- content_for :title, "#{@facility.name} | スパコレ"
+- content_for :head
+  meta[name="description" content="#{@facility.name}の施設詳細ページです"]
 = stylesheet_link_tag "modal", media: "all"
 = javascript_include_tag "show", "data-turbolinks-track": "reload", preload: true, as: "script"
 
