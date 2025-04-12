@@ -4,6 +4,10 @@ html
     title
       = content_for(:title)
     = yield :head
+    meta[property="og:title" content="スパコレ"]
+    meta[property="og:description" content="スパコレは位置情報を活用した東京23区のスパ施設訪問記録アプリです"]
+    meta[property="og:image" content="#{request.base_url}/ogp.png"]
+    meta[property="og:url" content=request.original_url]
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     meta[name="apple-mobile-web-app-capable" content="yes"]
     meta[name="mobile-web-app-capable" content="yes"]
