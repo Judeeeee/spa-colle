@@ -2,9 +2,9 @@ header style="background-color: #EF454A;" class="bg-gray-800 text-white p-4"
   .container.mx-auto.flex.items-center.justify-between
     .image_container
       = link_to root_path do
-        = image_tag "spa_colle_logo.png", alt: "Logo", class: "h-10"
+        = image_tag "spa_colle_logo.png", alt: "スパコレのロゴです。クリックするとトップページに遷移します。", class: "h-10"
     .ml-auto.relative data-controller="dropdown"
-      = image_tag current_user.image, alt: "Google account profile image",
+      = image_tag current_user.image, alt: "Googleアカウントに設定しているプロフィール画像です。クリックするとログアウトまたはアカウント削除が行えます。",
         class: 'h-10 w-10 rounded-full cursor-pointer', data: { action: "click->dropdown#toggle" }
       .absolute.right-0.mt-2.w-48.bg-white.rounded-lg.shadow-lg.hidden.dropdown-menu
         = link_to "ログアウト", log_out_path, class: "block px-4 py-2 text-gray-800 hover:bg-gray-200"
