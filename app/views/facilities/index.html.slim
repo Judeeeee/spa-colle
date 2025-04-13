@@ -6,7 +6,7 @@ div class="grid grid-cols-1 md:grid-cols-3 gap-2 w-[90%]"
   - @grouped_facilities.each do |ward, facilities|
     div class="border-b border-gray-300 p-4"
       details class="group"
-        summary class="text-lg font-semibold"
+        summary class="text-lg font-semibold cursor-pointer"
           = ward
         ul class="pl-4 space-y-2 group-open:block hidden"
           - facilities.each do |facility|
