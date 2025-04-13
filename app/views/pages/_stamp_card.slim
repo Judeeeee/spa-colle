@@ -9,7 +9,7 @@ table class="stamp-card-table w-full h-full table-fixed border-collapse border b
             = ward.name
           - if ward.visited_by_user?(current_user)
             span class="absolute inset-0 flex items-center justify-center text-red-500 text-2xl font-bold pointer-events-none"
-              = image_tag "hot_spring.svg", alt: "stamp", class: "w-16 h-16 opacity-50"
+              = image_tag "hot_spring.svg", alt: "温泉マークのスタンプです。施設を訪問するとこのスタンプが押されます。", class: "w-16 h-16 opacity-50"
 
     - wards.drop(3).each_slice(5) do |ward|
       tr
@@ -19,4 +19,4 @@ table class="stamp-card-table w-full h-full table-fixed border-collapse border b
               = w.name
             - if w.visited_by_user?(current_user)
               span class="absolute inset-0 flex items-center justify-center text-red-500 text-2xl font-bold pointer-events-none"
-                = image_tag "hot_spring.svg", alt: "stamp", class: "w-16 h-16 opacity-50"
+                = image_tag "hot_spring.svg", alt: "温泉マークのスタンプです。施設を訪問するとこのスタンプが押されます。", class: "w-16 h-16 opacity-50"
