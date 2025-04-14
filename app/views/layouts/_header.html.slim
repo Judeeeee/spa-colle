@@ -8,6 +8,6 @@ header style="background-color: #EF454A;" class="bg-gray-800 text-white p-4"
         class: 'h-10 w-10 rounded-full cursor-pointer', data: { action: "click->dropdown#toggle" }
       .absolute.right-0.mt-2.w-48.bg-white.rounded-lg.shadow-lg.hidden.dropdown-menu
         = link_to "ログアウト", log_out_path, class: "block px-4 py-2 text-gray-800 hover:bg-gray-200"
-        = link_to "アカウント削除", user_path(current_user), data: { turbo_frame: "modal" }, class: "block px-4 py-2 text-red-600 hover:bg-gray-200"
+        = link_to "アカウント削除", user_path(current_user), data: { turbo_frame: "modal" }, class: "block px-4 py-2 text-gray-800 hover:bg-gray-200"
 
 turbo-frame id="modal"
