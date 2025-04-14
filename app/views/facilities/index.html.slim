@@ -14,5 +14,5 @@ div class="grid grid-cols-1 md:grid-cols-3 gap-2 w-[90%]"
               span class="whitespace-nowrap"
                 - if current_user.checkin_logs.exists?(facility_id: facility.id)
                   = image_tag "sumi-stamp.svg", alt: "施設名の左横にある訪問済を表すスタンプです。", class: "h-5 w-5 inline-block"
-              = link_to facility.name, facility_path(facility), class: "text-blue-600 visited:text-purple-600 underline"
-= link_to "トップページへ戻る", root_path, class: "back_top_link text-lg text-blue-600 visited:text-purple-600 underline mt-auto mb-6"
+              = link_to facility.name, facility_path(facility), class: "text-blue-600 visited:text-purple-600 underline hover:no-underline"
+= link_to "トップページへ戻る", root_path, class: "back_top_link text-lg text-blue-600 visited:text-purple-600 underline hover:no-underline mt-auto mb-6"

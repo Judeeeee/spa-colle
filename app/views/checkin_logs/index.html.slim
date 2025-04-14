@@ -14,4 +14,4 @@ div class="checkin_logs w-[60%] flex flex-col"
     div class="mt-6 mb-6 self-center"
       - if @pagy.pages > 1
         = pagy_nav(@pagy).html_safe
-= link_to "詳細ページへ戻る", facility_path(@facility), class: "back_facility_link text-lg text-blue-600 visited:text-purple-600 underline mt-auto mb-6"
+= link_to "詳細ページへ戻る", facility_path(@facility), class: "back_facility_link text-lg text-blue-600 visited:text-purple-600 underline hover:no-underline mt-auto mb-6"
