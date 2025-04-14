@@ -61,7 +61,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
       expect(page).to have_selector('h1', text: 'チェックインログ')
       expect(page).to have_content("チェックインログはまだありません♨️")
-      expect(page).to have_content("施設を訪問してチェックインしよう！")
+      expect(page).to have_content("施設を訪問してチェックインしましょう！")
     end
   end
 
