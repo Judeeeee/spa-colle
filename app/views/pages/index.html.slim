@@ -6,20 +6,20 @@
   div class="stamp-card w-[80%] md:w-[40%] aspect-square relative mx-auto max-h-[calc(100vh-248px)]"
     = render 'stamp_card', wards: @wards
   div class="links w-[80%] flex flex-col md:flex-row gap-4 mt-12 mb-8"
-    div class="map link w-full md:w-1/2"
-      = link_to "付近の施設を検索", facilities_map_path, class: "facilities_map_link text-xl font-bold border border-[#EDBBBD] text-[#EDBBBD] bg-transparent hover:bg-[#EDBBBD] hover:text-white py-5 px-4 rounded-xl transition-colors duration-200 block text-center"
-    div class="facilities link w-full md:w-1/2"
-      = link_to "施設一覧", facilities_path, class: "text-xl font-bold border border-[#EF454A] text-[#EF454A] bg-transparent hover:bg-[#EF454A] hover:text-white py-5 px-4 rounded-xl transition-colors duration-200 block text-center"
+    div class="facilities-map-link w-full md:w-1/2"
+      = link_to "付近の施設を検索", facilities_map_path, class: "facilities-map-link text-xl font-bold border border-[#EDBBBD] text-[#EDBBBD] bg-transparent hover:bg-[#EDBBBD] hover:text-white py-5 px-4 rounded-xl transition-colors duration-200 block text-center"
+    div class="facilities-link w-full md:w-1/2"
+      = link_to "施設一覧", facilities_path, class: "facilities-link text-xl font-bold border border-[#EF454A] text-[#EF454A] bg-transparent hover:bg-[#EF454A] hover:text-white py-5 px-4 rounded-xl transition-colors duration-200 block text-center"
 - else
-  div class="section-container flex flex-col md:flex-row w-full h-screen justify-center items-center"
-    div class="logo-container md:w-1/2 flex justify-center items-center p-8"
+  div class="before-login-top-page flex flex-col md:flex-row w-full h-screen justify-center items-center"
+    div class="before-login-top-page-logo md:w-1/2 flex justify-center items-center p-8"
       = image_tag "spa_colle_icon.png", alt: "スパコレのアイコンです。押印の見た目をしています。", class: "w-2/3 max-w-xs"
-    div class="content-container md:w-1/2 flex flex-col justify-center items-center p-8 text-center"
+    div class="description md:w-1/2 flex flex-col justify-center items-center p-8 text-center"
       h1 class="text-4xl md:text-8xl font-bold mb-4 whitespace-nowrap w-full" スパコレ
       p class="text-base md:text-lg mb-6 text-gray-700 w-full" 位置情報を活用した東京23区のスパ施設訪問記録アプリです♨️<br>全施設制覇を目指しましょう！
       = button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false }, class: "bg-[#EF454A] hover:bg-[#d73c40] text-white font-bold py-3 px-6 rounded-lg text-lg transition w-full"
       p class="mt-6 block text-base text-sm text-gray-500 w-full text-center "
         |
-        = link_to "利用規約・プライバシーポリシー", terms_path, class: "text-blue-600 visited:text-purple-600 underline hover:no-underline"
+        = link_to "利用規約・プライバシーポリシー", terms_path, class: "terms-link text-blue-600 visited:text-purple-600 underline hover:no-underline"
         | に同意した上でログインしてください。
       p class="mt-6 block text-sm w-full" © 2025 Judeee スパコレ
