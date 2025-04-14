@@ -8,7 +8,7 @@ h1 class="text-3xl md:text-4xl font-bold mt-6 mb-4"
   = @facility.name
 p class="text-base md:text-lg mb-6"
   = "#{@checkin_count}回訪問"
-div#map data-latitude="#{ @facility.latitude }" data-longitude="#{ @facility.longitude }" data-image-url="#{asset_path('hot_spring.svg')}" class="w-[80%] h-[60vh] mb-6"
+div id="map" class="facility-map w-[80%] h-[60vh] mb-6" data-latitude="#{ @facility.latitude }" data-longitude="#{ @facility.longitude }" data-image-url="#{asset_path('hot_spring.svg')}"
 div class="w-[80%] flex flex-col md:flex-row gap-4 mt-6"
   div class="w-full md:w-1/2"
     = form_with url: facility_checkin_logs_path(@facility), method: :post, id: "check-in-form",  data: { turbo_frame: "checkin-modal-frame" } do |f|
