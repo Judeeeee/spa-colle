@@ -43,6 +43,8 @@ gem "tailwindcss-rails"
 # https://ddnexus.github.io/pagy/quick-start/#1-install
 gem "pagy", "~> 9.3"
 
+gem "slim-rails"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
@@ -55,8 +57,6 @@ group :development, :test do
 
   # https://github.com/rspec/rspec-rails?tab=readme-ov-file#installation
   gem "rspec-rails", "~> 7.0.0"
-
-  gem "slim-rails"
 end
 
 group :development do
