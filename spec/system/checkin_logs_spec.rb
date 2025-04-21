@@ -13,14 +13,14 @@ RSpec.describe "CheckinLogs", type: :system do
 
     visit root_path
     click_button 'Googleでログイン'
-    expect(page).to have_selector('h1', text: 'spa colle')
+    expect(page).to have_selector('h1', text: 'スパコレ')
   end
 
   def fill_in_location_and_submit(lat:, lng:)
     page.execute_script("document.getElementById('latitude').value = #{lat};")
     page.execute_script("document.getElementById('longitude').value = #{lng};")
 
-    click_button "チェックインする"
+    click_button "チェックイン"
   end
 
   context "the current location is within 200 meters of the facility" do

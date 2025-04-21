@@ -7,7 +7,7 @@ if Rails.env.test?
     options = Selenium::WebDriver::Chrome::Options.new
 
     Capybara.save_path = "/tmp/capybara"
-    Capybara.server_host = '0.0.0.0'
+    Capybara.server_host = "0.0.0.0"
     Capybara.always_include_port = true
 
     # 位置情報確認ダイアログを表示させるために、テスト毎にキャッシュを無効化
