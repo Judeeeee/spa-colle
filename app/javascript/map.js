@@ -40,7 +40,7 @@ function initMap(center) {
     zoom: 12,
   });
 
-  const currentLocation = new google.maps.Marker({
+  new google.maps.Marker({
     position: center,
     map: map,
     title: "現在地",
