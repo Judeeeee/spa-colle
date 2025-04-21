@@ -57,10 +57,13 @@ jobs:
           bundler-cache: true
 
       - name: Generate binstubs
-        run: bundle binstubs brakeman rubocop
+        run: bundle binstubs brakeman rubocop slim_lint
 
       - name: Security audit application code
         run: bin/brakeman -q -w2
 
       - name: Run RuboCop
         run: bin/rubocop --parallel
+
+      - name: Run slim-lint
+        run: bin/slim-lint app/views/*
