@@ -4,7 +4,7 @@
 - if current_user
   h1 class="text-3xl md:text-4xl font-bold mb-4" スパコレ
   div class="stamp-card w-[80%] md:w-[40%] aspect-square relative mx-auto max-h-[calc(100vh-248px)]"
-    = render 'stamp_card', wards: @wards
+    = render "stamp_card", wards: @wards
   div class="links w-[80%] flex flex-col md:flex-row gap-4 mt-12 mb-8"
     div class="facilities-map-link w-full md:w-1/2"
       = link_to "付近の施設を検索", facilities_map_path, class: "facilities-map-link text-xl font-bold border border-[#EDBBBD] text-[#EDBBBD] bg-transparent hover:bg-[#EDBBBD] hover:text-white active:bg-[#EDBBBD] active:text-white py-5 px-4 rounded-xl transition-colors duration-200 block text-center"

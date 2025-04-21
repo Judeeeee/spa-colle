@@ -55,6 +55,12 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
+  # https://github.com/rubocop/rubocop-rspec?tab=readme-ov-file#installation
+  gem "rubocop-rspec", require: false
+
+  # https://github.com/rubocop/rubocop-capybara?tab=readme-ov-file#installation
+  gem "rubocop-capybara", require: false
+
   # https://github.com/sds/slim-lint
   gem "slim_lint", require: false
 
@@ -73,10 +79,6 @@ end
 group :test do
   # https://github.com/teamcapybara/capybara?tab=readme-ov-file#setupq
   gem "capybara"
-  # https://github.com/rubocop/rubocop-rspec?tab=readme-ov-file#installation
-  gem "rubocop-rspec", require: false
-  # https://github.com/rubocop/rubocop-capybara?tab=readme-ov-file#installation
-  gem "rubocop-capybara", require: false
   # https://github.com/SeleniumHQ/selenium/tree/trunk/rb
   gem "selenium-webdriver"
 end

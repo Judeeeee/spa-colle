@@ -21,22 +21,19 @@ html
     = csp_meta_tag
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application", "data-turbolinks-track": "reload"
-    - # Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!)
-    - #= tag.link rel: "manifest", href: pwa_manifest_path(format: :json)
     link[rel="icon" href="/favicon.ico" sizes="32x32"]
     link[rel="icon" href="/icon.svg" type="image/svg+xml"]
     link[rel="apple-touch-icon" href="/apple-touch-icon.png"]
-    - # Includes all stylesheet files in app/assets/stylesheets
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_importmap_tags
   body class="min-h-screen flex flex-col"
-    - unless controller_name == 'pages' && action_name == 'terms'
+    - unless controller_name == "pages" && action_name == "terms"
       - if current_user
         header
-          = render partial: 'layouts/header', formats: :html
+          = render partial: "layouts/header", formats: :html
     main class="flex flex-col justify-center items-center flex-grow"
       = yield
-    - unless controller_name == 'pages' && action_name == 'terms'
+    - unless controller_name == "pages" && action_name == "terms"
       - if current_user
         footer
-          = render partial: 'layouts/footer', formats: :html
+          = render partial: "layouts/footer", formats: :html

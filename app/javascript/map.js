@@ -16,14 +16,14 @@ function initMapWithCurrentLocation() {
         switch (error.code) {
           case GeolocationErrorCodes.PERMISSION_DENIED:
             alert(
-              "位置情報の使用が許可されなかっため、現在地を取得できませんでした。"
+              "位置情報の使用が許可されなかっため、現在地を取得できませんでした。",
             );
             break;
           default:
             alert("現在地を取得できませんでした");
             break;
         }
-      }
+      },
     );
   } else {
     alert("このブラウザは位置情報に対応していません。");
@@ -32,7 +32,7 @@ function initMapWithCurrentLocation() {
 
 function initMap(center) {
   const facilities = JSON.parse(
-    document.getElementById("map").dataset.facilities
+    document.getElementById("map").dataset.facilities,
   );
 
   const map = new google.maps.Map(document.getElementById("map"), {
@@ -40,7 +40,7 @@ function initMap(center) {
     zoom: 12,
   });
 
-  const currentLocation = new google.maps.Marker({
+  new google.maps.Marker({
     position: center,
     map: map,
     title: "現在地",
