@@ -9,7 +9,7 @@ RSpec.describe "CheckinLogs", type: :system do
       info: { email: 'test@example.com', name: 'Test User', image: 'https://lh3.googleusercontent.com/a/ACg8ocJU5kFyhguKfUQHg_HNx0EWfhjlAq066jpPNweO2xtrsAu-lq' },
       credentials: { token: 'mock_token', refresh_token: 'mock_refresh_token' }
     )
-    driven_by :selenium_chrome
+    driven_by :selenium_chrome_headless
 
     visit root_path
     click_button 'Googleでログイン'
