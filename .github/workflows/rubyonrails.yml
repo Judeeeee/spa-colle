@@ -39,6 +39,9 @@ jobs:
       - name: Set up database
         run: bin/rails db:schema:load
 
+      - name: Seed database
+        run: bin/rails db:seed
+
       - name: Run RSpec
         run: bundle exec rspec
 
