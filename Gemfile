@@ -55,6 +55,9 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
+  # https://github.com/sds/slim-lint
+  gem "slim_lint", require: false
+
   # https://github.com/rspec/rspec-rails?tab=readme-ov-file#installation
   gem "rspec-rails", "~> 7.0.0"
 end
