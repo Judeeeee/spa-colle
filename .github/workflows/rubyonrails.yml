@@ -1,0 +1,69 @@
+name: "Ruby on Rails CI"
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410 # v1.179.1
+        with:
+          bundler-cache: true
+
+      - name: Assets precompile
+        run: bin/rails assets:precompile # System SpecでCapybaraとSeleniumを使っているため
+
+      - name: Set up database
+        run: bin/rails db:schema:load
+
+      - name: Seed database
+        run: bin/rails db:seed
+
+      - name: Run RSpec
+        run: bundle exec rspec
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410 # v1.179.1
+        with:
+          bundler-cache: true
+
+      - name: Generate binstubs
+        run: bundle binstubs brakeman rubocop slim_lint
+
+      - name: Security audit application code
+        run: bin/brakeman -q -w2
+
+      - name: Run RuboCop
+        run: bin/rubocop --parallel
+
+      - name: Run slim-lint
+        run: bin/slim-lint app/views/*
