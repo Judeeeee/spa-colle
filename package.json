@@ -1,0 +1,19 @@
+{
+  "name": "spa-colle",
+  "version": "1.0.0",
+  "description": "spa-colle is a location-based app for tracking visits to spa facilities in Tokyo's 23 wards.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "judeee",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.25.0",
+    "eslint": "^9.25.0",
+    "globals": "^16.0.0"
+  }
+}
