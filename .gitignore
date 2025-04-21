@@ -35,6 +35,7 @@
 
 /config/credentials/*
 !/config/credentials/production.yml.enc
+!/config/credentials/test.yml.enc
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
