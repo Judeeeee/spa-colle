@@ -30,13 +30,13 @@ html
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_importmap_tags
   body class="min-h-screen flex flex-col"
-    - unless controller_name == 'pages' && action_name == 'terms'
+    - unless controller_name == "pages" && action_name == "terms"
       - if current_user
         header
-          = render partial: 'layouts/header', formats: :html
+          = render partial: "layouts/header", formats: :html
     main class="flex flex-col justify-center items-center flex-grow"
       = yield
-    - unless controller_name == 'pages' && action_name == 'terms'
+    - unless controller_name == "pages" && action_name == "terms"
       - if current_user
         footer
-          = render partial: 'layouts/footer', formats: :html
+          = render partial: "layouts/footer", formats: :html

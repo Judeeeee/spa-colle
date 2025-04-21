@@ -4,7 +4,7 @@
 h1 class="text-3xl md:text-4xl font-bold mt-6 mb-6" チェックインログ
 div class="check-in-logs w-[60%] flex flex-col"
   - if @checkin_logs.empty?
-    = render 'no_check_in_logs'
+    = render "no_check_in_logs"
   - else
     ul class="check-in-logs-list space-y-2"
       - @checkin_logs.each do |checkin_log|
