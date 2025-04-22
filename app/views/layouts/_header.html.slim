@@ -3,11 +3,12 @@ header class="bg-[#EF454A] text-white"
     div class="logo-image"
       = link_to root_path do
         = image_tag "spa_colle_logo.png", alt: "スパコレのロゴです。クリックするとトップページに遷移します。", class: "h-10"
-    div class="google-acount-image ml-auto relative" data-controller="dropdown"
-      = image_tag current_user.image, alt: "Googleアカウントに設定しているプロフィール画像です。クリックするとログアウトまたはアカウント削除が行えます。",
-        class: "h-10 w-10 rounded-full cursor-pointer", data: { action: "click->dropdown#toggle" }
-      div class="links absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg hidden dropdown-menu"
-        = link_to "ログアウト", log_out_path, class: "log-out-link block px-4 py-2 text-gray-800 hover:bg-gray-200 active:bg-gray-200"
-        = link_to "アカウント削除", user_path(current_user), data: { turbo_frame: "modal" }, class: "account-delete-link block px-4 py-2 text-gray-800 hover:bg-gray-200 active:bg-gray-200"
+    - if current_user && action_name != "terms"
+      div class="google-acount-image ml-auto relative" data-controller="dropdown"
+        = image_tag current_user.image, alt: "Googleアカウントに設定しているプロフィール画像です。クリックするとログアウトまたはアカウント削除が行えます。",
+          class: "h-10 w-10 rounded-full cursor-pointer", data: { action: "click->dropdown#toggle" }
+        div class="links absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg hidden dropdown-menu"
+          = link_to "ログアウト", log_out_path, class: "log-out-link block px-4 py-2 text-gray-800 hover:bg-gray-200 active:bg-gray-200"
+          = link_to "アカウント削除", user_path(current_user), data: { turbo_frame: "modal" }, class: "account-delete-link block px-4 py-2 text-gray-800 hover:bg-gray-200 active:bg-gray-200"
 
 turbo-frame id="modal"
