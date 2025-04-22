@@ -2,13 +2,12 @@
 - content_for :head
   meta[name="description" content="#{@facility.name}の施設詳細ページです"]
 = stylesheet_link_tag "modal", media: "all"
-= javascript_include_tag "show", "data-turbolinks-track": "reload", preload: true, as: "script"
 
 h1 class="text-3xl md:text-4xl font-bold mt-6 mb-4"
   = @facility.name
 p class="text-base md:text-lg mb-6"
   = "#{@checkin_count}回訪問"
-div id="map" class="facility-map w-[80%] h-[60vh] mb-6" data-latitude="#{ @facility.latitude }" data-longitude="#{ @facility.longitude }" data-image-url="#{asset_path("hot_spring.svg")}"
+div id="facility-map" class="facility-map w-[80%] h-[60vh] mb-6" data-latitude="#{ @facility.latitude }" data-longitude="#{ @facility.longitude }" data-image-url="#{asset_path("hot_spring.svg")}"
 div class="w-[80%] flex flex-col md:flex-row gap-4 mt-6"
   div class="w-full md:w-1/2"
     = form_with url: facility_checkin_logs_path(@facility), method: :post, id: "check-in-form",  data: { turbo_frame: "checkin-modal-frame" } do |f|
@@ -23,5 +22,3 @@ div class="w-[80%] flex flex-col md:flex-row gap-4 mt-6"
 turbo-frame id="checkin-modal-frame"
 turbo-frame id="checkin-limit-modal-frame"
 turbo-frame id="checkin-out-of-range-modal-frame"
-
-script(src="https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google_map_api_key}&callback=initPage" defer)

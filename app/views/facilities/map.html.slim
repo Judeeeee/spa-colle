@@ -1,10 +1,7 @@
 - content_for :title, "付近の施設を検索 | スパコレ"
 - content_for :head
   meta[name="description" content="現在地の位置情報を使って付近の施設を検索できるページです"]
-= javascript_include_tag "map", "data-turbolinks-track": "reload", preload: true, as: "script"
 
 h1 class="text-3xl md:text-4xl font-bold mt-6 mb-6" 付近の施設を検索
 div id="map" class="search-map w-[80%] h-[60vh] mb-6" data-facilities=@facilities.to_json data-image-url="#{asset_path("hot_spring.svg")}"
 = link_to "トップページへ戻る", root_path, class: "back-top-link text-lg text-blue-600 visited:text-purple-600 underline hover:no-underline active:no-underline mt-auto mb-6"
-
-script(src="https://maps.googleapis.com/maps/api/js?key=#{Rails.application.credentials.google_map_api_key}&callback=initMapWithCurrentLocation" defer)
