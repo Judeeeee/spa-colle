@@ -155,7 +155,7 @@ function getCurrentLocationAndSetForm() {
         switch (error.code) {
           case GeolocationErrorCodes.PERMISSION_DENIED:
             alert(
-              "位置情報の使用が許可されなかっため、現在地を取得できませんでした。",
+              "位置情報の使用が許可されなかったため、現在地を取得できませんでした。",
             );
             break;
           default:

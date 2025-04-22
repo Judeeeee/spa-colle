@@ -26,7 +26,7 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
       initMapWithCurrentLocation();
     JS
 
-    accept_alert '位置情報の使用が許可されなかっため、現在地を取得できませんでした。'
+    accept_alert '位置情報の使用が許可されなかったため、現在地を取得できませんでした。'
   end
 
   # TODO: 非同期処理の関係でアラートが表示されない
