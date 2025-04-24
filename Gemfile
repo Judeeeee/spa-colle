@@ -81,4 +81,7 @@ group :test do
   gem "capybara"
   # https://github.com/SeleniumHQ/selenium/tree/trunk/rb
   gem "selenium-webdriver"
+
+  # https://github.com/simplecov-ruby/simplecov
+  gem "simplecov", require: false
 end
