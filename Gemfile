@@ -68,7 +68,7 @@ group :development, :test do
   gem "rspec-rails", "~> 7.0.0"
 
   # https://github.com/thoughtbot/factory_bot_rails?tab=readme-ov-file
-  gem 'factory_bot_rails'
+  gem "factory_bot_rails"
 end
 
 group :development do
