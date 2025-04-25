@@ -1,12 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "CheckinLogs", type: :system do
+  let(:user) { create(:user) }
+
   before(:each) do
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(
       provider: 'google_oauth2',
       uid: '123456789',
-      info: { email: 'test@example.com', name: 'Test User', image: 'https://lh3.googleusercontent.com/a/ACg8ocJU5kFyhguKfUQHg_HNx0EWfhjlAq066jpPNweO2xtrsAu-lq' },
+      info: { email: user.email, name: user.name, image: user.image },
       credentials: { token: 'mock_token', refresh_token: 'mock_refresh_token' }
     )
     driven_by :selenium_chrome_headless
@@ -67,7 +69,6 @@ RSpec.describe "CheckinLogs", type: :system do
 
   context "when there are 11 more check-in logs" do
     it "displays pagination" do
-      user = User.find_by(email: 'test@example.com')
       11.times do |i|
         created_at = Time.zone.today - i.days
         CheckinLog.create!(user_id: user.id, facility_id: 4, created_at:)
