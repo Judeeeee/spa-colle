@@ -2,6 +2,9 @@ require 'rails_helper'
 
 RSpec.describe "CheckinLogs", type: :system do
   let(:user) { create(:user) }
+  let!(:not_check_in_facility) { create(:not_check_in_facility) }
+  let!(:fails_to_check_in_facility) { create(:fails_to_check_in_facility) }
+  let!(:many_check_in_facility) { create(:many_check_in_facility) }
 
   before(:each) do
     OmniAuth.config.test_mode = true
@@ -27,8 +30,8 @@ RSpec.describe "CheckinLogs", type: :system do
 
   context "the current location is within 200 meters of the facility" do
     it "successfully checks in" do
-      visit "/facilities/1" # { ward_id: 1, name: "RAKU SPA 1010 神田", latitude: 35.698137, longitude: 139.767935 }
-      expect(page).to have_selector('h1', text: 'RAKU SPA 1010 神田')
+      visit facility_path(not_check_in_facility)
+      expect(page).to have_selector('h1', text: '未チェックイン施設')
 
       fill_in_location_and_submit(lat: 35.698800, lng: 139.768500) # 約100m北東
 
@@ -42,8 +45,8 @@ RSpec.describe "CheckinLogs", type: :system do
     end
 
     it "fails to check in" do
-      visit "/facilities/2" # { ward_id: 2, name: "SPA&SAUNA コリドーの湯", latitude: 35.6706907, longitude: 139.7599611 }
-      expect(page).to have_selector('h1', text: 'SPA&SAUNA コリドーの湯')
+      visit facility_path(fails_to_check_in_facility)
+      expect(page).to have_selector('h1', text: 'チェックインに失敗する施設')
 
       fill_in_location_and_submit(lat: 35.6751907, lng: 139.7542611) # 約500m北西
 
@@ -55,8 +58,8 @@ RSpec.describe "CheckinLogs", type: :system do
 
   context "when there are no check-in logs" do
     it "displays a message indicating that there are no check in logs yet" do
-      visit "/facilities/3"
-      expect(page).to have_selector('h1', text: 'テルマー湯 西麻布')
+      visit facility_path(not_check_in_facility)
+      expect(page).to have_selector('h1', text: '未チェックイン施設')
       expect(page).to have_content("0回訪問")
 
       click_link "チェックインログページへ"
@@ -74,8 +77,8 @@ RSpec.describe "CheckinLogs", type: :system do
         CheckinLog.create!(user_id: user.id, facility_id: 4, created_at:)
       end
 
-      visit "/facilities/4"
-      expect(page).to have_selector('h1', text: 'テルマー湯 新宿店')
+      visit facility_path(many_check_in_facility)
+      expect(page).to have_selector('h1', text: 'ページネーションが表示される施設')
       expect(page).to have_content("11回訪問")
 
       click_link "チェックインログページへ"
