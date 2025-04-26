@@ -10,17 +10,8 @@ RSpec.describe "CheckinLogs", type: :system do
   end
 
   before(:each) do
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(
-      provider: 'google_oauth2',
-      uid: '123456789',
-      info: { email: user.email, name: user.name, image: user.image },
-      credentials: { token: 'mock_token', refresh_token: 'mock_refresh_token' }
-    )
     driven_by :selenium_chrome_headless
-
-    visit root_path
-    click_button 'Googleでログイン'
+    login_with_google(user)
     expect(page).to have_selector('h1', text: 'スパコレ')
   end
 
