@@ -4,17 +4,8 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
   let(:user) { create(:user) }
 
   before(:each) do
-    OmniAuth.config.test_mode = true
-    OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(
-      provider: 'google_oauth2',
-      uid: '123456789',
-      info: { email: user.email, name: user.name, image: user.image },
-      credentials: { token: 'mock_token', refresh_token: 'mock_refresh_token' }
-    )
-
     driven_by :selenium_chrome_without_cache # 位置情報確認ダイアログを表示させるために、テスト毎にキャッシュを無効化
-    visit root_path
-    click_button 'Googleでログイン'
+    login_with_google(user)
   end
 
   it 'displays an alert when location permission is denied' do
