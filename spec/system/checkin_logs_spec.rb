@@ -5,9 +5,11 @@ RSpec.describe "CheckinLogs", type: :system do
   let!(:not_check_in_facility) { create(:not_check_in_facility) }
   let!(:fails_to_check_in_facility) { create(:fails_to_check_in_facility) }
   let!(:many_check_in_facility) { create(:many_check_in_facility) }
+  let!(:checked_in_facility) { create(:checked_in_facility) }
   let!(:checkin_logs) do
     11.times.map { |i| create(:checkin_log, user: user, facility: many_check_in_facility, days_ago: i) }
   end
+  let!(:checked_in_log) { create(:checkin_log, user: user, facility: checked_in_facility) }
 
   before(:each) do
     driven_by :selenium_chrome_headless
@@ -47,6 +49,25 @@ RSpec.describe "CheckinLogs", type: :system do
       within "#checkin-out-of-range-modal-frame" do
         expect(page).to have_content("チェックインに失敗しました😢")
       end
+    end
+  end
+
+  context "when checking in to a facility already checked in today" do
+    it "displays an already checked-in modal" do
+      visit facility_path(checked_in_facility)
+      expect(page).to have_selector('h1', text: '本日既にチェックインしている施設')
+
+      fill_in_location_and_submit(lat: 35.7078220, lng: 139.7536846) # 約100m北東
+
+      within "#checkin-limit-modal-frame" do
+        expect(page).to have_content("本日は既にチェックインしています♨️")
+        click_button "閉じる"
+      end
+
+      click_link "チェックインログページへ"
+
+      expect(page).to have_selector('h1', text: 'チェックインログ')
+      expect(page).to have_content(Time.zone.today.strftime("%Y/%m/%d"), count: 1)
     end
   end
 
