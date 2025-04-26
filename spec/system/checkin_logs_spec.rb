@@ -5,6 +5,9 @@ RSpec.describe "CheckinLogs", type: :system do
   let!(:not_check_in_facility) { create(:not_check_in_facility) }
   let!(:fails_to_check_in_facility) { create(:fails_to_check_in_facility) }
   let!(:many_check_in_facility) { create(:many_check_in_facility) }
+  let!(:checkin_logs) do
+    11.times.map { |i| create(:checkin_log, user: user, facility: many_check_in_facility, days_ago: i) }
+  end
 
   before(:each) do
     OmniAuth.config.test_mode = true
@@ -72,11 +75,6 @@ RSpec.describe "CheckinLogs", type: :system do
 
   context "when there are 11 more check-in logs" do
     it "displays pagination" do
-      11.times do |i|
-        created_at = Time.zone.today - i.days
-        CheckinLog.create!(user_id: user.id, facility_id: 4, created_at:)
-      end
-
       visit facility_path(many_check_in_facility)
       expect(page).to have_selector('h1', text: 'ページネーションが表示される施設')
       expect(page).to have_content("11回訪問")
