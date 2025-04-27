@@ -27,5 +27,12 @@ FactoryBot.define do
       longitude { 139.7529042 }
       association :ward, factory: :bunkyo_ward
     end
+
+    factory :previous_day_checked_in_facility do
+      name { "昨日チェックインしている施設" }
+      latitude { 35.7129856 }
+      longitude { 139.7926897 }
+      association :ward, factory: :taito_ward
+    end
   end
 end

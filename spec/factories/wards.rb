@@ -19,5 +19,10 @@ FactoryBot.define do
       name { "文京区" }
       name_kana { "ぶんきょうく" }
     end
+
+    factory :taito_ward do
+      name { "台東区" }
+      name_kana { "たいとうく" }
+    end
   end
 end

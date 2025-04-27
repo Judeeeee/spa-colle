@@ -6,10 +6,12 @@ RSpec.describe "CheckinLogs", type: :system do
   let!(:fails_to_check_in_facility) { create(:fails_to_check_in_facility) }
   let!(:many_check_in_facility) { create(:many_check_in_facility) }
   let!(:checked_in_facility) { create(:checked_in_facility) }
+  let!(:previous_day_checked_in_facility) { create(:previous_day_checked_in_facility) }
   let!(:checkin_logs) do
     11.times.map { |i| create(:checkin_log, user: user, facility: many_check_in_facility, days_ago: i) }
   end
   let!(:checked_in_log) { create(:checkin_log, user: user, facility: checked_in_facility) }
+  let!(:yesterday_checked_in_log) { create(:checkin_log, user: user, facility: previous_day_checked_in_facility, days_ago: 1) }
 
   before(:each) do
     driven_by :selenium_chrome_headless
@@ -67,6 +69,19 @@ RSpec.describe "CheckinLogs", type: :system do
       click_link "チェックインログページへ"
 
       expect(page).to have_selector('h1', text: 'チェックインログ')
+      expect(page).to have_content(Time.zone.today.strftime("%Y/%m/%d"), count: 1)
+    end
+  end
+
+  context "When checking in to a facility checked in yesterday" do
+    it "Does not display the modal and redirects to the check-in log page" do
+      visit facility_path(previous_day_checked_in_facility)
+      expect(page).to have_selector('h1', text: '昨日チェックインしている施設')
+
+      fill_in_location_and_submit(lat: 35.7138849, lng: 139.7937973) # 約100m北東
+
+      expect(page).to have_selector('h1', text: 'チェックインログ')
+      expect(page).to have_content(Time.zone.yesterday.strftime("%Y/%m/%d"), count: 1)
       expect(page).to have_content(Time.zone.today.strftime("%Y/%m/%d"), count: 1)
     end
   end
