@@ -28,6 +28,11 @@ RSpec.describe "CheckinLogs", type: :system do
 
   context "the current location is within 200 meters of the facility" do
     it "successfully checks in" do
+      visit root_path
+      within("td", text: "千代田区") do
+        expect(page).not_to have_css("img")
+      end
+
       visit facility_path(not_check_in_facility)
       expect(page).to have_selector('h1', text: '未チェックイン施設')
 
@@ -40,9 +45,19 @@ RSpec.describe "CheckinLogs", type: :system do
 
       expect(page).to have_selector('h1', text: 'チェックインログ')
       expect(page).to have_content(Time.zone.today.strftime("%Y/%m/%d"))
+
+      visit root_path
+      within("td", text: "千代田区") do
+        expect(page).to have_css("img")
+      end
     end
 
     it "fails to check in" do
+      visit root_path
+      within("td", text: "中央区") do
+        expect(page).not_to have_css("img")
+      end
+
       visit facility_path(fails_to_check_in_facility)
       expect(page).to have_selector('h1', text: 'チェックインに失敗する施設')
 
@@ -51,11 +66,21 @@ RSpec.describe "CheckinLogs", type: :system do
       within "#checkin-out-of-range-modal-frame" do
         expect(page).to have_content("チェックインに失敗しました😢")
       end
+
+      visit root_path
+      within("td", text: "中央区") do
+        expect(page).not_to have_css("img")
+      end
     end
   end
 
   context "when checking in to a facility already checked in today" do
     it "displays an already checked-in modal" do
+      visit root_path
+      within("td", text: "文京区") do
+        expect(page).to have_css("img")
+      end
+
       visit facility_path(checked_in_facility)
       expect(page).to have_selector('h1', text: '本日既にチェックインしている施設')
 
@@ -75,6 +100,11 @@ RSpec.describe "CheckinLogs", type: :system do
 
   context "When checking in to a facility checked in yesterday" do
     it "Does not display the modal and redirects to the check-in log page" do
+      visit root_path
+      within("td", text: "台東区") do
+        expect(page).to have_css("img")
+      end
+
       visit facility_path(previous_day_checked_in_facility)
       expect(page).to have_selector('h1', text: '昨日チェックインしている施設')
 
@@ -88,6 +118,11 @@ RSpec.describe "CheckinLogs", type: :system do
 
   context "when there are no check-in logs" do
     it "displays a message indicating that there are no check in logs yet" do
+      visit root_path
+      within("td", text: "千代田区") do
+        expect(page).not_to have_css("img")
+      end
+
       visit facility_path(not_check_in_facility)
       expect(page).to have_selector('h1', text: '未チェックイン施設')
       expect(page).to have_content("0回訪問")
@@ -102,6 +137,11 @@ RSpec.describe "CheckinLogs", type: :system do
 
   context "when there are 11 more check-in logs" do
     it "displays pagination" do
+      visit root_path
+      within("td", text: "新宿区") do
+        expect(page).to have_css("img")
+      end
+
       visit facility_path(many_check_in_facility)
       expect(page).to have_selector('h1', text: 'ページネーションが表示される施設')
       expect(page).to have_content("11回訪問")
