@@ -51,7 +51,9 @@ RSpec.describe "CheckinLogs", type: :system do
         expect(page).to have_css("img")
       end
     end
+  end
 
+  context "the current location is more than 200 meters away from the facility" do
     it "fails to check in" do
       visit root_path
       within("td", text: "中央区") do
