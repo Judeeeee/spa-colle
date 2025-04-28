@@ -26,7 +26,7 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
   it 'displays an alert when location permission is denied' do
     mock_geolocation_error
 
-    click_link '付近の施設を検索'
+    visit facilities_map_path
     expect(page).to have_selector('h1', text: '付近の施設を検索', wait: 5) # Turboのロードが完全に終わるのを待つ"
 
     accept_alert '位置情報の使用が許可されなかったため、現在地を取得できませんでした。'
