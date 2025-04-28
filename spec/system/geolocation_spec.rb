@@ -8,16 +8,25 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
     login_with_google(user)
   end
 
-  it 'displays an alert when location permission is denied' do
-    click_link '付近の施設を検索'
-    expect(page).to have_selector('h1', text: '付近の施設を検索')
+  def mock_geolocation_error
+    allow_any_instance_of(Selenium::WebDriver::Driver).to receive(:execute_script).and_wrap_original do |original, script, *args|
+      if script.include?('navigator.geolocation.getCurrentPosition')
+        original.call(<<~JS, *args)
+          navigator.geolocation.getCurrentPosition = function(success, error) {
+            error({ code: 1 });
+          };
+        JS
+      else
+        original.call(script, *args)# 地図描画のJSが壊れてしまうので
+      end
+    end
+  end
 
-    page.evaluate_script(<<-JS)
-      navigator.geolocation.getCurrentPosition = function(success, error) {
-        error({ code: 1 });
-      };
-      initMapWithCurrentLocation();
-    JS
+  it 'displays an alert when location permission is denied' do
+    mock_geolocation_error
+
+    click_link '付近の施設を検索'
+    expect(page).to have_selector('h1', text: '付近の施設を検索', wait: 5) # Turboのロードが完全に終わるのを待つ"
 
     accept_alert '位置情報の使用が許可されなかったため、現在地を取得できませんでした。'
   end
