@@ -3,14 +3,21 @@ require 'rails_helper'
 RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
   let(:user) { create(:user) }
   let!(:not_check_in_facility) { create(:not_check_in_facility) }
+  let(:selenium_driver) { Capybara.current_session.driver.browser } # SeleniumのWebDriverインスタンスを取得
 
   before(:each) do
     driven_by :selenium_chrome_without_cache # 位置情報確認ダイアログを表示させるために、テスト毎にキャッシュを無効化
     login_with_google(user)
+    expect(page).to have_selector('h1', text: 'スパコレ')
+    allow(selenium_driver).to receive(:execute_script).and_call_original
+  end
+
+  after(:each) do
+    Capybara.reset_sessions!
   end
 
   def mock_geolocation_success
-    allow_any_instance_of(Selenium::WebDriver::Driver).to receive(:execute_script).and_wrap_original do |original, script, *args|
+    allow(selenium_driver).to receive(:execute_script).and_wrap_original do |original, script, *args|
       if script.include?('navigator.geolocation.getCurrentPosition')
         original.call(<<~JS, *args)
           navigator.geolocation.getCurrentPosition = function(success, error) {
@@ -24,7 +31,7 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
   end
 
   def mock_geolocation_error
-    allow_any_instance_of(Selenium::WebDriver::Driver).to receive(:execute_script).and_wrap_original do |original, script, *args|
+    allow(selenium_driver).to receive(:execute_script).and_wrap_original do |original, script, *args|
       if script.include?('navigator.geolocation.getCurrentPosition')
         original.call(<<~JS, *args)
           navigator.geolocation.getCurrentPosition = function(success, error) {
