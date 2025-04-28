@@ -9,6 +9,20 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
     login_with_google(user)
   end
 
+  def mock_geolocation_success
+    allow_any_instance_of(Selenium::WebDriver::Driver).to receive(:execute_script).and_wrap_original do |original, script, *args|
+      if script.include?('navigator.geolocation.getCurrentPosition')
+        original.call(<<~JS, *args)
+          navigator.geolocation.getCurrentPosition = function(success, error) {
+            success({ coords: { latitude: 35.698137, longitude: 139.767935 } });  // not_check_in_facilityの座標
+          };
+        JS
+      else
+        original.call(script, *args)# 地図描画のJSが壊れてしまうので
+      end
+    end
+  end
+
   def mock_geolocation_error
     allow_any_instance_of(Selenium::WebDriver::Driver).to receive(:execute_script).and_wrap_original do |original, script, *args|
       if script.include?('navigator.geolocation.getCurrentPosition')
@@ -23,6 +37,15 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
     end
   end
 
+  it 'displays the map with the current location when location permission is granted' do
+    visit facilities_map_path
+
+    mock_geolocation_success
+    expect(page).to have_selector('h1', text: '付近の施設を検索', wait: 5)  # Turboのロードが完全に終わるのを待つ
+
+    expect(page).to have_selector('#map', visible: true)
+  end
+
   it 'displays an alert when location permission is denied' do
     mock_geolocation_error
 
@@ -30,6 +53,15 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
     expect(page).to have_selector('h1', text: '付近の施設を検索', wait: 5) # Turboのロードが完全に終わるのを待つ"
 
     accept_alert '位置情報の使用が許可されなかったため、現在地を取得できませんでした。'
+  end
+
+  it 'displays the map on the facility page when location permission is granted' do
+    visit facility_path(not_check_in_facility)
+
+    mock_geolocation_success
+    expect(page).to have_selector('h1', text: '未チェックイン施設', wait: 5)
+
+    expect(page).to have_selector('#facility-map', visible: true)
   end
 
   it 'displays an alert on the facility page when location permission is denied on' do
