@@ -7,7 +7,7 @@ class Facility < ApplicationRecord
     distance = distance_by_pythagoras(self, current_lat, current_lng)
     threshold =  0.2 # 様子を見るために200m(0.2km)圏内にする
 
-    true if distance <= threshold
+    distance <= threshold
   end
 
   private
