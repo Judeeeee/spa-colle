@@ -23,3 +23,6 @@
         = link_to "利用規約・プライバシーポリシー", terms_path, class: "terms-link text-blue-600 visited:text-purple-600 underline hover:no-underline active:no-underline"
         | に同意した上でログインしてください。
       p class="mt-6 block text-sm w-full" © 2025 Judeee スパコレ
+- if flash[:alert]
+  div class="fixed top-4 right-4 bg-[#EF454A] text-white text-lg p-4 rounded-md z-50"
+    = flash[:alert]

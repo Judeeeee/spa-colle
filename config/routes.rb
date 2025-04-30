@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :users, only: [ :show, :destroy ]
   get "/terms", to: "pages#terms"
   get "auth/:provider/callback", to: "sessions#create"
-  get "auth/failure", to: redirect("/")
+  get "auth/failure", to: "sessions#failure"
   get "log_out", to: "sessions#destroy", as: "log_out"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

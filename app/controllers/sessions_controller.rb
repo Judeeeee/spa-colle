@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :check_logged_in, only: :create
+  skip_before_action :check_logged_in, only: [ :create, :failure ]
 
   def create
     if (user = User.find_or_create_from_auth_hash(auth_hash))
@@ -10,6 +10,22 @@ class SessionsController < ApplicationController
 
   def destroy
     log_out
+    redirect_to root_path
+  end
+
+  def failure
+    error_message = case params[:message]
+    when "timeout"
+                      "Google認証がタイムアウトしました。もう一度お試しください。"
+    when "access_denied"
+                      "Google認証が拒否されました。許可をお願いいたします。"
+    when "invalid_credentials"
+                      "Google認証に失敗しました。もう一度ログインしてください。"
+    else
+                      "Googleアカウント認証に失敗しました。"
+    end
+
+    flash[:alert] = error_message
     redirect_to root_path
   end
 

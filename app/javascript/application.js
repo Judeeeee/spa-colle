@@ -12,3 +12,10 @@ document.addEventListener("turbo:frame-missing", (event) => {
   event.preventDefault();
   visit(response.url);
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const alertMessage = document.getElementById("flash-alert");
+  if (alertMessage) {
+    alert(alertMessage.innerText);
+  }
+});
