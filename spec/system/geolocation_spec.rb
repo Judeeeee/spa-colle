@@ -12,9 +12,6 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
     allow(selenium_driver).to receive(:execute_script).and_call_original
   end
 
-  after(:each) do
-    Capybara.reset_sessions!
-  end
 
   def mock_geolocation_success
     allow(selenium_driver).to receive(:execute_script).and_wrap_original do |original, script, *args|
