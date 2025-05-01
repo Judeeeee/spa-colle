@@ -15,6 +15,7 @@ if Rails.env.test?
     options.add_argument("--disable-application-cache")
     options.add_argument("--disable-cache")
     options.add_argument("--incognito")
+    options.add_preference("profile.default_content_setting_values.geolocation", 1) # Chromeの位置情報を「常に許可」に設定
 
     # tmpディレクトリを安全にユニークに確保
     user_data_dir = Dir.mktmpdir("chrome-user-data")
