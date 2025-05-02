@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "CheckinLogs", type: :system do
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
   let!(:not_check_in_facility) { create(:not_check_in_facility) }
   let!(:fails_to_check_in_facility) { create(:fails_to_check_in_facility) }
   let!(:many_check_in_facility) { create(:many_check_in_facility) }

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
   let!(:not_check_in_facility) { create(:not_check_in_facility) }
 
   def mock_geolocation_success

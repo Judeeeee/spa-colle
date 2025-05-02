@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
 
   before(:each) do
     driven_by :selenium_chrome_headless
