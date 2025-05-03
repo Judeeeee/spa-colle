@@ -7,11 +7,12 @@ RSpec.describe "CheckinLogs", type: :system do
   let!(:many_check_in_facility) { create(:many_check_in_facility) }
   let!(:checked_in_facility) { create(:checked_in_facility) }
   let!(:previous_day_checked_in_facility) { create(:previous_day_checked_in_facility) }
-  let!(:checkin_logs) do
+
+  before do
     11.times.map { |i| create(:checkin_log, user: user, facility: many_check_in_facility, days_ago: i) }
+    create(:checkin_log, user: user, facility: checked_in_facility)
+    create(:checkin_log, user: user, facility: previous_day_checked_in_facility, days_ago: 1)
   end
-  let!(:checked_in_log) { create(:checkin_log, user: user, facility: checked_in_facility) }
-  let!(:yesterday_checked_in_log) { create(:checkin_log, user: user, facility: previous_day_checked_in_facility, days_ago: 1) }
 
   before(:each) do
     driven_by :selenium_chrome_headless

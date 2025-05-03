@@ -48,7 +48,8 @@ RSpec.describe User, type: :model do
   describe '#checkin_dates_for' do
     let!(:user) { create(:user) }
     let!(:many_check_in_facility) { create(:many_check_in_facility) }
-    let!(:checkin_logs) do
+
+    before do
       10.times.map { |i| create(:checkin_log, user: user, facility: many_check_in_facility, days_ago: i) }
     end
 
