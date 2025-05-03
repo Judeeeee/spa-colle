@@ -1,7 +1,5 @@
 require 'rails_helper'
-# describe の引数にはテストの対象
-# context の引数にはテストが実行される際に前提になる条件や状態(xxxの時、xxxの場合)
-# itには期待する値
+
 RSpec.describe SessionsHelper, type: :helper do
   let!(:user) { create(:user) }
 
