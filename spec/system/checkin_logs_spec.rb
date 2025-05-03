@@ -15,7 +15,6 @@ RSpec.describe "CheckinLogs", type: :system do
   before(:each) do
     driven_by :selenium_chrome_headless
     login_with_google(user)
-    expect(page).to have_selector('h1', text: 'スパコレ')
   end
 
   def fill_in_location_and_submit(lat:, lng:)
@@ -31,6 +30,8 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "successfully check in and displays first-time check-in modal" do
         visit root_path
+        expect(page).to have_selector('h1', text: 'スパコレ')
+
         within("td", text: "千代田区") do
           expect(page).not_to have_css("img")
         end
@@ -51,6 +52,8 @@ RSpec.describe "CheckinLogs", type: :system do
         expect(page).to have_content(Time.zone.today.strftime("%Y/%m/%d"))
 
         visit root_path
+        expect(page).to have_selector('h1', text: 'スパコレ')
+
         within("td", text: "千代田区") do
           expect(page).to have_css("img")
         end
@@ -62,6 +65,8 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "successfully check in and redirects to the check in log page" do
         visit root_path
+        expect(page).to have_selector('h1', text: 'スパコレ')
+
         within("td", text: "台東区") do
           expect(page).to have_css("img")
         end
@@ -82,6 +87,8 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "fails to check in and displays limit modal" do
         visit root_path
+        expect(page).to have_selector('h1', text: 'スパコレ')
+
         within("td", text: "中央区") do
           expect(page).not_to have_css("img")
         end
@@ -98,6 +105,8 @@ RSpec.describe "CheckinLogs", type: :system do
         end
 
         visit root_path
+        expect(page).to have_selector('h1', text: 'スパコレ')
+
         within("td", text: "中央区") do
           expect(page).not_to have_css("img")
         end
@@ -109,6 +118,8 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "fails to check in and the already checked in modal" do
         visit root_path
+        expect(page).to have_selector('h1', text: 'スパコレ')
+
         within("td", text: "文京区") do
           expect(page).to have_css("img")
         end
@@ -139,6 +150,8 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "displays a message that there are no check in logs yet" do
         visit root_path
+        expect(page).to have_selector('h1', text: 'スパコレ')
+
         within("td", text: "千代田区") do
           expect(page).not_to have_css("img")
         end
@@ -160,6 +173,8 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "displays pagination" do
         visit root_path
+        expect(page).to have_selector('h1', text: 'スパコレ')
+
         within("td", text: "新宿区") do
           expect(page).to have_css("img")
         end

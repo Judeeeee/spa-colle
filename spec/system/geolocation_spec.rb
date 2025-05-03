@@ -35,12 +35,13 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
     driven_by :selenium_chrome_without_cache
     visit root_path
     login_with_google(user)
-    expect(page).to have_selector('h1', text: 'スパコレ', wait: 5)
   end
 
   describe 'location permission' do
     context 'when permission is granted' do
       it 'displays the map with the current location on the map page' do
+        expect(page).to have_selector('h1', text: 'スパコレ')
+
         mock_geolocation_success
         sleep 2 # モックの反映を保証する
         click_link "付近の施設を検索"
@@ -50,6 +51,8 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
       end
 
       it 'displays the map on the facility page' do
+        expect(page).to have_selector('h1', text: 'スパコレ')
+
         mock_geolocation_success
         sleep 2 # モックの反映を保証する
         click_link "施設一覧"
@@ -64,6 +67,8 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
 
     context 'when permission is denied' do
       it 'displays an alert on the map page' do
+        expect(page).to have_selector('h1', text: 'スパコレ')
+
         mock_geolocation_error
         sleep 2 # モックの反映を保証する
         click_link "付近の施設を検索"
@@ -74,6 +79,8 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
       end
 
       it 'displays an alert on the facility page' do
+        expect(page).to have_selector('h1', text: 'スパコレ')
+
         mock_geolocation_error
         sleep 2 # モックの反映を保証する
         click_link "施設一覧"
