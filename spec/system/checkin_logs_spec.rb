@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "CheckinLogs", type: :system do
   let!(:user) { create(:user) }
-  let!(:not_check_in_facility) { create(:not_check_in_facility) }
-  let!(:fails_to_check_in_facility) { create(:fails_to_check_in_facility) }
   let!(:many_check_in_facility) { create(:many_check_in_facility) }
   let!(:checked_in_facility) { create(:checked_in_facility) }
   let!(:previous_day_checked_in_facility) { create(:previous_day_checked_in_facility) }
@@ -29,6 +27,8 @@ RSpec.describe "CheckinLogs", type: :system do
 
   describe "check in functionality" do
     context "when the user checks in for the first time within 200 meters of the facility" do
+      let!(:not_check_in_facility) { create(:not_check_in_facility) }
+
       it "successfully check in and displays first-time check-in modal" do
         visit root_path
         within("td", text: "千代田区") do
@@ -58,6 +58,8 @@ RSpec.describe "CheckinLogs", type: :system do
     end
 
     context "when the user has already checked in on a previous day" do
+      let!(:previous_day_checked_in_facility) { create(:previous_day_checked_in_facility) }
+
       it "successfully check in and redirects to the check in log page" do
         visit root_path
         within("td", text: "台東区") do
@@ -76,6 +78,8 @@ RSpec.describe "CheckinLogs", type: :system do
     end
 
     context "when the user is more than 200 meters away from the facility" do
+      let!(:fails_to_check_in_facility) { create(:fails_to_check_in_facility) }
+
       it "fails to check in and displays limit modal" do
         visit root_path
         within("td", text: "中央区") do
@@ -101,6 +105,8 @@ RSpec.describe "CheckinLogs", type: :system do
     end
 
     context "when the user has already checked in today" do
+      let!(:checked_in_facility) { create(:checked_in_facility) }
+
       it "fails to check in and the already checked in modal" do
         visit root_path
         within("td", text: "文京区") do
@@ -129,6 +135,8 @@ RSpec.describe "CheckinLogs", type: :system do
 
   describe "check in logs display" do
     context "when there are no check in logs" do
+      let!(:not_check_in_facility) { create(:not_check_in_facility) }
+
       it "displays a message that there are no check in logs yet" do
         visit root_path
         within("td", text: "千代田区") do
@@ -148,6 +156,8 @@ RSpec.describe "CheckinLogs", type: :system do
     end
 
     context "when there are more than 11 check in logs" do
+      let!(:many_check_in_facility) { create(:many_check_in_facility) }
+
       it "displays pagination" do
         visit root_path
         within("td", text: "新宿区") do

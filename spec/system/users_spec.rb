@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
-  let!(:user) { create(:user) }
-
   before(:each) do
     driven_by :selenium_chrome_headless
     OmniAuth.config.mock_auth[:google_oauth2] = nil
@@ -10,6 +8,8 @@ RSpec.describe "Users", type: :system do
 
   describe 'authenticating with google' do
     context "when credentials are valid" do
+      let!(:user) { create(:user) }
+
       it "displays the top page after login" do
         login_with_google(user)
         expect(page).to have_selector('h1', text: 'スパコレ')
