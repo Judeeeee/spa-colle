@@ -17,13 +17,6 @@ RSpec.describe "CheckinLogs", type: :system do
     login_with_google(user)
   end
 
-  def fill_in_location_and_submit(lat:, lng:)
-    page.execute_script("document.getElementById('latitude').value = #{lat};")
-    page.execute_script("document.getElementById('longitude').value = #{lng};")
-
-    click_button "チェックイン"
-  end
-
   describe "check in functionality" do
     context "when the user checks in for the first time within 200 meters of the facility" do
       let!(:not_check_in_facility) { create(:not_check_in_facility) }
