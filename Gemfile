@@ -15,23 +15,6 @@ gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem "stimulus-rails"
 
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
-
-# Use the database-backed adapters for Rails.cache, Active Job, and Action Cable
-gem "solid_cache"
-gem "solid_queue"
-gem "solid_cable"
-
-# Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
-gem "kamal", require: false
-
-# Add HTTP asset caching/compression and X-Sendfile acceleration to Puma [https://github.com/basecamp/thruster/]
-gem "thruster", require: false
-
 # https://github.com/zquestz/omniauth-google-oauth2
 gem "omniauth-google-oauth2"
 # https://github.com/zquestz/omniauth-google-oauth2
@@ -74,9 +57,6 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-
-  # change-from-erb-to-slim https://github.com/slim-template/slim/wiki/Template-Converters-ERB-to-SLIM
-  gem "html2slim", github: "slim-template/html2slim" # https://zenn.dev/yksn/articles/aff65f3afb73d0
 end
 
 group :test do
