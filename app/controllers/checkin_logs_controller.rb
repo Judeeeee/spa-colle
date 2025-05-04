@@ -3,6 +3,7 @@ class CheckinLogsController < ApplicationController
 
   before_action :set_facility
   before_action :set_current_location
+
   def index
     @pagy, @checkin_logs = pagy(current_user.checkin_dates_for(@facility))
   end
@@ -30,7 +31,7 @@ class CheckinLogsController < ApplicationController
 
   def checkin_within_range(format)
     if current_user.checked_in_today_to?(@facility)
-      format.turbo_stream { render_chechin_limit_modal }
+      format.turbo_stream { render_checkin_limit_modal }
     else
       render_checkin_modal_if_first_visit(format)
       current_user.check_in(@facility)
@@ -56,7 +57,7 @@ class CheckinLogsController < ApplicationController
     )
   end
 
-  def render_chechin_limit_modal
+  def render_checkin_limit_modal
     render turbo_stream: turbo_stream.update(
       "checkin-limit-modal-frame",
       partial: "facilities/checkin_limit_modal",
