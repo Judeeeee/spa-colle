@@ -11,10 +11,10 @@ class CheckinLogsController < ApplicationController
     if @facility.within_distance?(@current_lat, @current_lng)
 
       respond_to do |format|
-        if already_checked_in_today?
+        if current_user.checked_in_today_to?(@facility)
           format.turbo_stream { render_chechin_limit_modal }
         else
-          format.turbo_stream { render_checkin_modal } if first_visit?
+          format.turbo_stream { render_checkin_modal } if current_user.first_visit_to?(@facility)
           current_user.check_in(@facility)
           format.html { redirect_to facility_checkin_logs_path(@facility) }
         end
@@ -35,14 +35,6 @@ class CheckinLogsController < ApplicationController
   def set_current_location
     @current_lat = params[:latitude].to_f
     @current_lng = params[:longitude].to_f
-  end
-
-  def first_visit?
-    !current_user.checkin_logs.exists?(facility_id: @facility.id)
-  end
-
-  def already_checked_in_today?
-    current_user.checkin_logs.exists?(facility_id: @facility.id, created_at: Time.zone.now.all_day)
   end
 
   def render_checkin_modal

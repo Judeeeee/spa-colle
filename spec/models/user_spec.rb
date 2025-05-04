@@ -60,4 +60,56 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '#first_visit_to?' do
+    let!(:user) { create(:user) }
+
+    context 'when the user has not checked in at the facility' do
+      let!(:not_check_in_facility) { create(:not_check_in_facility) }
+
+      it 'returns true' do
+        expect(user.first_visit_to?(not_check_in_facility)).to be true
+      end
+    end
+
+    context 'when the user has already checked in at the facility' do
+      let!(:many_check_in_facility) { create(:many_check_in_facility) }
+
+      before do
+        10.times.map { |i| create(:checkin_log, user: user, facility: many_check_in_facility, days_ago: i) }
+      end
+
+      it 'returns false' do
+        expect(user.first_visit_to?(many_check_in_facility)).to be false
+      end
+    end
+  end
+
+  describe '#checked_in_today_to?' do
+    let!(:user) { create(:user) }
+
+    context 'when the user has not checked in at the facility' do
+      let!(:not_check_in_facility) { create(:not_check_in_facility) }
+
+      before do
+        create(:checkin_log, user: user, facility: not_check_in_facility)
+      end
+
+      it 'returns true' do
+        expect(user.checked_in_today_to?(not_check_in_facility)).to be true
+      end
+    end
+
+    context 'when the user has not checked in at the facility' do
+      let!(:checked_in_facility) { create(:checked_in_facility) }
+
+      before do
+        create(:checkin_log, user: user, facility: checked_in_facility, days_ago: 1)
+      end
+
+      it 'returns false' do
+        expect(user.checked_in_today_to?(checked_in_facility)).to be false
+      end
+    end
+  end
 end
