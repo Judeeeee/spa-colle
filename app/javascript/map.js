@@ -1,181 +1,160 @@
-const GeolocationErrorCodes = {
-  PERMISSION_DENIED: 1,
-};
+class GoogleMap {
+  static async init() {
+    await this.loadGoogleMapsApi();
 
-// Google Maps APIは複数回読み込むとエラーになるので、動的に1回だけ読み込む
-function loadGoogleMapsApi(callback) {
-  if (typeof google !== "undefined" && google.maps) {
-    callback();
-    return;
+    if (document.getElementById("facility-map")) {
+      await this.setCurrentLocationToForm();
+      this.initMapFacility();
+    } else if (document.getElementById("map")) {
+      await this.initMapWithCurrentLocation();
+    }
   }
 
-  const existingScript = document.querySelector(
-    "script[src*='maps.googleapis.com']",
-  );
+  static async loadGoogleMapsApi() {
+    if (typeof google !== "undefined" && google.maps) return;
 
-  if (existingScript) {
-    existingScript.addEventListener("load", () => callback());
-    return;
+    const existingScript = document.querySelector(
+      "script[src*='maps.googleapis.com']",
+    );
+    if (existingScript) {
+      return new Promise((resolve) =>
+        existingScript.addEventListener("load", resolve),
+      );
+    }
+
+    const apiKey = document.querySelector(
+      "meta[name='google-maps-api-key']",
+    )?.content;
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}`;
+      script.async = true;
+      script.defer = true;
+      script.onload = resolve;
+      document.head.appendChild(script);
+    });
   }
 
-  const apiKey = document.querySelector(
-    "meta[name='google-maps-api-key']",
-  )?.content;
+  static async getCurrentLocation() {
+    if (!navigator.geolocation) throw new Error("Geolocation is not supported");
 
-  const script = document.createElement("script");
-  script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}`;
-  script.async = true;
-  script.defer = true;
-  script.onload = () => callback();
-  document.head.appendChild(script);
-}
-
-function initMapWithCurrentLocation() {
-  if (!navigator.geolocation) {
-    alert("このブラウザは位置情報に対応していません。");
-    return;
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
   }
 
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
+  static alertGeolocationError(error) {
+    if (error.code === 1) {
+      alert(
+        "位置情報の使用が許可されなかったため、現在地を取得できませんでした。",
+      );
+    } else {
+      alert("現在地を取得できませんでした");
+    }
+  }
+
+  static async setCurrentLocationToForm() {
+    try {
+      const position = await this.getCurrentLocation();
+      document.getElementById("latitude").value = position.coords.latitude;
+      document.getElementById("longitude").value = position.coords.longitude;
+    } catch (error) {
+      this.alertGeolocationError(error);
+    }
+  }
+
+  static initMapFacility() {
+    const mapElement = document.getElementById("facility-map");
+    if (!mapElement) return;
+
+    const latitude = parseFloat(mapElement.dataset.latitude);
+    const longitude = parseFloat(mapElement.dataset.longitude);
+    const imageUrl = mapElement.dataset.imageUrl;
+    const googleMapUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+    const map = new google.maps.Map(mapElement, {
+      center: { lat: latitude, lng: longitude },
+      zoom: 18,
+    });
+
+    this.createMarkerWithInfoWindow(map, {
+      position: { lat: latitude, lng: longitude },
+      iconUrl: imageUrl,
+      infoContent: `<div class="infowindow"><a href="${googleMapUrl}" target="_blank">Googleマップへ移動</a></div>`,
+    });
+  }
+
+  static async initMapWithCurrentLocation() {
+    try {
+      const position = await this.getCurrentLocation();
       const currentLocation = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       };
-      initMap(currentLocation);
-    },
-    (error) => {
-      switch (error.code) {
-        case GeolocationErrorCodes.PERMISSION_DENIED:
-          alert(
-            "位置情報の使用が許可されなかったため、現在地を取得できませんでした。",
-          );
-          break;
-        default:
-          alert("現在地を取得できませんでした。");
-          break;
-      }
-    },
-  );
-}
+      this.displayCurrentLocation(currentLocation);
+    } catch (error) {
+      this.alertGeolocationError(error);
+    }
+  }
 
-function initMap(center) {
-  const mapElement = document.getElementById("map");
-  if (!mapElement) return;
+  static displayCurrentLocation(center) {
+    const mapElement = document.getElementById("map");
+    if (!mapElement) return;
 
-  const facilities = JSON.parse(mapElement.dataset.facilities);
+    const facilities = JSON.parse(mapElement.dataset.facilities);
+    const map = new google.maps.Map(mapElement, {
+      center: center,
+      zoom: 12,
+    });
 
-  const map = new google.maps.Map(mapElement, {
-    center: center,
-    zoom: 12,
-  });
-
-  new google.maps.Marker({
-    position: center,
-    map: map,
-    title: "現在地",
-    icon: {
-      url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-      scaledSize: new google.maps.Size(38, 31),
-    },
-  });
-
-  facilities.forEach((facility) => {
-    const marker = new google.maps.Marker({
-      position: { lat: facility.latitude, lng: facility.longitude },
+    // 現在地マーカー
+    new google.maps.Marker({
+      position: center,
       map: map,
-      title: facility.name,
+      title: "現在地",
       icon: {
-        url: mapElement.dataset.imageUrl,
+        url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
         scaledSize: new google.maps.Size(38, 31),
       },
     });
 
-    const contentString = `
-      <div class="infowindow">
-        <h1>${facility.name}</h1>
-        <a href='/facilities/${facility.id}'>施設詳細ページへ</a>
-      </div>
-    `;
-
-    const infowindow = new google.maps.InfoWindow({
-      content: contentString,
+    // 施設マーカー
+    facilities.forEach((facility) => {
+      this.createMarkerWithInfoWindow(map, {
+        position: { lat: facility.latitude, lng: facility.longitude },
+        iconUrl: mapElement.dataset.imageUrl,
+        infoContent: `
+          <div class="infowindow">
+            <h1>${facility.name}</h1>
+            <a href='/facilities/${facility.id}'>施設詳細ページへ</a>
+          </div>
+        `,
+        title: facility.name,
+      });
     });
+  }
+
+  static createMarkerWithInfoWindow(
+    map,
+    { position, iconUrl, infoContent, title },
+  ) {
+    const marker = new google.maps.Marker({
+      position,
+      map,
+      title,
+      icon: {
+        url: iconUrl,
+        scaledSize: new google.maps.Size(38, 31),
+      },
+    });
+
+    const infowindow = new google.maps.InfoWindow({ content: infoContent });
 
     marker.addListener("click", () => {
       infowindow.open({ anchor: marker, map });
     });
-  });
-}
-
-function initMapFacility() {
-  const mapElement = document.getElementById("facility-map");
-  const latitude = parseFloat(mapElement.dataset.latitude);
-  const longitude = parseFloat(mapElement.dataset.longitude);
-  const imageUrl = mapElement.dataset.imageUrl;
-  const googleMapUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
-
-  let map = new google.maps.Map(mapElement, {
-    center: { lat: latitude, lng: longitude },
-    zoom: 18,
-  });
-
-  const contentString = `
-     <div class="infowindow">
-       <a href="${googleMapUrl}" target="_blank">Googleマップへ移動</a>
-     </div>
-   `;
-
-  const infowindow = new google.maps.InfoWindow({
-    content: contentString,
-  });
-
-  const marker = new google.maps.Marker({
-    position: { lat: latitude, lng: longitude },
-    map: map,
-    icon: {
-      url: imageUrl,
-      scaledSize: new google.maps.Size(38, 31),
-    },
-  });
-
-  marker.addListener("click", function () {
-    infowindow.open(map, marker);
-  });
-}
-
-function getCurrentLocationAndSetForm() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      function (position) {
-        document.getElementById("latitude").value = position.coords.latitude;
-        document.getElementById("longitude").value = position.coords.longitude;
-      },
-      function (error) {
-        switch (error.code) {
-          case GeolocationErrorCodes.PERMISSION_DENIED:
-            alert(
-              "位置情報の使用が許可されなかったため、現在地を取得できませんでした。",
-            );
-            break;
-          default:
-            alert("現在地を取得できませんでした");
-            break;
-        }
-      },
-    );
-  } else {
-    alert("このブラウザは位置情報に対応していません。");
   }
 }
 
 document.addEventListener("turbo:load", () => {
-  loadGoogleMapsApi(() => {
-    if (document.getElementById("facility-map")) {
-      getCurrentLocationAndSetForm();
-      initMapFacility();
-    } else if (document.getElementById("map")) {
-      initMapWithCurrentLocation();
-    }
-  });
+  GoogleMap.init();
 });
