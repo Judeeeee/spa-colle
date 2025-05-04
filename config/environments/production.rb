@@ -73,7 +73,6 @@ Rails.application.configure do
   # Enable DNS rebinding protection and other `Host` header attacks.
   # https://railsguides.jp/v7.2/upgrading_ruby_on_rails.html#%E6%96%B0%E3%81%97%E3%81%84config-hosts%E8%A8%AD%E5%AE%9A
   config.hosts = [
-    "spa-colle.onrender.com",
     "spa-colle.com",
     "www.spa-colle.com"
   ]
