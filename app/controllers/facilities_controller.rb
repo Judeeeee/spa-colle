@@ -2,8 +2,8 @@ class FacilitiesController < ApplicationController
   before_action :set_facility, only: %w[show]
 
   def index
-    facilities = Facility.joins(:ward).order("wards.name_kana")
-    @grouped_facilities = facilities.group_by { |facility| facility.ward.name }
+    @grouped_facilities = Facility.grouped_by_ward_name
+    @visited_facility_ids = current_user.checkin_logs.pluck(:facility_id)
   end
 
   def show
