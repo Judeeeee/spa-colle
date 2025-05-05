@@ -7,7 +7,7 @@ table class="stamp-card-table w-full h-full table-fixed border-collapse border b
         td class="relative border border-gray-300 text-sm text-center w-[30px] h-[30px] align-middle"
           span class="text-l font-bold whitespace-nowrap"
             = ward.name
-          - if ward.visited_by_user?(current_user)
+          - if @visited_ward_ids.include?(ward.id)
             span class="absolute inset-0 flex items-center justify-center text-red-500 text-2xl font-bold pointer-events-none"
               = image_tag "hot_spring.svg", alt: "温泉マークのスタンプです。施設を訪問するとこのスタンプが押されます。", class: "w-16 h-16 opacity-50"
 
@@ -17,6 +17,6 @@ table class="stamp-card-table w-full h-full table-fixed border-collapse border b
           td class="relative border border-gray-300 text-sm text-center w-[30px] h-[30px] align-middle"
             span class="text-l font-bold whitespace-nowrap"
               = w.name
-            - if w.visited_by_user?(current_user)
+            - if @visited_ward_ids.include?(w.id)
               span class="absolute inset-0 flex items-center justify-center text-red-500 text-2xl font-bold pointer-events-none"
                 = image_tag "hot_spring.svg", alt: "温泉マークのスタンプです。施設を訪問するとこのスタンプが押されます。", class: "w-16 h-16 opacity-50"
