@@ -3,25 +3,17 @@ class CheckinLogsController < ApplicationController
 
   before_action :set_facility
   before_action :set_current_location
+
   def index
     @pagy, @checkin_logs = pagy(current_user.checkin_dates_for(@facility))
   end
 
   def create
-    if @facility.within_distance?(@current_lat, @current_lng)
-
-      respond_to do |format|
-        if already_checked_in_today?
-          format.turbo_stream { render_chechin_limit_modal }
-        else
-          format.turbo_stream { render_checkin_modal } if first_visit?
-          current_user.check_in(@facility)
-          format.html { redirect_to facility_checkin_logs_path(@facility) }
-        end
-      end
-    else
-      respond_to do |format|
-        format.turbo_stream { render_checkin_out_of_range_modal }
+    respond_to do |format|
+      if @facility.within_distance?(@current_lat, @current_lng)
+        checkin_within_range(format)
+      else
+        checkin_out_of_range(format)
       end
     end
   end
@@ -37,12 +29,24 @@ class CheckinLogsController < ApplicationController
     @current_lng = params[:longitude].to_f
   end
 
-  def first_visit?
-    !current_user.checkin_logs.exists?(facility_id: @facility.id)
+  def checkin_within_range(format)
+    if current_user.checked_in_today_to?(@facility)
+      format.turbo_stream { render_checkin_limit_modal }
+    else
+      render_checkin_modal_if_first_visit(format)
+      current_user.check_in(@facility)
+      format.html { redirect_to facility_checkin_logs_path(@facility) }
+    end
   end
 
-  def already_checked_in_today?
-    current_user.checkin_logs.exists?(facility_id: @facility.id, created_at: Time.zone.now.all_day)
+  def render_checkin_modal_if_first_visit(format)
+    if current_user.first_visit_to?(@facility)
+      format.turbo_stream { render_checkin_modal }
+    end
+  end
+
+  def checkin_out_of_range(format)
+    format.turbo_stream { render_checkin_out_of_range_modal }
   end
 
   def render_checkin_modal
@@ -53,7 +57,7 @@ class CheckinLogsController < ApplicationController
     )
   end
 
-  def render_chechin_limit_modal
+  def render_checkin_limit_modal
     render turbo_stream: turbo_stream.update(
       "checkin-limit-modal-frame",
       partial: "facilities/checkin_limit_modal",
