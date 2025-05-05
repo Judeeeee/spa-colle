@@ -3,6 +3,7 @@ class FacilitiesController < ApplicationController
 
   def index
     @grouped_facilities = Facility.grouped_by_ward_name
+    @visited_facility_ids = current_user.checkin_logs.pluck(:facility_id)
   end
 
   def show
