@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :checkin_logs
+  has_many :checkin_logs, dependent: :delete_all
   has_many :facilities, through: :checkin_logs
 
   class << self
