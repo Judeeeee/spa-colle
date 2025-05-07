@@ -2,9 +2,8 @@ class SessionsController < ApplicationController
   skip_before_action :check_logged_in, only: [ :create, :failure ]
 
   def create
-    if (user = User.find_or_create_from_auth_hash(auth_hash))
-      log_in user
-    end
+    user = User.find_or_create_from_auth_hash(auth_hash)
+    log_in(user) if user
     redirect_to root_path
   end
 
@@ -14,18 +13,7 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    error_message = case params[:message]
-    when "timeout"
-                      "Google認証がタイムアウトしました。もう一度お試しください。"
-    when "access_denied"
-                      "Google認証が拒否されました。許可をお願いいたします。"
-    when "invalid_credentials"
-                      "Google認証に失敗しました。もう一度ログインしてください。"
-    else
-                      "Googleアカウント認証に失敗しました。"
-    end
-
-    flash[:alert] = error_message
+    flash[:alert] = failure_error_message(params[:message])
     redirect_to root_path
   end
 
@@ -33,5 +21,15 @@ class SessionsController < ApplicationController
 
   def auth_hash
     request.env["omniauth.auth"] # https://github.com/zquestz/omniauth-google-oauth2?tab=readme-ov-file#auth-hash
+  end
+
+  def failure_error_message(message)
+    error_messages = {
+      "timeout" => "Google認証がタイムアウトしました。もう一度お試しください。",
+      "access_denied" => "Google認証が拒否されました。許可をお願いいたします。",
+      "invalid_credentials" => "Google認証に失敗しました。もう一度ログインしてください。"
+    }
+
+    error_messages[message] || "Googleアカウント認証に失敗しました。"
   end
 end
