@@ -1,8 +1,8 @@
 turbo-frame id="modal" data-controller="modal"
   div class="user-action-modal absolute top-4 right-4 bg-white p-4 rounded-lg shadow-lg max-w-sm w-auto z-50" data-modal-target="modal"
     h2 class="text-xl font-bold mb-4" アカウント削除
-    p class="text-gray-700"
+    p class="font-bold text-sm"
       | アカウントを削除すると、すべてのデータが失われます。この操作は取り消せません。
     div class="links mt-4 flex justify-end"
-      = link_to "キャンセル", root_path, class: "cancel-link px-4 py-2 bg-gray-200 hover:bg-gray-300 active:bg-gray-300 rounded", data: { action: "click->modal#close" }
-      = button_to "削除する", user_path, method: :delete, class: "delete-button px-4 py-2 bg-[#EF454A] hover:bg-[#D73C40] active:bg-[#D73C40] text-white font-bold rounded", data: { turbo_frame: "_top" }
+      = link_to "キャンセル", root_path, class: "cancel-link px-4 py-2 mr-2 bg-gray-200 hover:bg-gray-300 active:bg-gray-300 rounded", data: { action: "click->modal#close" }
+      = button_to "削除する", user_path, method: :delete, class: "delete-button px-4 py-2 bg-[#537072] hover:bg-[#2c4a52] active:bg-[#2c4a52] text-white font-bold rounded", data: { turbo_frame: "_top" }
