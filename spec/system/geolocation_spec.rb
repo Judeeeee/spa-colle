@@ -33,7 +33,6 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
         sleep 2 # モックの反映を保証する
         click_link "施設一覧"
 
-        find('summary', text: '千代田区').click
         find('.facility-link', text: '未チェックイン施設').click
 
         expect(page).to have_selector('#facility-map', visible: true, wait: 5)
@@ -61,7 +60,6 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
         sleep 2 # モックの反映を保証する
         click_link "施設一覧"
 
-        find('summary', text: '千代田区').click
         find('.facility-link', text: '未チェックイン施設').click
 
         accept_alert('位置情報の使用が許可されなかったため、現在地を取得できませんでした。', wait: 5)
