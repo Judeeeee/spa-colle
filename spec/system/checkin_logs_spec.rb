@@ -25,8 +25,8 @@ RSpec.describe "CheckinLogs", type: :system do
         visit root_path
         expect(page).to have_selector('h1', text: 'スパコレ')
 
-        expect(page).to have_selector("td", text: "千代田区", wait: 5)
-        within("td", text: "千代田区") do
+        expect(page).to have_selector("span", text: "千代田区", wait: 5)
+        within("span", text: "千代田区") do
           expect(page).not_to have_css("img")
         end
 
@@ -48,8 +48,8 @@ RSpec.describe "CheckinLogs", type: :system do
         visit root_path
         expect(page).to have_selector('h1', text: 'スパコレ')
 
-        expect(page).to have_selector("td", text: "千代田区", wait: 5)
-        within("td", text: "千代田区") do
+        expect(page).to have_selector("span", text: "千代田区", wait: 5)
+        within("span", text: "千代田区") do
           expect(page).to have_css("img")
         end
       end
@@ -62,8 +62,8 @@ RSpec.describe "CheckinLogs", type: :system do
         visit root_path
         expect(page).to have_selector('h1', text: 'スパコレ')
 
-        expect(page).to have_selector("td", text: "台東区", wait: 5)
-        within("td", text: "台東区") do
+        expect(page).to have_selector("span", text: "台東区", wait: 5)
+        within("span", text: "台東区") do
           expect(page).to have_css("img")
         end
 
@@ -85,8 +85,8 @@ RSpec.describe "CheckinLogs", type: :system do
         visit root_path
         expect(page).to have_selector('h1', text: 'スパコレ')
 
-        expect(page).to have_selector("td", text: "中央区", wait: 5)
-        within("td", text: "中央区") do
+        expect(page).to have_selector("span", text: "中央区", wait: 5)
+        within("span", text: "中央区") do
           expect(page).not_to have_css("img")
         end
 
@@ -104,8 +104,8 @@ RSpec.describe "CheckinLogs", type: :system do
         visit root_path
         expect(page).to have_selector('h1', text: 'スパコレ')
 
-        expect(page).to have_selector("td", text: "中央区", wait: 5)
-        within("td", text: "中央区") do
+        expect(page).to have_selector("span", text: "中央区", wait: 5)
+        within("span", text: "中央区") do
           expect(page).not_to have_css("img")
         end
       end
@@ -118,8 +118,8 @@ RSpec.describe "CheckinLogs", type: :system do
         visit root_path
         expect(page).to have_selector('h1', text: 'スパコレ')
 
-        expect(page).to have_selector("td", text: "文京区", wait: 5)
-        within("td", text: "文京区") do
+        expect(page).to have_selector("span", text: "文京区", wait: 5)
+        within("span", text: "文京区") do
           expect(page).to have_css("img")
         end
 
@@ -151,8 +151,8 @@ RSpec.describe "CheckinLogs", type: :system do
         visit root_path
         expect(page).to have_selector('h1', text: 'スパコレ')
 
-        expect(page).to have_selector("td", text: "千代田区", wait: 5)
-        within("td", text: "千代田区") do
+        expect(page).to have_selector("span", text: "千代田区", wait: 5)
+        within("span", text: "千代田区") do
           expect(page).not_to have_css("img")
         end
 
@@ -175,8 +175,8 @@ RSpec.describe "CheckinLogs", type: :system do
         visit root_path
         expect(page).to have_selector('h1', text: 'スパコレ')
 
-        expect(page).to have_selector("td", text: "新宿区", wait: 5)
-        within("td", text: "新宿区") do
+        expect(page).to have_selector("span", text: "新宿区", wait: 5)
+        within("span", text: "新宿区") do
           expect(page).to have_css("img")
         end
 
