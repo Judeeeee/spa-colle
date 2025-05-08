@@ -7,8 +7,7 @@ RSpec.describe User, type: :model do
       OmniAuth::AuthHash.new({
         info: {
           name: 'Test User',
-          email: 'test@example.com',
-          image: 'http://image.url'
+          email: 'test@example.com'
         }
       })
     end
@@ -23,7 +22,7 @@ RSpec.describe User, type: :model do
 
     context 'when the user already exists' do
       it 'does not create a user' do
-        User.create!(name: 'Test User', email: 'test@example.com', image: 'http://image.url')
+        User.create!(name: 'Test User', email: 'test@example.com')
 
         expect {
           User.find_or_create_from_auth_hash(auth_hash)

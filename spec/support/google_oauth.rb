@@ -7,8 +7,7 @@ module GoogleOauth
       uid: '123456789',
       info: {
         email: user.email,
-        name: user.name,
-        image: 'https://lh3.googleusercontent.com/a/default_image_url'
+        name: user.name
       },
       credentials: {
         token: 'mock_token',
