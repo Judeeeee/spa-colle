@@ -2,7 +2,7 @@ header class="bg-[#2c4a52] p-4 h-24"
   div class="header-container w-[80%] mx-auto flex items-center justify-between h-12"
     div class="logo-image"
       = link_to root_path do
-        = image_tag "spa_colle_logo.png", alt: "スパコレのロゴです。クリックするとトップページに遷移します。", class: "h-10"
+        = image_tag "logo_header.svg", alt: "スパコレのロゴです。クリックするとトップページに遷移します。", class: "h-10"
     - if current_user && action_name != "terms"
       div class="google-acount-image ml-auto relative" data-controller="dropdown"
         = image_tag current_user.image, alt: "Googleアカウントに設定しているプロフィール画像です。クリックするとログアウトまたはアカウント削除が行えます。",
