@@ -1,22 +1,8 @@
-table class="stamp-card-table w-full h-full table-fixed border-collapse border border-gray-300"
-  tbody
-    tr
-      td class="p-4 border border-gray-300 text-2xl text-center align-middle w-[30px] h-[30px]" ♨️
-      td class="p-4 border border-gray-300 text-2xl text-center align-middle w-[30px] h-[30px]" ♨️
-      - wards.first(3).each do |ward|
-        td class="relative border border-gray-300 text-sm text-center w-[30px] h-[30px] align-middle"
-          span class="text-l font-bold whitespace-nowrap"
-            = ward.name
-          - if @visited_ward_ids.include?(ward.id)
-            span class="absolute inset-0 flex items-center justify-center text-red-500 text-2xl font-bold pointer-events-none"
-              = image_tag "hot_spring.svg", alt: "温泉マークのスタンプです。施設を訪問するとこのスタンプが押されます。", class: "w-16 h-16 opacity-50"
-
-    - wards.drop(3).each_slice(5) do |ward|
-      tr
-        - ward.each do |w|
-          td class="relative border border-gray-300 text-sm text-center w-[30px] h-[30px] align-middle"
-            span class="text-l font-bold whitespace-nowrap"
-              = w.name
-            - if @visited_ward_ids.include?(w.id)
-              span class="absolute inset-0 flex items-center justify-center text-red-500 text-2xl font-bold pointer-events-none"
-                = image_tag "hot_spring.svg", alt: "温泉マークのスタンプです。施設を訪問するとこのスタンプが押されます。", class: "w-16 h-16 opacity-50"
+div class="stamp-card-table max-w-xl mx-auto flex flex-wrap gap-3 bg-[#8e9b97] p-6 justify-start items-center rounded"
+  - wards.each do |ward|
+    div class="relative flex justify-center items-center text-sm w-[30%] sm:w-[20%] min-h-[100px] rounded text-center whitespace-nowrap bg-white flex-shrink-0 px-4"
+      span class="text-base font-bold"
+        = ward.name
+      - if @visited_ward_ids.include?(ward.id)
+        span class="absolute inset-0 flex items-center justify-center text-red-500 text-2xl font-bold pointer-events-none"
+          = image_tag "stamp.svg", alt: "温泉マークのスタンプです。施設を訪問するとこのスタンプが押されます。", class: "w-16 h-16 opacity-30"
