@@ -135,7 +135,7 @@ RSpec.describe "CheckinLogs", type: :system do
           click_button "閉じる"
         end
 
-        click_link "チェックインログページへ"
+        click_link "1回訪問"
 
         expect(page).to have_selector('h1', text: 'チェックインログ')
         expect(page).to have_content(Time.zone.today.strftime("%Y/%m/%d"), count: 1)
@@ -160,7 +160,7 @@ RSpec.describe "CheckinLogs", type: :system do
         expect(page).to have_selector('h1', text: '未チェックイン施設')
         expect(page).to have_content("0回訪問")
 
-        click_link "チェックインログページへ"
+        click_link "0回訪問"
 
         expect(page).to have_selector('h1', text: 'チェックインログ')
         expect(page).to have_content("チェックインログはまだありません♨️")
@@ -184,7 +184,7 @@ RSpec.describe "CheckinLogs", type: :system do
         expect(page).to have_selector('h1', text: 'ページネーションが表示される施設')
         expect(page).to have_content("11回訪問")
 
-        click_link "チェックインログページへ"
+        click_link "11回訪問"
 
         expect(page).to have_selector('h1', text: 'チェックインログ')
         expect(page).to have_selector('nav.pagy.nav')
