@@ -8,7 +8,7 @@ div class="check-in-logs w-[60%] flex flex-col"
   - else
     ul class="check-in-logs-list space-y-2"
       - @checkin_logs.each do |checkin_log|
-        li class="check-in-log p-4 bg-white border border-[#EDBBBD] border-4 rounded-lg flex items-center"
+        li class="check-in-log p-4 bg-white border-4 rounded-lg flex items-center"
           p class="text-lg md:text-xl text-center flex-1 font-bold"
             = checkin_log.created_at.strftime("%Y/%m/%d")
     div class="pagination mt-6 mb-6 self-center"
