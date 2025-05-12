@@ -7,7 +7,7 @@
     div class="stamp-card w-[80%] md:w-[40%]"
       = render "stamp_card", wards: @wards
     div class="facilities-map-link w-[80%] md:w-[40%] mt-12 mb-8"
-      = link_to "付近の施設を検索", facilities_map_path, class: "block text-center text-xl bg-[#537072] hover:bg-[#2c4a52] active:bg-[#2c4a52] text-white font-bold py-3 px-6 rounded-lg transition"
+      = link_to "地図からチェックイン", facilities_map_path, class: "block text-center text-xl bg-[#537072] hover:bg-[#2c4a52] active:bg-[#2c4a52] text-white font-bold py-3 px-6 rounded-lg transition"
 - else
   div class="before-login-top-page bg-[#f4ebdb] max-w-md flex flex-col justify-center items-center mx-10 px-4 py-8 text-center"
       div class="description flex flex-col justify-center items-stretch p-8 text-center"
