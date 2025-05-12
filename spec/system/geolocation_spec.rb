@@ -20,10 +20,10 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
 
         mock_geolocation_success
         sleep 2 # モックの反映を保証する
-        click_link "付近の施設を検索"
+        click_link "地図からチェックイン"
 
         expect(page).to have_selector('#map', visible: true, wait: 5)
-        expect(page).to have_selector('h1', text: '付近の施設を検索', wait: 5)
+        expect(page).to have_selector('h1', text: '温浴施設マップ', wait: 5)
       end
 
       it 'displays the map on the facility page' do
@@ -46,11 +46,11 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
 
         mock_geolocation_error
         sleep 2 # モックの反映を保証する
-        click_link "付近の施設を検索"
+        click_link "地図からチェックイン"
 
         accept_alert('位置情報の使用が許可されなかったため、現在地を取得できませんでした。', wait: 5)
         expect(page).to have_selector('#map', visible: true, wait: 5)
-        expect(page).to have_selector('h1', text: '付近の施設を検索', wait: 5)
+        expect(page).to have_selector('h1', text: '温浴施設マップ', wait: 5)
       end
 
       it 'displays an alert on the facility page' do
