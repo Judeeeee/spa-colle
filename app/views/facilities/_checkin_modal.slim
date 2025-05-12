@@ -1,8 +1,8 @@
-div class="modal-overlay" data-controller="modal"
-  div class="modal"
+div class="fixed inset-0 bg-black/50 flex justify-center items-center z-[1000]" data-controller="modal"
+  div class="bg-white p-5 rounded-lg shadow-lg w-[90%] max-w-[400px] text-center"
     h2 #{facility.name}
     h3 初回チェックイン🎉
     = link_to "Xにポストする", "https://twitter.com/intent/tweet?text=#{facility.name}に初めてチェックインしました🎉&hashtags=スパコレ,spacolle,スーパー銭湯,スタンプラリー", target: "_blank", rel: "noopener noreferrer"
     br
-    = button_tag "閉じる", class: "close-modal",
+    = button_tag "閉じる", class: "mt-2 px-4 py-2 bg-red-500 text-white rounded cursor-pointer hover:bg-red-700",
       data: { action: "click->modal#close", url: facility_checkin_logs_path(facility) }
