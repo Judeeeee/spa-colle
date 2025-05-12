@@ -9,8 +9,4 @@ class Ward < ApplicationRecord
     joins(facilities: :checkin_logs)
       .where(checkin_logs: { user_id: user.id })
   }
-
-  def self.visited_ids_by(user)
-    visited_by(user).pluck(:id)
-  end
 end

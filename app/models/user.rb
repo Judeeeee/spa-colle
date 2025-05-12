@@ -35,4 +35,8 @@ class User < ApplicationRecord
   def checked_in_today_to?(facility)
     checkin_logs.for_facility(facility).today.exists?
   end
+
+  def visited_facility_counts_by_ward
+    CheckinLog.where(user: self).distinct_facility_counts_grouped_by_ward
+  end
 end

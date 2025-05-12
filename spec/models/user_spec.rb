@@ -111,4 +111,22 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe '#visited_facility_counts_by_ward' do
+    let!(:user) { create(:user) }
+    let!(:shinjuku_ward) { create(:shinjuku_ward) }
+    let!(:facility_shinjuku1) { create(:facility, ward: shinjuku_ward) }
+    let!(:facility_shinjuku2) { create(:facility, ward: shinjuku_ward) }
+
+    before do
+      create(:checkin_log, user: user, facility: facility_shinjuku1)
+      create(:checkin_log, user: user, facility: facility_shinjuku1)
+    end
+
+    context 'when the user has visited the same facility multiple times' do
+      it 'does not double count duplicate checkins to the same facility' do
+        expect(user.visited_facility_counts_by_ward).to eq({ shinjuku_ward.id => 1 })
+      end
+    end
+  end
 end
