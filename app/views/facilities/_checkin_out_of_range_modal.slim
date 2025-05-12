@@ -1,6 +1,5 @@
-div class="modal-overlay" data-controller="modal"
-  div class="modal"
-    h2 チェックインに失敗しました😢
-    p 施設200m圏内がチェックイン可能範囲です。
-    = button_tag "閉じる", class: "close-modal",
-      data: { action: "click->modal#close" }
+div class="fixed inset-0 bg-black/50 flex justify-center items-center z-[1000]" data-controller="modal"
+  div class="bg-white p-5 rounded-lg shadow-lg w-[90%] max-w-[400px] text-center"
+    h2 class="text-xl font-bold text-[#2c4a52]"チェックインに失敗しました😢
+    p class="text-sm text-[#537072] my-2"施設から200m以内でチェックインできます。
+    = button_tag "閉じる", class: "bg-[#537072] hover:bg-[#2c4a52] active:bg-[#2c4a52] text-white font-bold py-3 px-6 rounded-lg text-sm transition mt-2", data: { action: "click->modal#close" }
