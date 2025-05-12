@@ -79,7 +79,7 @@ class GoogleMap {
     this.createMarkerWithInfoWindow(map, {
       position: { lat: latitude, lng: longitude },
       iconUrl: imageUrl,
-      infoContent: `<div class="infowindow"><a href="${googleMapUrl}" target="_blank">Googleマップへ移動</a></div>`,
+      infoContent: `<div class="infowindow"><a href="${googleMapUrl}" target="_blank" class="text-[#537072] visited:text-[#2c4a52] underline hover:no-underline active:no-underline">Googleマップへ移動</a></div>`,
     });
   }
 
@@ -124,8 +124,8 @@ class GoogleMap {
         iconUrl: mapElement.dataset.imageUrl,
         infoContent: `
           <div class="infowindow">
-            <h1>${facility.name}</h1>
-            <a href='/facilities/${facility.id}'>施設詳細ページへ</a>
+            <h1 class="text-lg text-[#2c4a52] font-bold whitespace-nowrap mb-2">${facility.name}</h1>
+            <a href='/facilities/${facility.id}' class="text-[#537072] visited:text-[#2c4a52] underline hover:no-underline active:no-underline">施設詳細ページへ</a>
           </div>
         `,
         title: facility.name,
