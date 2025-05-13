@@ -12,7 +12,7 @@ RSpec.describe "Users", type: :system do
 
       it "displays the top page after login" do
         login_with_google(user)
-        expect(page).to have_selector('h1', text: 'スパコレ')
+        expect(page).to have_selector('h1', text: 'スタンプカード')
       end
     end
 
