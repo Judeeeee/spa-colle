@@ -1,4 +1,5 @@
 - bg_class = current_user || action_name == "terms" ? "bg-[#f4ebdb]" : "bg-[#2c4a52]"
+- center_justify = !(controller_name == "checkin_logs" && action_name == "index")
 
 doctype html
 html
@@ -33,7 +34,7 @@ html
     - if current_user || action_name == "terms"
       header
         = render partial: "layouts/header", formats: :html
-    main class="flex flex-col justify-center items-center flex-grow"
+    main class="flex flex-col #{"justify-center" if center_justify} items-center flex-grow"
       = yield
     - unless controller_name == "pages" && action_name == "terms"
       - if current_user
