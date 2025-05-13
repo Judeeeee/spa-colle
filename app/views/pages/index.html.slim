@@ -1,6 +1,6 @@
 - content_for :title, "スパコレ"
 - content_for :head
-  meta[name="description" content="スパコレは位置情報を活用した東京23区のスパ施設訪問記録アプリです"]
+  meta[name="description" content="スパコレは東京23区の温浴施設全制覇を目指すGPS連動のスタンプラリーアプリです"]
 - if current_user
   h1 class="text-[#537072] text-3xl md:text-4xl font-bold mt-6 mb-6" スタンプカード
   div class="flex flex-col items-center w-full"
@@ -13,7 +13,7 @@
       div class="description flex flex-col justify-center items-stretch p-8 text-center"
         h1 class="before-login-top-page-logo"
           = image_tag "logo.svg", alt: "スパコレのアイコンです。押印の見た目をしています。", class: "w-full max-w-xs mb-6"
-        p class="text-sm mb-6 w-full" スパコレは東京23区の温浴施設を巡る<br>GPSスタンプラリーアプリです♨️
+        p class="text-sm mb-6 w-full" 東京23区の温浴施設全制覇を目指そう！<br>スパコレはGPS連動のスタンプラリーアプリです♨️
         = button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false }, class: "bg-[#537072] hover:bg-[#2c4a52] active:bg-[#2c4a52] text-white font-bold py-3 px-6 rounded-lg text-lg transition w-full"
         p class="mt-6 block text-sm w-full text-center "
           |
