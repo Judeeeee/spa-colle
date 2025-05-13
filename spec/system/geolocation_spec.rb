@@ -16,7 +16,7 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
   describe 'location permission' do
     context 'when permission is granted' do
       it 'displays the map with the current location on the map page' do
-        expect(page).to have_selector('h1', text: 'スパコレ')
+        expect(page).to have_selector('h1', text: 'スタンプカード')
 
         mock_geolocation_success
         sleep 2 # モックの反映を保証する
@@ -27,7 +27,7 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
       end
 
       it 'displays the map on the facility page' do
-        expect(page).to have_selector('h1', text: 'スパコレ')
+        expect(page).to have_selector('h1', text: 'スタンプカード')
 
         mock_geolocation_success
         sleep 2 # モックの反映を保証する
@@ -42,7 +42,7 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
 
     context 'when permission is denied' do
       it 'displays an alert on the map page' do
-        expect(page).to have_selector('h1', text: 'スパコレ')
+        expect(page).to have_selector('h1', text: 'スタンプカード')
 
         mock_geolocation_error
         sleep 2 # モックの反映を保証する
@@ -54,7 +54,7 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
       end
 
       it 'displays an alert on the facility page' do
-        expect(page).to have_selector('h1', text: 'スパコレ')
+        expect(page).to have_selector('h1', text: 'スタンプカード')
 
         mock_geolocation_error
         sleep 2 # モックの反映を保証する

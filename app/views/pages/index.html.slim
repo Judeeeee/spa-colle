@@ -2,7 +2,7 @@
 - content_for :head
   meta[name="description" content="スパコレは位置情報を活用した東京23区のスパ施設訪問記録アプリです"]
 - if current_user
-  h1 class="text-3xl md:text-4xl font-bold mb-4" スパコレ
+  h1 class="text-[#537072] text-3xl md:text-4xl font-bold mt-6 mb-6" スタンプカード
   div class="flex flex-col items-center w-full"
     div class="stamp-card w-[80%] md:w-[40%]"
       = render "stamp_card", wards: @wards
