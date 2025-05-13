@@ -2,7 +2,8 @@ class PagesController < ApplicationController
   skip_before_action :check_logged_in,  only: [ :index, :terms ]
   def index
     @wards = Ward.with_facilities_ordered
-    @visited_ward_ids = Ward.visited_ids_by(current_user) if current_user
+    @facility_counts_by_wards = Facility.group(:ward_id).count
+    @visited_facility_counts_by_wards = current_user.visited_facility_counts_by_ward if current_user
   end
 
   def terms
