@@ -1,8 +1,7 @@
-header class="bg-[#2c4a52] p-4 h-24"
-  div class="header-container w-[80%] mx-auto flex items-center justify-between h-12"
-    div class="logo-image"
-      = link_to root_path do
-        = image_tag "logo_header.svg", alt: "スパコレのロゴです。クリックするとトップページに遷移します。", class: "h-10"
-    - if action_name != "terms"
-      div class="facilities-link"
-        = link_to "施設一覧", facilities_path, class: "facilities-link text-[#f4ebdb] underline hover:no-underline active:no-underline"
+div class="header-container w-[80%] mx-auto flex items-center justify-between h-12"
+  div class="logo-image"
+    = link_to root_path do
+      = image_tag "logo_header.svg", alt: "スパコレのロゴです。クリックするとトップページに遷移します。", class: "h-10"
+  - if action_name != "terms"
+    div class="facilities-link"
+      = link_to "施設一覧", facilities_path, class: "facilities-link text-[#f4ebdb] underline hover:no-underline active:no-underline"
