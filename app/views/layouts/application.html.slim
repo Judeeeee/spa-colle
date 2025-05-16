@@ -32,7 +32,7 @@ html
     link[rel="apple-touch-icon" href="/apple-touch-icon.png"]
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_importmap_tags
-  body class="#{bg_class} text-[#8e9b97] min-h-screen flex flex-col"
+  body class="#{bg_class} text-[#8e9b97] font-serif min-h-screen flex flex-col"
     - if current_user || action_name == "terms"
       header class="bg-[#2c4a52] p-4 h-24"
         = render partial: "layouts/header", formats: :html
