@@ -1,7 +1,8 @@
-div class="stamp-card-table max-w-xl mx-auto flex flex-wrap gap-3 p-6 justify-start items-center rounded"
-  - wards.each do |ward|
-    div class="ward-cell relative flex justify-center items-center text-sm w-[30%] sm:w-[20%] min-h-[100px] rounded text-center whitespace-nowrap bg-white border border-dashed border-[#8e9b97] flex-shrink-0 px-4 overflow-hidden"
-      span class="absolute right-1 bottom-1 text-lg text-[#8e9b97] font-bold"
-        = "#{@visited_facility_counts_by_wards[ward.id] || 0} / #{@facility_counts_by_wards[ward.id] || 0}"
-      span class="relative text-base text-[#537072] font-bold z-10"
-        = ward.name
+div class="stamp-card w-full flex justify-center"
+  div class="stamp-card-table grid grid-cols-3 sm:grid-cols-5 gap-3 p-6 max-w-xl"
+    - wards.each do |ward|
+      div class="ward-cell relative text-sm min-h-[100px] rounded text-center whitespace-nowrap bg-white px-4 overflow-hidden border border-dashed border-[#8e9b97] flex items-center justify-center"
+        span class="absolute right-1 bottom-1 text-lg text-[#8e9b97] font-bold"
+          = "#{@visited_facility_counts_by_wards[ward.id] || 0} / #{@facility_counts_by_wards[ward.id] || 0}"
+        span class="relative text-base text-[#537072] font-bold"
+          = ward.name
