@@ -9,7 +9,7 @@ div class="check-in-logs w-[80%] flex flex-col"
     ul class="check-in-logs-list space-y-2"
       - @checkin_logs.each do |checkin_log|
         li class="check-in-log p-4 flex items-center border-b border-[#8e9b97]"
-          p class="text-xl text-[#537072] text-center flex-1 font-bold"
+          p class="text-xl text-[#537072] text-center flex-1 font-bold font-sans"
             = checkin_log.created_at.strftime("%Y/%m/%d")
     div class="pagination mt-6 mb-6 self-center"
       - if @pagy.pages > 1
