@@ -34,7 +34,7 @@ html
     = javascript_importmap_tags
   body class="#{bg_class} text-[#8e9b97] font-serif min-h-screen flex flex-col"
     - if current_user || action_name == "terms"
-      header class="bg-[#2c4a52] p-4 h-24"
+      header class="bg-[#2c4a52] p-4 h-24 flex items-center"
         = render partial: "layouts/header", formats: :html
     main class="flex flex-col #{"justify-center" if center_justify} items-center flex-grow"
       = yield
