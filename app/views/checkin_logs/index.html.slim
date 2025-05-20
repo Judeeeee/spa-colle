@@ -2,7 +2,7 @@
 - content_for :head
   meta[name="description" content="チェックインログページです"]
 h1 class="text-[#537072] text-3xl md:text-4xl font-bold text-center pt-6 pb-6 mb-6 w-full bg-[#e7dbc6]" チェックインログ
-div class="check-in-logs w-[80%] flex flex-col"
+div class="check-in-logs max-w-full w-[640px] flex flex-col"
   - if @checkin_logs.empty?
     = render "no_check_in_logs"
   - else
