@@ -25,7 +25,6 @@ html
     meta[name="google-maps-api-key" content="#{Rails.application.credentials.google_map_api_key}"]
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "map", "data-turbolinks-track": "reload", preload: true, as: "script"
     link[rel="icon" href="/favicon.ico" sizes="32x32"]
     link[rel="icon" href="/icon.svg" type="image/svg+xml"]
