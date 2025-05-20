@@ -37,4 +37,39 @@ RSpec.describe "Users", type: :system do
       end
     end
   end
+
+  describe 'log out' do
+    context "when logs out the user" do
+      let!(:user) { create(:user) }
+
+      it "redirect before login page" do
+        login_with_google(user)
+        expect(page).to have_selector('h1', text: 'スタンプカード')
+        click_link "ログアウト"
+
+        expect(page).to have_button("Googleでログイン")
+      end
+    end
+  end
+
+  describe 'delete account' do
+    context "when delete the account" do
+      let!(:user) { create(:user) }
+
+      it "redirect before login page" do
+        login_with_google(user)
+        expect(page).to have_selector('h1', text: 'スタンプカード')
+
+        click_link "アカウント削除"
+        expect(page).to have_selector('#modal', visible: true, wait: 5)
+
+        within "#modal" do
+          expect(page).to have_content("アカウント削除")
+          click_button "削除する"
+        end
+
+        expect(page).to have_button("Googleでログイン")
+      end
+    end
+  end
 end
