@@ -2,7 +2,7 @@
 - content_for :head
   meta[name="description" content="施設一覧ページです"]
 h1 class="text-[#537072] text-3xl md:text-4xl font-bold text-center pt-6 pb-6 mb-6 w-full bg-[#e7dbc6]" 施設一覧
-div class="facilities-container grid grid-cols-1 gap-2 w-[80%]"
+div class="facilities-container grid grid-cols-1 gap-2 max-w-full w-[640px] p-8"
   - @grouped_facilities.each do |ward, facilities|
     div class="facilities border-b border-[#8e9b97] p-4"
       div class="text-xl md:text-2xl font-semibold mb-2 text-[#537072]" = ward
