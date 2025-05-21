@@ -13,7 +13,7 @@ div class="max-w-full w-[640px] items-center flex flex-col gap-4 mt-6"
       = f.hidden_field :latitude, id: "latitude"
       = f.hidden_field :longitude, id: "longitude"
       = f.submit "チェックイン", id: "check-in-btn", class: "bg-[#a24930] hover:bg-[#803920] active:bg-[#803920] text-white font-bold py-3 px-6 rounded-lg text-lg transition w-full"
-= link_to "温浴施設マップへ", facilities_map_path, class: "facilities-link text-lg text-[#537072] visited:text-[#2c4a52] underline hover:no-underline active:no-underline mt-4 mb-4"
+= link_to "スーパー銭湯マップへ", facilities_map_path, class: "facilities-link text-lg text-[#537072] visited:text-[#2c4a52] underline hover:no-underline active:no-underline mt-4 mb-4"
 
 turbo-frame id="checkin-modal-frame"
 turbo-frame id="checkin-limit-modal-frame"
