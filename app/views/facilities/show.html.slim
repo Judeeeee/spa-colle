@@ -9,6 +9,11 @@ h1 class="text-[#537072] text-2xl md:text-4xl font-bold whitespace-nowrap text-c
 div id="facility-map" class="facility-map max-w-full w-[640px] h-[60vh] mb-6" data-latitude="#{ @facility.latitude }" data-longitude="#{ @facility.longitude }" data-image-url="#{asset_path("facility_pin.svg")}"
 div class="max-w-full w-[640px] items-center flex flex-col gap-4 mt-6"
   div class="w-[320px]"
+    p class="text-lg text-[#537072] font-bold text-center mb-4"
+      | 施設から
+      span.font-sans 200
+      | m以内で<br>
+      | チェックインできます。
     = form_with url: facility_checkin_logs_path(@facility), method: :post, id: "check-in-form",  data: { turbo_frame: "checkin-modal-frame" } do |f|
       = f.hidden_field :latitude, id: "latitude"
       = f.hidden_field :longitude, id: "longitude"
