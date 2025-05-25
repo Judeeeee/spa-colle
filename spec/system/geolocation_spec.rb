@@ -8,7 +8,7 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
   end
 
   before do
-    driven_by :selenium_chrome_without_cache
+    driven_by :selenium_chrome_headless
     visit root_path
     login_with_google(user)
   end

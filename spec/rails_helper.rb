@@ -46,19 +46,6 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  # spec/system/geolocation_spec.rbでダイアログが表示されないはずのテストでも、テスト間で状態が残留しておりテストが落ちていた。
-  # ブラウザインスタンスを再起動する設定を追加して問題を解消させる
-  config.before(:each, type: :system, js: true) do
-    Capybara.current_session.driver.browser
-  end
-
-  config.after(:each, type: :system, js: true) do
-    if Capybara.javascript_driver == :selenium_chrome_without_cache
-      if Capybara.current_session&.driver&.browser
-        Capybara.current_session.driver.quit
-      end
-    end
-  end
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 
