@@ -6,8 +6,8 @@ h1 class="text-[#537072] text-2xl md:text-4xl font-bold whitespace-nowrap text-c
 = link_to facility_checkin_logs_path(@facility), class: "checkin-log-link text-xl text-[#537072] visited:text-[#2c4a52] underline hover:no-underline active:no-underline mb-4" do
   span.font-sans = @checkin_count
   | 回訪問
-div id="facility-map" class="facility-map max-w-full w-[640px] h-[60vh] mb-6" data-latitude="#{ @facility.latitude }" data-longitude="#{ @facility.longitude }" data-image-url="#{asset_path("facility_pin.svg")}"
-div class="max-w-full w-[640px] items-center flex flex-col gap-4 mt-6"
+div id="facility-map" class="facility-map max-w-full w-[640px] h-[40vh] mb-6" data-latitude="#{ @facility.latitude }" data-longitude="#{ @facility.longitude }" data-image-url="#{asset_path("facility_pin.svg")}"
+div class="max-w-full w-[640px] items-center flex flex-col gap-4"
   div class="w-[320px]"
     p class="text-lg text-[#537072] font-bold text-center mb-4"
       | 施設から
