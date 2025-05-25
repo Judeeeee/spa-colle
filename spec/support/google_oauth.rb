@@ -6,8 +6,7 @@ module GoogleOauth
       provider: 'google_oauth2',
       uid: '123456789',
       info: {
-        email: user.email,
-        name: user.name
+        email: user.email
       },
       credentials: {
         token: 'mock_token',

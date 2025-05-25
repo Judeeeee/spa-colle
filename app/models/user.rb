@@ -14,7 +14,6 @@ class User < ApplicationRecord
 
     def user_params_from_auth_hash(auth_hash)
       {
-        name: auth_hash.info.name,
         email: auth_hash.info.email
       }
     end

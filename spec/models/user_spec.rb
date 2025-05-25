@@ -6,7 +6,6 @@ RSpec.describe User, type: :model do
       # https://github.com/zquestz/omniauth-google-oauth2?tab=readme-ov-file#auth-hash
       OmniAuth::AuthHash.new({
         info: {
-          name: 'Test User',
           email: 'test@example.com'
         }
       })
@@ -22,7 +21,7 @@ RSpec.describe User, type: :model do
 
     context 'when the user already exists' do
       it 'does not create a user' do
-        User.create!(name: 'Test User', email: 'test@example.com')
+        User.create!(email: 'test@example.com')
 
         expect {
           User.find_or_create_from_auth_hash(auth_hash)
