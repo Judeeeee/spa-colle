@@ -1,4 +1,6 @@
-module SessionsHelper
+module Authentication
+  extend ActiveSupport::Concern
+
   def current_user
     return unless (user_id = session[:user_id])
 
