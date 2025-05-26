@@ -1,9 +1,7 @@
 class Ward < ApplicationRecord
   has_many :facilities
 
-  scope :with_facilities_ordered, -> {
-    joins(:facilities).includes(:facilities).distinct.order(:name_kana)
-  }
+  scope :ordered_by_kana, -> { order(:name_kana) }
 
   scope :visited_by, ->(user) {
     joins(facilities: :checkin_logs)
