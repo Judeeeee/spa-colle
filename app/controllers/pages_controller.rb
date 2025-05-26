@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :check_logged_in,  only: [ :index, :terms ]
+  skip_before_action :check_logged_in,  only: [ :index, :terms, :privacy ]
   def index
     @wards = Ward.with_facilities_ordered
     @facility_counts_by_wards = Facility.group(:ward_id).count
@@ -7,5 +7,8 @@ class PagesController < ApplicationController
   end
 
   def terms
+  end
+
+  def privacy
   end
 end

@@ -1,4 +1,4 @@
-- bg_class = current_user || action_name == "terms" ? "bg-[#f4ebdb]" : "bg-[#2c4a52]"
+- bg_class = current_user || action_name == "terms"|| action_name == "privacy" ? "bg-[#f4ebdb]" : "bg-[#2c4a52]"
 
 doctype html
 html class="bg-[#537072]"
@@ -31,12 +31,12 @@ html class="bg-[#537072]"
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_importmap_tags
   body class="#{bg_class} text-[#537072] font-serif mx-auto max-w-[640px] w-full min-h-screen flex flex-col"
-    - if current_user || action_name == "terms"
+    - if current_user || action_name == "terms"|| action_name == "privacy"
       header class="bg-[#2c4a52] p-4 h-12 md:h-24 flex items-center justify-center"
         = render partial: "layouts/header", formats: :html
     main class="flex flex-col items-center flex-grow"
       = yield
-    - unless controller_name == "pages" && action_name == "terms"
+    - unless controller_name == "pages" && action_name == "terms" && action_name == "privacy"
       - if current_user
         footer class="bg-[#2c4a52] text-[#f4ebdb] p-4 flex flex-col items-center justify-center h-auto"
           = render partial: "layouts/footer", formats: :html
