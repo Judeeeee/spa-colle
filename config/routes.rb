@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "pages#index"
-  get "/facilities/map", to: "maps#index"
   resources :facilities, only: [ :index, :show ] do
+    get "map", to: "maps#index", on: :collection
     resources :checkin_logs, only: [ :index, :create ]
   end
   resources :users, only: [ :show, :destroy ]
