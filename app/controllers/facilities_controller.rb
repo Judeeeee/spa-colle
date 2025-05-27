@@ -10,10 +10,6 @@ class FacilitiesController < ApplicationController
     @checkin_count = @facility.checkin_logs.size
   end
 
-  def map
-    @facilities = Facility.all
-  end
-
   private
 
   def set_facility
