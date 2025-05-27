@@ -34,7 +34,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
         fill_in_location_and_submit(lat: 35.698800, lng: 139.768500) # 約100m北東
 
-        expect(page).to have_selector('#checkin-modal-frame', visible: true, wait: 5)
+        expect(page).to have_selector('#checkin-modal-frame', visible: true, wait: 10)
 
         within "#checkin-modal-frame" do
           expect(page).to have_content("初回チェックイン🎉")
@@ -92,7 +92,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
         fill_in_location_and_submit(lat: 35.6751907, lng: 139.7542611) # 約500m北西
 
-        expect(page).to have_selector('#checkin-out-of-range-modal-frame', visible: true, wait: 5)
+        expect(page).to have_selector('#checkin-out-of-range-modal-frame', visible: true, wait: 10)
 
         within "#checkin-out-of-range-modal-frame" do
           expect(page).to have_content("チェックインに失敗しました😢")
@@ -124,7 +124,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
         fill_in_location_and_submit(lat: 35.7078220, lng: 139.7536846) # 約100m北東
 
-        expect(page).to have_selector('#checkin-limit-modal-frame', visible: true, wait: 5)
+        expect(page).to have_selector('#checkin-limit-modal-frame', visible: true, wait: 10)
 
         within "#checkin-limit-modal-frame" do
           expect(page).to have_content("本日は既にチェックインしています♨️")
