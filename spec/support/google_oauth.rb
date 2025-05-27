@@ -24,6 +24,7 @@ module GoogleOauth
     mock_google_oauth(user)
     visit root_path
     click_button 'Googleでログイン'
+    expect(page).to have_selector('h1', text: 'スタンプカード', wait: 10)
   end
 
   def login_with_google_failure(error_type)
