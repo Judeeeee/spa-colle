@@ -34,6 +34,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
         fill_in_location_and_submit(lat: 35.698800, lng: 139.768500) # 約100m北東
 
+        expect(page).to have_selector("turbo-frame#checkin-modal-frame", wait: 10)
         expect(page).to have_selector('#checkin-modal-frame', visible: true, wait: 10)
 
         within "#checkin-modal-frame" do

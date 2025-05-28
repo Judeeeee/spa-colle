@@ -61,6 +61,8 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_selector('h1', text: 'スタンプカード')
 
         click_link "アカウント削除"
+
+        expect(page).to have_selector("turbo-frame#user-modal-frame", wait: 10)
         expect(page).to have_selector('#user-modal-frame', wait: 10)
 
         within "#user-modal-frame" do
