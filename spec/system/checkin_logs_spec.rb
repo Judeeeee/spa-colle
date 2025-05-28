@@ -13,6 +13,7 @@ RSpec.describe "CheckinLogs", type: :system do
   end
 
   before(:each) do
+    Capybara.reset_sessions!
     driven_by :selenium_chrome_headless
     login_with_google(user)
   end

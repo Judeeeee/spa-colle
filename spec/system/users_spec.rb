@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
   before(:each) do
+    Capybara.reset_sessions!
     driven_by :selenium_chrome_headless
     OmniAuth.config.mock_auth[:google_oauth2] = nil
   end
