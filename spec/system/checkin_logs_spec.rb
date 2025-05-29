@@ -33,9 +33,9 @@ RSpec.describe "CheckinLogs", type: :system do
         visit facility_path(not_check_in_facility)
         expect(page).to have_selector('h1', text: '未チェックイン施設')
 
-        fill_in_location_and_submit(lat: 35.698800, lng: 139.768500) # 約100m北東
+        fill_in_location(lat: 35.698800, lng: 139.768500) # 約100m北東
+        click_button "チェックイン"
 
-        expect(page).to have_selector("turbo-frame#checkin-modal-frame", wait: 10)
         expect(page).to have_selector('#checkin-modal-frame', visible: true, wait: 10)
 
         within "#checkin-modal-frame" do
@@ -70,7 +70,8 @@ RSpec.describe "CheckinLogs", type: :system do
         visit facility_path(previous_day_checked_in_facility)
         expect(page).to have_selector('h1', text: '昨日チェックインしている施設')
 
-        fill_in_location_and_submit(lat: 35.7138849, lng: 139.7937973) # 約100m北東
+        fill_in_location(lat: 35.7138849, lng: 139.7937973) # 約100m北東
+        click_button "チェックイン"
 
         expect(page).to have_selector('h1', text: 'チェックインログ')
         expect(page).to have_content(Time.zone.yesterday.strftime("%Y/%m/%d"), count: 1)
@@ -92,7 +93,8 @@ RSpec.describe "CheckinLogs", type: :system do
         visit facility_path(fails_to_check_in_facility)
         expect(page).to have_selector('h1', text: 'チェックインに失敗する施設')
 
-        fill_in_location_and_submit(lat: 35.6751907, lng: 139.7542611) # 約500m北西
+        fill_in_location(lat: 35.6751907, lng: 139.7542611) # 約500m北西
+        click_button "チェックイン"
 
         expect(page).to have_selector('#checkin-out-of-range-modal-frame', visible: true, wait: 10)
 
@@ -124,7 +126,8 @@ RSpec.describe "CheckinLogs", type: :system do
         visit facility_path(checked_in_facility)
         expect(page).to have_selector('h1', text: '本日既にチェックインしている施設')
 
-        fill_in_location_and_submit(lat: 35.7078220, lng: 139.7536846) # 約100m北東
+        fill_in_location(lat: 35.7078220, lng: 139.7536846) # 約100m北東
+        click_button "チェックイン"
 
         expect(page).to have_selector('#checkin-limit-modal-frame', visible: true, wait: 10)
 
