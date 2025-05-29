@@ -34,6 +34,7 @@ RSpec.describe "CheckinLogs", type: :system do
         expect(page).to have_selector('h1', text: '未チェックイン施設')
 
         fill_in_location(lat: 35.698800, lng: 139.768500) # 約100m北東
+        sleep 5 # 本当は書きたくないが、緯度経度をセットするために待つ
         click_button "チェックイン"
 
         expect(page).to have_selector('#checkin-modal-frame', visible: true, wait: 10)
