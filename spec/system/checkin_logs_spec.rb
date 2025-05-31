@@ -16,6 +16,7 @@ RSpec.describe "CheckinLogs", type: :system do
     Capybara.reset_sessions!
     driven_by :selenium_chrome_headless
     login_with_google(user)
+    sleep 1 # ここで待たないとログインできていない時がある
   end
 
   describe "check in functionality" do
