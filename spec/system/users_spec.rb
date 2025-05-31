@@ -61,9 +61,9 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_selector('h1', text: 'スタンプカード')
 
         click_link "アカウント削除"
-        expect(page).to have_selector('#modal', visible: true, wait: 5)
+        expect(page).to have_selector('[data-controller="modal"]', visible: true, wait: 5)
 
-        within "#modal" do
+        within('[data-controller="modal"]') do
           expect(page).to have_content("アカウント削除")
           click_button "削除する"
         end
