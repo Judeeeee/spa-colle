@@ -13,6 +13,7 @@ RSpec.describe "CheckinLogs", type: :system do
   end
 
   before(:each) do
+    Capybara.reset_sessions!
     driven_by :selenium_chrome_headless
     login_with_google(user)
   end
@@ -23,7 +24,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "successfully check in and displays first-time check-in modal" do
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード')
+        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
 
         expect(page).to have_selector("span", text: "千代田区", wait: 5)
         within(".ward-cell", text: "千代田区") do
@@ -47,7 +48,7 @@ RSpec.describe "CheckinLogs", type: :system do
         expect(page).to have_content(Time.zone.today.strftime("%Y/%m/%d"))
 
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード')
+        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
 
         expect(page).to have_selector("span", text: "千代田区", wait: 5)
         within(".ward-cell", text: "千代田区") do
@@ -61,7 +62,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "successfully check in and redirects to the check in log page" do
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード')
+        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
 
         expect(page).to have_selector("span", text: "台東区", wait: 5)
         within(".ward-cell", text: "台東区") do
@@ -84,7 +85,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "fails to check in and displays limit modal" do
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード')
+        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
 
         expect(page).to have_selector("span", text: "中央区", wait: 5)
         within(".ward-cell", text: "中央区") do
@@ -103,7 +104,7 @@ RSpec.describe "CheckinLogs", type: :system do
         end
 
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード')
+        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
 
         expect(page).to have_selector("span", text: "中央区", wait: 5)
         within(".ward-cell", text: "中央区") do
@@ -117,7 +118,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "fails to check in and the already checked in modal" do
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード')
+        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
 
         expect(page).to have_selector("span", text: "文京区", wait: 5)
         within(".ward-cell", text: "文京区") do
@@ -150,7 +151,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "displays a message that there are no check in logs yet" do
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード')
+        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
 
         expect(page).to have_selector("span", text: "千代田区", wait: 5)
         within(".ward-cell", text: "千代田区") do
@@ -174,7 +175,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "displays pagination" do
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード')
+        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
 
         expect(page).to have_selector("span", text: "新宿区", wait: 5)
         within(".ward-cell", text: "新宿区") do
