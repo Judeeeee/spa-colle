@@ -1,3 +1,5 @@
 linters:
   LineLength:
-    max: 300
+    exclude:
+      - app/views/pages/terms.html.slim
+      - app/views/pages/privacy.html.slim
