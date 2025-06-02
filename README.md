@@ -149,11 +149,25 @@ bin/lint
 
 ### テスト
 
-テスト用のcredentialsファイルを作成する必要があります。
+テスト用に環境変数を設定する必要があります。
 
-環境変数の設定を参考に、credentialsファイルを作成してください。
+以下のコマンドを実行して、credentialファイルを編集してください。
 
-以下のコマンドを実行してください。
+```
+EDITOR=vim bin/rails credentials:edit -e test
+```
+
+「環境変数の設定」と同様に、credentialファイルは以下のように指定してください。
+
+```
+google:
+  client_id: GoogleのクライアントID
+  client_secret: Googleのクライアントシークレット
+
+google_map_api_key: GoogleMapAPIキー
+```
+
+その後、以下のコマンドを実行してください。
 
 ```
 bundle exec rspec
