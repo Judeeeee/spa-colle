@@ -126,8 +126,8 @@ google_map_api_key: GoogleMapAPIキー
 
 参考：
 
-- Googleアカウント認証
-  - https://developers.google.com/workspace/guides/create-credentials?hl=ja#api-key
+- OAuthクライアントID認証情報
+  - https://developers.google.com/workspace/guides/create-credentials?hl=ja#oauth-client-id
 - Google Map API キー
   - https://developers.google.com/maps/documentation/javascript/get-api-key?hl=ja
 
