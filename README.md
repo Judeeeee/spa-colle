@@ -124,12 +124,19 @@ google:
 google_map_api_key: GoogleMapAPIキー
 ```
 
-参考：
+### GoogleのクライアントIDとクライアントシークレット
 
-- Googleアカウント認証
-  - https://developers.google.com/workspace/guides/create-credentials?hl=ja#api-key
-- Google Map API キー
-  - https://developers.google.com/maps/documentation/javascript/get-api-key?hl=ja
+以下の公式ドキュメントを参考にクライアントIDを取得してください。
+
+https://developers.google.com/workspace/guides/create-credentials?hl=ja#api-key
+
+その際、「承認済みのリダイレクトURI」には`http://localhost:3000/auth/google_oauth2/callback`を追加してください。
+
+### GoogleMapAPIキー
+
+以下の公式ドキュメントを参考にGoogleMapAPIキーを取得してください。
+
+https://developers.google.com/maps/documentation/javascript/get-api-key?hl=ja
 
 ### サーバーの起動
 
