@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_many :checkin_logs, dependent: :delete_all
   has_many :facilities, through: :checkin_logs
 
+  validates :email, uniqueness: true
+
   class << self
     def find_or_create_from_auth_hash(auth_hash)
       user_params = user_params_from_auth_hash(auth_hash)
