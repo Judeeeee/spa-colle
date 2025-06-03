@@ -1,4 +1,5 @@
-- bg_class = current_user || action_name == "terms"|| action_name == "privacy" ? "bg-[#f4ebdb]" : "bg-[#2c4a52]"
+- show_light_bg = current_user || %w[terms privacy].include?(action_name)
+- bg_class = show_light_bg ? "bg-[#f4ebdb]" : "bg-[#2c4a52]"
 
 doctype html
 html class="bg-[#537072]"
@@ -7,36 +8,80 @@ html class="bg-[#537072]"
       = content_for(:title)
     = yield :head
     meta[property="og:title" content="スパコレ"]
-    meta[property="og:description" content="スパコレは東京23区のスーパー銭湯全制覇を目指すGPS連動のスタンプラリーアプリです"]
+    meta(
+      property="og:description",
+      content="スパコレは東京23区のスーパー銭湯全制覇を目指すGPS連動のスタンプラリーアプリです"
+    )
     meta[property="og:image" content="#{request.base_url}/ogp.png"]
     meta[property="og:image:width" content="1200"]
     meta[property="og:image:height" content="630"]
-    meta[property="og:image:alt" content="東京23区のスーパー銭湯全制覇を目指すGPS連動のスタンプラリーアプリスパコレのロゴ"]
+    meta(
+      property="og:image:alt",
+      content="東京23区のスーパー銭湯全制覇を目指すGPS連動のスタンプラリーアプリスパコレのロゴ"
+    )
     meta[property="og:url" content=request.original_url]
     meta[name="twitter:card" content="summary_large_image"]
     meta[name="twitter:title" content="スパコレ"]
-    meta[name="twitter:description" content="スパコレは東京23区のスーパー銭湯全制覇を目指すGPS連動のスタンプラリーアプリです"]
+    meta(
+      name="twitter:description",
+      content="スパコレは東京23区のスーパー銭湯全制覇を目指すGPS連動のスタンプラリーアプリです"
+    )
     meta[name="twitter:image" content="#{request.base_url}/ogp.png"]
-    meta[property="twitter:image:alt" content="東京23区のスーパー銭湯全制覇を目指すGPS連動のスタンプラリーアプリスパコレのロゴ"]
+    meta(
+      property="twitter:image:alt",
+      content="東京23区のスーパー銭湯全制覇を目指すGPS連動のスタンプラリーアプリスパコレのロゴ"
+    )
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     meta[name="apple-mobile-web-app-capable" content="yes"]
     meta[name="mobile-web-app-capable" content="yes"]
-    meta[name="google-maps-api-key" content="#{Rails.application.credentials.google_map_api_key}"]
+    meta(
+      name="google-maps-api-key",
+      content="#{Rails.application.credentials.google_map_api_key}"
+    )
     = csrf_meta_tags
     = csp_meta_tag
-    = javascript_include_tag "map", "data-turbolinks-track": "reload", preload: true, as: "script"
+    = javascript_include_tag "map",
+      "data-turbolinks-track": "reload",
+      preload: true,
+      as: "script"
     link[rel="icon" href="/favicon.ico" sizes="32x32"]
     link[rel="icon" href="/icon.svg" type="image/svg+xml"]
     link[rel="apple-touch-icon" href="/apple-touch-icon.png"]
     = stylesheet_link_tag :app, "data-turbo-track": "reload"
     = javascript_importmap_tags
-  body class="#{bg_class} text-[#537072] font-serif mx-auto max-w-[640px] w-full min-h-screen flex flex-col"
+  body class="
+    #{bg_class}
+    text-[#537072]
+    font-serif
+    mx-auto
+    max-w-[640px]
+    w-full
+    min-h-screen
+    flex
+    flex-col
+  "
     - if current_user || action_name == "terms"|| action_name == "privacy"
-      header class="bg-[#2c4a52] p-4 h-12 md:h-24 flex items-center justify-center"
+      header class="
+        bg-[#2c4a52]
+        p-4 h-12
+        md:h-24
+        flex
+        items-center
+        justify-center
+      "
         = render partial: "layouts/header", formats: :html
     main class="flex flex-col items-center flex-grow"
       = yield
-    - unless controller_name == "pages" && action_name == "terms" && action_name == "privacy"
+    - unless controller_name=="pages" && %w[terms privacy].include?(action_name)
       - if current_user
-        footer class="bg-[#2c4a52] text-[#f4ebdb] p-4 flex flex-col items-center justify-center h-auto"
+        footer class="
+          bg-[#2c4a52]
+          text-[#f4ebdb]
+          p-4
+          flex
+          flex-col
+          items-center
+          justify-center
+          h-auto
+        "
           = render partial: "layouts/footer", formats: :html

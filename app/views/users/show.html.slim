@@ -1,8 +1,23 @@
-div class="fixed inset-0 bg-black/50 flex justify-center items-center z-[1000]" data-controller="modal"
+div class="
+  fixed
+  inset-0
+  bg-black/50
+  flex
+  justify-center
+  items-center
+  z-[1000]
+" data-controller="modal"
   div class="bg-white p-5 rounded-lg shadow-lg max-w-full w-[640px] text-center"
     h2 class="text-xl font-bold text-[#2c4a52]"アカウント削除
     p class="text-sm text-[#537072] my-2 font-bold"
       | アカウントを削除すると、すべてのデータが失われます。<br>この操作は取り消せません。
     div class="links mt-4 flex justify-center"
-      = link_to "キャンセル", root_path, class: "cancel-link px-4 py-2 mr-2 bg-gray-200 hover:bg-gray-300 active:bg-gray-300 rounded", data: { action: "click->modal#close" }
-      = button_to "削除する", user_path, method: :delete, class: "delete-button px-4 py-2 bg-[#537072] hover:bg-[#2c4a52] active:bg-[#2c4a52] text-white font-bold rounded", data: { turbo_frame: "_top" }
+      = link_to "キャンセル", root_path,
+        class: "cancel-link px-4 py-2 mr-2 "\
+               "bg-gray-200 hover:bg-gray-300 active:bg-gray-300 rounded",
+        data: { action: "click->modal#close" }
+      = button_to "削除する", user_path, method: :delete,
+        class: "delete-button px-4 py-2 "\
+               "bg-[#537072] hover:bg-[#2c4a52] active:bg-[#2c4a52] "\
+               "text-white font-bold rounded",
+        data: { turbo_frame: "_top" }
