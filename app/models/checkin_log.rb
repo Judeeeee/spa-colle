@@ -4,10 +4,10 @@ class CheckinLog < ApplicationRecord
 
   scope :for_facility, ->(facility) { where(facility_id: facility.id) }
   scope :today, -> { where(created_at: Time.zone.now.all_day) }
-  scope :distinct_facility_counts_grouped_by_ward, -> {
+  scope :counts_visited_facility_in_ward, ->(ward) {
     joins(:facility)
-      .group("facilities.ward_id")
+      .where(facilities: { ward: ward })
       .distinct
-      .count("facility_id")
+      .count(:facility_id)
   }
 end
