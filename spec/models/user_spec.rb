@@ -59,14 +59,14 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#first_visit_to?' do
+  describe '#visited?' do
     let!(:user) { create(:user) }
 
     context 'when the user has not checked in at the facility' do
       let!(:not_check_in_facility) { create(:not_check_in_facility) }
 
-      it 'returns true' do
-        expect(user.first_visit_to?(not_check_in_facility)).to be true
+      it 'returns false' do
+        expect(user.visited?(not_check_in_facility)).to be false
       end
     end
 
@@ -77,8 +77,8 @@ RSpec.describe User, type: :model do
         10.times.map { |i| create(:checkin_log, user: user, facility: many_check_in_facility, days_ago: i) }
       end
 
-      it 'returns false' do
-        expect(user.first_visit_to?(many_check_in_facility)).to be false
+      it 'returns true' do
+        expect(user.visited?(many_check_in_facility)).to be true
       end
     end
   end
