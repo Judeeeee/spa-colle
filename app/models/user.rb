@@ -31,6 +31,10 @@ class User < ApplicationRecord
     checkin_logs.for_facility(facility).none?
   end
 
+  def visited?(facility)
+    checkin_logs.for_facility(facility).exists?
+  end
+
   def checked_in_today_to?(facility)
     checkin_logs.for_facility(facility).today.exists?
   end
