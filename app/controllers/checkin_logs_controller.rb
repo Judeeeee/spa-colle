@@ -40,7 +40,7 @@ class CheckinLogsController < ApplicationController
   end
 
   def render_checkin_modal_if_first_visit(format)
-    if current_user.first_visit_to?(@facility)
+    if !current_user.visited?(@facility)
       format.turbo_stream { render_checkin_modal }
     end
   end
