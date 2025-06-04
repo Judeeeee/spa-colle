@@ -7,7 +7,7 @@ class FacilitiesController < ApplicationController
   end
 
   def show
-    @checkin_count = @facility.checkin_logs.size
+    @checkin_count = current_user.checkin_dates_for(@facility).size
   end
 
   private
