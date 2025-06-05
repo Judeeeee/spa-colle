@@ -2,12 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "CheckinLogs", type: :system do
   let!(:user) { create(:user) }
-  let!(:many_check_in_facility) { create(:many_check_in_facility) }
+  let!(:many_check_in_facility) { create(:many_check_in_facility, user: user) }
   let!(:checked_in_facility) { create(:checked_in_facility) }
   let!(:previous_day_checked_in_facility) { create(:previous_day_checked_in_facility) }
 
   before do
-    11.times.map { |i| create(:checkin_log, user: user, facility: many_check_in_facility, days_ago: i) }
     create(:checkin_log, user: user, facility: checked_in_facility)
     create(:checkin_log, user: user, facility: previous_day_checked_in_facility, days_ago: 1)
   end
@@ -172,7 +171,7 @@ RSpec.describe "CheckinLogs", type: :system do
     end
 
     context "when there are more than 11 check in logs" do
-      let!(:many_check_in_facility) { create(:many_check_in_facility) }
+      let!(:many_check_in_facility) { create(:many_check_in_facility, user: user) }
 
       it "displays pagination" do
         visit root_path

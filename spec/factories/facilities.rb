@@ -19,6 +19,16 @@ FactoryBot.define do
       latitude { 35.694526 }
       longitude { 139.7051388 }
       association :ward, factory: :shinjuku_ward
+
+      transient do
+        user { create(:user) }
+      end
+
+      after(:create) do |facility, context|
+        11.times do |i|
+          create(:checkin_log, facility: facility, user: context.user, days_ago: i)
+        end
+      end
     end
 
     factory :checked_in_facility do
