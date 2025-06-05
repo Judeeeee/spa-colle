@@ -45,11 +45,7 @@ RSpec.describe User, type: :model do
 
   describe '#checkin_dates_for' do
     let!(:user) { create(:user) }
-    let!(:many_check_in_facility) { create(:many_check_in_facility) }
-
-    before do
-      10.times.map { |i| create(:checkin_log, user: user, facility: many_check_in_facility, days_ago: i) }
-    end
+    let!(:many_check_in_facility) { create(:many_check_in_facility, user: user) }
 
     context 'when checkin logs exist for a facility' do
       it 'returns checkin logs ordered by created_at asc' do
@@ -71,11 +67,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'when the user has already checked in at the facility' do
-      let!(:many_check_in_facility) { create(:many_check_in_facility) }
-
-      before do
-        10.times.map { |i| create(:checkin_log, user: user, facility: many_check_in_facility, days_ago: i) }
-      end
+      let!(:many_check_in_facility) { create(:many_check_in_facility, user: user) }
 
       it 'returns false' do
         expect(user.first_visit_to?(many_check_in_facility)).to be false
