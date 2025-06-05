@@ -8,5 +8,5 @@ p class="text-[#537072] mb-4 text-center max-w-full w-[640px] font-bold"
   = image_tag("facility_pin.svg", alt: "施設ピン", class: "inline h-5 align-text-bottom")
   | をクリックして<br>
   | 施設詳細ページからチェックインしましょう！
-div id="map" class="search-map max-w-full w-[640px] h-[40vh] mb-6" data-facilities=@facilities.to_json data-image-url="#{asset_path("facility_pin.svg")}"
+div id="map" class="search-map max-w-full w-[640px] h-[40vh] mb-6" data-facilities=@facility_pins.to_json data-image-url="#{asset_path("facility_pin.svg")}"
 = link_to "トップへ戻る", root_path, class: "back-top-link text-lg text-[#537072] visited:text-[#2c4a52] underline hover:no-underline active:no-underline mt-4 mb-4"
