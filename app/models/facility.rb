@@ -1,4 +1,7 @@
 class Facility < ApplicationRecord
+  THRESHOLD_KM = 0.2
+  EARTH_RADIUS_KM = 6371.0
+
   belongs_to :ward
   has_many :checkin_logs, dependent: :destroy
 
@@ -11,17 +14,13 @@ class Facility < ApplicationRecord
   def within_distance?(current_lat, current_lng)
     # 距離計算（Haversine公式）
     distance = distance_by_pythagoras(self, current_lat, current_lng)
-    threshold =  0.2 # 様子を見るために200m(0.2km)圏内にする
-
-    distance <= threshold
+    distance <= THRESHOLD_KM
   end
 
   private
 
   # 二点間の距離を計算(Haversine公式)
   def distance_by_pythagoras(facility, current_lat, current_lng)
-    earth_radius_km = 6371.0  # 地球の半径 (km)
-
     # 緯度・経度をラジアンに変換
     rad_facility_lat = facility.latitude * Math::PI / 180.0
     rad_facility_lng = facility.longitude * Math::PI / 180.0
@@ -32,6 +31,6 @@ class Facility < ApplicationRecord
     delta_x = delta_lon * Math.cos((rad_facility_lat + rad_current_lat) / 2.0) # 経度方向を緯度で調整
     delta_y = delta_lat
 
-    Math.sqrt(delta_x**2 + delta_y**2) * earth_radius_km
+    Math.sqrt(delta_x**2 + delta_y**2) * EARTH_RADIUS_KM
   end
 end
