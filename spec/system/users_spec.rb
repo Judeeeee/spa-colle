@@ -72,4 +72,20 @@ RSpec.describe "Users", type: :system do
       end
     end
   end
+
+  describe 'create account' do
+    context "when create the account" do
+      let(:user) { build(:user) }
+
+      it "redirect after login page" do
+        expect(User.exists?(email: user.email)).to be false
+
+        login_with_google(user)
+        sleep 1 # ログイン処理が完了するのを待つ
+        expect(User.exists?(email: user.email)).to be true
+
+        expect(page).to have_selector('h1', text: 'スタンプカード')
+      end
+    end
+  end
 end
