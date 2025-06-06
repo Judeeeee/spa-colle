@@ -6,4 +6,12 @@ module CheckinLogs
 
     click_button "チェックイン"
   end
+
+  def check_stamp_card_status(ward:, count_text:)
+    expect(page).to have_selector("span", text: ward, wait: 5)
+
+    within(".ward-cell", text: ward, wait: 5) do
+      expect(page).to have_text(count_text)
+    end
+  end
 end
