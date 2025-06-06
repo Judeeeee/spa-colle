@@ -59,6 +59,7 @@ RSpec.describe "Users", type: :system do
       it "redirect before login page" do
         login_with_google(user)
         expect(page).to have_selector('h1', text: 'スタンプカード')
+        expect(User.exists?(user.id)).to be true
 
         click_link "アカウント削除"
         expect(page).to have_selector('[data-controller="modal"]', visible: true, wait: 5)
@@ -69,6 +70,7 @@ RSpec.describe "Users", type: :system do
         end
 
         expect(page).to have_button("Googleでログイン")
+        expect(User.exists?(user.id)).to be false
       end
     end
   end
