@@ -138,6 +138,10 @@ https://developers.google.com/workspace/guides/create-credentials?hl=ja#oauth-cl
 
 https://developers.google.com/maps/documentation/javascript/get-api-key?hl=ja
 
+また、セキュリティを強化するために、以下の公式ドキュメントを参考にAPI キーの使用を制限してください。
+
+https://developers.google.com/maps/documentation/javascript/get-api-key?hl=ja#restrict_key
+
 ### サーバーの起動
 
 以下のコマンドを実行してサーバーを起動し、ブラウザで`http://localhost:3000`にアクセスします。
