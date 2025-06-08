@@ -1,5 +1,5 @@
 class MapsController < ApplicationController
   def index
-    @facilities = Facility.all
+    @facility_pins = Facility.select(:name, :latitude, :longitude)
   end
 end
