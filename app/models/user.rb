@@ -29,8 +29,8 @@ class User < ApplicationRecord
     checkin_logs.where(facility: facility).order(created_at: :asc)
   end
 
-  def first_visit_to?(facility)
-    checkin_logs.for_facility(facility).none?
+  def visited?(facility)
+    checkin_logs.for_facility(facility).exists?
   end
 
   def checked_in_today_to?(facility)
