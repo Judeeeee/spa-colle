@@ -2,7 +2,7 @@ div class="footer-links flex flex-col md:flex-row items-center md:space-x-6 text
   = link_to "利用規約", terms_path, class: "terms-link block underline hover:no-underline active:no-underline"
   = link_to "プライバシーポリシー", privacy_path, class: "privacy-link block underline hover:no-underline active:no-underline"
   = link_to "ログアウト", log_out_path, class: "log-out-link block underline hover:no-underline active:no-underline"
-  = link_to "アカウント削除", user_path(current_user), data: { turbo_frame: "modal" }, class: "account-delete-link block underline hover:no-underline active:no-underline"
+  = link_to "アカウント削除", users_display_delete_user_modal_path, data: { turbo_frame: "modal" }, class: "account-delete-link block underline hover:no-underline active:no-underline"
 p class="mt-2" © 2025 Judeee スパコレ
 
 turbo-frame id="modal"

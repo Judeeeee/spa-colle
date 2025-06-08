@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [ :destroy ]
-  get "/users/:id", to: "users#display_delete_user_modal"
+  get "/users/display_delete_user_modal", to: "users#display_delete_user_modal"
 
   get "/terms", to: "pages#terms"
   get "/privacy", to: "pages#privacy"
