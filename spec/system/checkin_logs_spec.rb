@@ -24,12 +24,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "successfully check in and displays first-time check-in modal" do
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
-
-        expect(page).to have_selector("span", text: "千代田区", wait: 5)
-        within(".ward-cell", text: "千代田区") do
-          expect(page).to have_text("0 / 1")
-        end
+        check_stamp_card_status(ward: "千代田区", count_text: "0 / 1")
 
         visit facility_path(not_check_in_facility)
         expect(page).to have_selector('h1', text: '未チェックイン施設')
@@ -48,12 +43,7 @@ RSpec.describe "CheckinLogs", type: :system do
         expect(page).to have_content(Time.zone.today.strftime("%Y/%m/%d"))
 
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
-
-        expect(page).to have_selector("span", text: "千代田区", wait: 5)
-        within(".ward-cell", text: "千代田区") do
-          expect(page).to have_text("1 / 1")
-        end
+        check_stamp_card_status(ward: "千代田区", count_text: "1 / 1")
       end
     end
 
@@ -62,12 +52,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "successfully check in and redirects to the check in log page" do
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
-
-        expect(page).to have_selector("span", text: "台東区", wait: 5)
-        within(".ward-cell", text: "台東区") do
-          expect(page).to have_text("1 / 1")
-        end
+        check_stamp_card_status(ward: "台東区", count_text: "1 / 1")
 
         visit facility_path(previous_day_checked_in_facility)
         expect(page).to have_selector('h1', text: '昨日チェックインしている施設')
@@ -85,12 +70,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "fails to check in and displays limit modal" do
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
-
-        expect(page).to have_selector("span", text: "中央区", wait: 5)
-        within(".ward-cell", text: "中央区") do
-          expect(page).to have_text("0 / 1")
-        end
+        check_stamp_card_status(ward: "中央区", count_text: "0 / 1")
 
         visit facility_path(fails_to_check_in_facility)
         expect(page).to have_selector('h1', text: 'チェックインに失敗する施設')
@@ -104,12 +84,7 @@ RSpec.describe "CheckinLogs", type: :system do
         end
 
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
-
-        expect(page).to have_selector("span", text: "中央区", wait: 5)
-        within(".ward-cell", text: "中央区") do
-          expect(page).to have_text("0 / 1")
-        end
+        check_stamp_card_status(ward: "中央区", count_text: "0 / 1")
       end
     end
 
@@ -118,12 +93,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "fails to check in and the already checked in modal" do
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
-
-        expect(page).to have_selector("span", text: "文京区", wait: 5)
-        within(".ward-cell", text: "文京区") do
-          expect(page).to have_text("1 / 1")
-        end
+        check_stamp_card_status(ward: "文京区", count_text: "1 / 1")
 
         visit facility_path(checked_in_facility)
         expect(page).to have_selector('h1', text: '本日既にチェックインしている施設')
@@ -151,12 +121,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "displays a message that there are no check in logs yet" do
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
-
-        expect(page).to have_selector("span", text: "千代田区", wait: 5)
-        within(".ward-cell", text: "千代田区") do
-          expect(page).to have_text("0 / 1")
-        end
+        check_stamp_card_status(ward: "千代田区", count_text: "0 / 1")
 
         visit facility_path(not_check_in_facility)
         expect(page).to have_selector('h1', text: '未チェックイン施設')
@@ -175,12 +140,7 @@ RSpec.describe "CheckinLogs", type: :system do
 
       it "displays pagination" do
         visit root_path
-        expect(page).to have_selector('h1', text: 'スタンプカード', wait: 5)
-
-        expect(page).to have_selector("span", text: "新宿区", wait: 5)
-        within(".ward-cell", text: "新宿区") do
-          expect(page).to have_text("1 / 1")
-        end
+        check_stamp_card_status(ward: "新宿区", count_text: "1 / 1")
 
         visit facility_path(many_check_in_facility)
         expect(page).to have_selector('h1', text: 'ページネーションが表示される施設')
