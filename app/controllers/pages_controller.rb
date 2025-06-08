@@ -4,6 +4,9 @@ class PagesController < ApplicationController
     if current_user
       wards = Ward.ordered_by_kana
       @ward_visit_stats = visit_stats_by_ward(wards)
+      render "after_login"
+    else
+      render "before_login"
     end
   end
 
