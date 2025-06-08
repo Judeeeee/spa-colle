@@ -13,11 +13,11 @@ div class="before-login-top-page bg-[#f4ebdb] max-w-md flex flex-col justify-cen
       | ・ 浴料金が公衆浴場入浴料金ではないこと<br>
       | ・ 男性専用・女性専用の施設ではないこと<br>
     = button_to "Googleでログイン", "/auth/google_oauth2", method: :post, data: { turbo: false }, class: "bg-[#537072] hover:bg-[#2c4a52] active:bg-[#2c4a52] text-white font-bold py-3 px-6 rounded-lg text-lg transition w-full"
-    = render "how_to_use"
     p class="mt-6 block text-sm w-full text-center "
       |
       = link_to "利用規約", terms_path, class: "terms-link text-[#537072] visited:text-[#2c4a52] underline hover:no-underline active:no-underline"
       | と
       = link_to "プライバシーポリシー", privacy_path, class: "privacy-link text-[#537072] visited:text-[#2c4a52] underline hover:no-underline active:no-underline"
       | に同意した上で<br>ログインしてください。
+    = render "how_to_use"
     p class="mt-6 block text-sm w-full" © 2025 Judeee スパコレ
