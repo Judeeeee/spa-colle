@@ -67,10 +67,14 @@ RSpec.describe User, type: :model do
     end
 
     context 'when the user has already checked in at the facility' do
-      let!(:many_check_in_facility) { create(:many_check_in_facility, user: user) }
+      let!(:checked_in_facility) { create(:checked_in_facility) }
+
+      before do
+        create(:checkin_log, user: user, facility: checked_in_facility)
+      end
 
       it 'returns true' do
-        expect(user.visited?(many_check_in_facility)).to be true
+        expect(user.visited?(checked_in_facility)).to be true
       end
     end
   end
