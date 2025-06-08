@@ -81,28 +81,29 @@ RSpec.describe User, type: :model do
 
   describe '#checked_in_today_to?' do
     let!(:user) { create(:user) }
+    let!(:ward) { create(:ward) }
 
     context 'when the user has not checked in at the facility' do
-      let!(:not_check_in_facility) { create(:not_check_in_facility) }
+      let!(:facility_checked_in_today) { create(:facility, ward: ward) }
 
       before do
-        create(:checkin_log, user: user, facility: not_check_in_facility)
+        create(:checkin_log, user: user, facility: facility_checked_in_today)
       end
 
       it 'returns true' do
-        expect(user.checked_in_today_to?(not_check_in_facility)).to be true
+        expect(user.checked_in_today_to?(facility_checked_in_today)).to be true
       end
     end
 
     context 'when the user has not checked in at the facility' do
-      let!(:checked_in_facility) { create(:checked_in_facility) }
+      let!(:facility_checked_in_yesterday) { create(:facility, ward: ward) }
 
       before do
-        create(:checkin_log, user: user, facility: checked_in_facility, days_ago: 1)
+        create(:checkin_log, user: user, facility: facility_checked_in_yesterday, days_ago: 1)
       end
 
       it 'returns false' do
-        expect(user.checked_in_today_to?(checked_in_facility)).to be false
+        expect(user.checked_in_today_to?(facility_checked_in_yesterday)).to be false
       end
     end
   end
