@@ -4,7 +4,7 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
   let!(:user) { create(:user) }
 
   before do
-    create(:not_check_in_facility)
+    create(:facility, name: "未チェックイン施設", latitude: 35.698137, longitude: 139.767935)
   end
 
   before do
