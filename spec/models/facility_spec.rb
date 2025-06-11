@@ -1,23 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Facility, type: :model do
-  describe '.with_ward_ordered_by_kana' do
-    let!(:taito_ward) { create(:taito_ward) }
-    let!(:chiyoda_ward) { create(:chiyoda_ward) }
-    let!(:shinjuku_ward) { create(:shinjuku_ward) }
-
-    let!(:facility_chiyoda)  { create(:facility, ward: chiyoda_ward) }
-    let!(:facility_shinjuku) { create(:facility, ward: shinjuku_ward) }
-    let!(:facility_taito)  { create(:facility, ward: taito_ward) }
-
-    context 'when facilities belong to wards with different name_kana' do
-      it 'returns facilities ordered by wards.name_kana asc' do
-        result = Facility.with_ward_ordered_by_kana
-        expect(result).to eq([ facility_shinjuku, facility_taito, facility_chiyoda ])
-      end
-    end
-  end
-
   describe '#within_distance?' do
     let!(:ward) { create(:ward) }
     let!(:facility) {

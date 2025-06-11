@@ -2,7 +2,7 @@ class FacilitiesController < ApplicationController
   before_action :set_facility, only: %w[show]
 
   def index
-    @grouped_facilities = Facility.grouped_by_ward_name
+    @wards = Ward.includes(:facilities).ordered_by_kana
     @visited_facility_ids = current_user.checkin_logs.pluck(:facility_id)
   end
 

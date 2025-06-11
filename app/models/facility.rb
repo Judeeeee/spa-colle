@@ -5,12 +5,6 @@ class Facility < ApplicationRecord
   belongs_to :ward
   has_many :checkin_logs, dependent: :destroy
 
-  scope :with_ward_ordered_by_kana, -> { includes(:ward).joins(:ward).order("wards.name_kana") }
-
-  def self.grouped_by_ward_name
-    with_ward_ordered_by_kana.group_by { |facility| facility.ward.name }
-  end
-
   def within_distance?(current_lat, current_lng)
     # 距離計算（Haversine公式）
     distance = distance_by_pythagoras(self, current_lat, current_lng)
