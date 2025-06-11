@@ -4,7 +4,7 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
   let!(:user) { create(:user) }
 
   before do
-    create(:not_check_in_facility)
+    create(:facility, name: "未チェックイン施設", latitude: 35.698137, longitude: 139.767935)
   end
 
   before do
@@ -18,7 +18,7 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
       it 'displays the map with the current location on the map page' do
         expect(page).to have_selector('h1', text: 'スタンプカード')
 
-        mock_geolocation_success
+        mock_geolocation_success(35.698137, 139.767935)
         sleep 2 # モックの反映を保証する
         click_link "地図からチェックイン"
 
@@ -29,7 +29,7 @@ RSpec.describe 'Geolocation Error Handling', type: :system, js: true do
       it 'displays the map on the facility page' do
         expect(page).to have_selector('h1', text: 'スタンプカード')
 
-        mock_geolocation_success
+        mock_geolocation_success(35.698137, 139.767935)
         sleep 2 # モックの反映を保証する
         click_link "施設一覧"
 

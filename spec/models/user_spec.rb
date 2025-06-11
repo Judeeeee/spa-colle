@@ -32,7 +32,7 @@ RSpec.describe User, type: :model do
 
   describe '#check_in' do
     let!(:user) { create(:user) }
-    let!(:not_check_in_facility) { create(:not_check_in_facility) }
+    let!(:not_check_in_facility) { create(:facility) }
 
     context 'when a user checkin a facility' do
       it 'creates a CheckinLog for the facility' do
@@ -45,7 +45,13 @@ RSpec.describe User, type: :model do
 
   describe '#checkin_dates_for' do
     let!(:user) { create(:user) }
-    let!(:many_check_in_facility) { create(:many_check_in_facility, user: user) }
+    let!(:many_check_in_facility) { create(:facility, name: "ページネーションが表示される施設") }
+
+    before do
+      11.times do |i|
+        create(:checkin_log, facility: many_check_in_facility, user: user, created_at: i.days.ago)
+      end
+    end
 
     context 'when checkin logs exist for a facility' do
       it 'returns checkin logs ordered by created_at asc' do
@@ -59,7 +65,7 @@ RSpec.describe User, type: :model do
     let!(:user) { create(:user) }
 
     context 'when the user has not checked in at the facility' do
-      let!(:not_check_in_facility) { create(:not_check_in_facility) }
+      let!(:not_check_in_facility) { create(:facility) }
 
       it 'returns false' do
         expect(user.visited?(not_check_in_facility)).to be false
@@ -67,7 +73,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'when the user has already checked in at the facility' do
-      let!(:checked_in_facility) { create(:checked_in_facility) }
+      let!(:checked_in_facility) { create(:facility) }
 
       before do
         create(:checkin_log, user: user, facility: checked_in_facility)

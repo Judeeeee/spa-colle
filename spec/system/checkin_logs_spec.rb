@@ -2,14 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "CheckinLogs", type: :system do
   let!(:user) { create(:user) }
-  let!(:many_check_in_facility) { create(:many_check_in_facility, user: user) }
-  let!(:checked_in_facility) { create(:checked_in_facility) }
-  let!(:previous_day_checked_in_facility) { create(:previous_day_checked_in_facility) }
-
-  before do
-    create(:checkin_log, user: user, facility: checked_in_facility)
-    create(:checkin_log, user: user, facility: previous_day_checked_in_facility, days_ago: 1)
-  end
 
   before(:each) do
     Capybara.reset_sessions!
@@ -20,7 +12,8 @@ RSpec.describe "CheckinLogs", type: :system do
 
   describe "check in functionality" do
     context "when the user checks in for the first time within 200 meters of the facility" do
-      let!(:not_check_in_facility) { create(:not_check_in_facility) }
+      let!(:chiyoda_ward) { create(:ward, name: "千代田区", name_kana: "ちよだく") }
+      let!(:not_check_in_facility) { create(:facility, name: "未チェックイン施設", latitude: 35.698137, longitude: 139.767935, ward: chiyoda_ward) }
 
       it "successfully check in and displays first-time check-in modal" do
         visit root_path
@@ -48,7 +41,12 @@ RSpec.describe "CheckinLogs", type: :system do
     end
 
     context "when the user has already checked in on a previous day" do
-      let!(:previous_day_checked_in_facility) { create(:previous_day_checked_in_facility) }
+      let!(:taito_ward) { create(:ward, name: "台東区", name_kana: "たいとうく") }
+      let!(:previous_day_checked_in_facility) { create(:facility, name: "昨日チェックインしている施設", latitude: 35.7129856, longitude: 139.7926897, ward: taito_ward) }
+
+      before do
+        create(:checkin_log, user: user, facility: previous_day_checked_in_facility, days_ago: 1)
+      end
 
       it "successfully check in and redirects to the check in log page" do
         visit root_path
@@ -66,7 +64,8 @@ RSpec.describe "CheckinLogs", type: :system do
     end
 
     context "when the user is more than 200 meters away from the facility" do
-      let!(:fails_to_check_in_facility) { create(:fails_to_check_in_facility) }
+      let!(:chuo_ward) { create(:ward, name: "中央区", name_kana: "ちゅうおうく") }
+      let!(:fails_to_check_in_facility) { create(:facility, name: "チェックインに失敗する施設", latitude: 35.6706907, longitude: 139.7599611, ward: chuo_ward) }
 
       it "fails to check in and displays limit modal" do
         visit root_path
@@ -89,7 +88,12 @@ RSpec.describe "CheckinLogs", type: :system do
     end
 
     context "when the user has already checked in today" do
-      let!(:checked_in_facility) { create(:checked_in_facility) }
+      let!(:bunkyo_ward) { create(:ward, name: "文京区", name_kana: "ぶんきょうく") }
+      let!(:checked_in_facility) { create(:facility, name: "本日既にチェックインしている施設", latitude: 35.7071868, longitude: 139.7529042, ward: bunkyo_ward) }
+
+      before do
+        create(:checkin_log, user: user, facility: checked_in_facility)
+      end
 
       it "fails to check in and the already checked in modal" do
         visit root_path
@@ -117,7 +121,8 @@ RSpec.describe "CheckinLogs", type: :system do
 
   describe "check in logs display" do
     context "when there are no check in logs" do
-      let!(:not_check_in_facility) { create(:not_check_in_facility) }
+      let!(:chiyoda_ward) { create(:ward, name: "千代田区", name_kana: "ちよだく") }
+      let!(:not_check_in_facility) { create(:facility, name: "未チェックイン施設", latitude: 35.698137, longitude: 139.767935, ward: chiyoda_ward) }
 
       it "displays a message that there are no check in logs yet" do
         visit root_path
@@ -136,7 +141,14 @@ RSpec.describe "CheckinLogs", type: :system do
     end
 
     context "when there are more than 11 check in logs" do
-      let!(:many_check_in_facility) { create(:many_check_in_facility, user: user) }
+      let!(:shinjuku_ward) { create(:ward, name: "新宿区", name_kana: "しんじゅくく") }
+      let!(:many_check_in_facility) { create(:facility, name: "ページネーションが表示される施設", ward: shinjuku_ward) }
+
+      before do
+        11.times do |i|
+          create(:checkin_log, facility: many_check_in_facility, user: user, created_at: i.days.ago)
+        end
+      end
 
       it "displays pagination" do
         visit root_path

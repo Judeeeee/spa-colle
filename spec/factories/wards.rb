@@ -1,28 +1,6 @@
 FactoryBot.define do
   factory :ward do
-    factory :chiyoda_ward do
-      name { "千代田区" }
-      name_kana { "ちよだく" }
-    end
-
-    factory :chuo_ward do
-      name { "中央区" }
-      name_kana { "ちゅうおうく" }
-    end
-
-    factory :shinjuku_ward do
-      name { "新宿区" }
-      name_kana { "しんじゅくく" }
-    end
-
-    factory :bunkyo_ward do
-      name { "文京区" }
-      name_kana { "ぶんきょうく" }
-    end
-
-    factory :taito_ward do
-      name { "台東区" }
-      name_kana { "たいとうく" }
-    end
+    name { "区名" }
+    name_kana { "くめい" }
   end
 end

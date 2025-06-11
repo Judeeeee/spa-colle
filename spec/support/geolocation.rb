@@ -1,11 +1,11 @@
 
 module Geolocation
-  def mock_geolocation_success
+  def mock_geolocation_success(latitude, longitude)
     page.execute_script(<<~JS)
       Object.defineProperty(navigator, "geolocation", {
         value: {
           getCurrentPosition: function(success, error) {
-            success({ coords: { latitude: 35.698137, longitude: 139.767935 } });
+            success({ coords: { latitude: #{latitude}, longitude: #{longitude} } });
           }
         }
       });
