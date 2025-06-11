@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  def show
+  def display_delete_user_modal
   end
 
   def destroy

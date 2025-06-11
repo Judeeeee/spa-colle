@@ -6,7 +6,8 @@ Rails.application.routes.draw do
     resources :checkin_logs, only: [ :index, :create ]
   end
 
-  resources :users, only: [ :show, :destroy ]
+  resources :users, only: [ :destroy ]
+  get "/users/display_delete_user_modal", to: "users#display_delete_user_modal"
 
   get "/terms", to: "pages#terms"
   get "/privacy", to: "pages#privacy"
