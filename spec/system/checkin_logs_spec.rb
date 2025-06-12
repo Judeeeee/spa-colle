@@ -135,8 +135,8 @@ RSpec.describe "CheckinLogs", type: :system do
         click_link "0回訪問"
 
         expect(page).to have_selector('h1', text: 'チェックインログ')
-        expect(page).to have_content("チェックインログはまだありません♨️")
-        expect(page).to have_content("施設を訪問してチェックインしましょう！")
+        expect(page).to have_content("チェックインログは\nまだありません♨️")
+        expect(page).to have_content("施設を訪問して\nチェックインしましょう！")
       end
     end
 
