@@ -3,7 +3,6 @@ class FacilitiesController < ApplicationController
 
   def index
     @wards = Ward.includes(:facilities).ordered_by_kana
-    @visited_facility_ids = current_user.checkin_logs.pluck(:facility_id)
   end
 
   def show
