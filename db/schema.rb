@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_02_084409) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_12_071802) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -25,9 +25,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_02_084409) do
 
   create_table "facilities", force: :cascade do |t|
     t.bigint "ward_id", null: false
-    t.string "name"
-    t.float "latitude"
-    t.float "longitude"
+    t.string "name", null: false
+    t.float "latitude", null: false
+    t.float "longitude", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ward_id"], name: "index_facilities_on_ward_id"
