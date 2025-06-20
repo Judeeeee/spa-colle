@@ -16,10 +16,9 @@
 
 サービスURL: https://spa-colle.com/
 
-### 🌏スパコレに関するブログ記事
+### 🌏リリースブログ
 
-- リリースブログ:
-- 開発ブログ:
+https://judeee-blog.hatenablog.com/entry/2025/06/13/083000
 
 ## 🔍使い方
 
