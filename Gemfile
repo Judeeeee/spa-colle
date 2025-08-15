@@ -24,7 +24,7 @@ gem "omniauth-rails_csrf_protection"
 gem "tailwindcss-rails"
 
 # https://ddnexus.github.io/pagy/quick-start/#1-install
-gem "pagy", "~> 9.3"
+gem "pagy", "~> 9.4"
 
 gem "slim-rails"
 
