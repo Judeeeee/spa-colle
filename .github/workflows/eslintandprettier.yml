@@ -5,9 +5,12 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   eslint_and_prettier:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - name: Checkout code
