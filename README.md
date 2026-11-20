@@ -55,7 +55,7 @@ GPSチェックインをすると、スタンプカードの訪問数が増え�
 ### Backend
 
 - Ruby 4.0.10
-- Ruby on Rails 8.0.2
+- Ruby on Rails 8.1.4.1
 
 ### Frontend
 
